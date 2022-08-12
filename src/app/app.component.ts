@@ -1,18 +1,27 @@
 import { Component } from '@angular/core';
+import { SessionService } from './lib/core/services/session.service';
+import { SocketioService } from './lib/core/services/socketio.service';
+
 @Component({
   selector: 'app-root',
   templateUrl: 'app.component.html',
   styleUrls: ['app.component.scss'],
 })
 export class AppComponent {
-  public appPages = [
-    { title: 'Inbox', url: '/folder/Inbox', icon: 'mail' },
-    { title: 'Outbox', url: '/folder/Outbox', icon: 'paper-plane' },
-    { title: 'Favorites', url: '/folder/Favorites', icon: 'heart' },
-    { title: 'Archived', url: '/folder/Archived', icon: 'archive' },
-    { title: 'Trash', url: '/folder/Trash', icon: 'trash' },
-    { title: 'Spam', url: '/folder/Spam', icon: 'warning' },
-  ];
-  public labels = ['Family', 'Friends', 'Notes', 'Work', 'Travel', 'Reminders'];
-  constructor() {}
+
+  constructor(
+    private sessionService: SessionService,
+    private socketioService: SocketioService
+  ) {
+    this.init();
+  }
+
+  private async init(): Promise<void> {
+    await this.sessionService.checkSession();
+
+    if (this.sessionService.isLogged) {
+      // TODO: uncomment when need it
+      // this.socketioService.connect();
+    }
+  }
 }

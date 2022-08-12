@@ -1,0 +1,77 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Iniciar Sesión</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+
+  <form [formGroup]="form" (submit)="onSubmit()">
+
+    <ion-grid fixed>
+
+      <ion-row class="ion-justify-content-center">
+
+        <ion-col size="12" size-md="4">
+
+          <ion-item>
+            <ion-label position="stacked">Nombre de Usuario</ion-label>
+            <ion-input placeholder="Capture su nombre de usuario" enterkeyhint="next" inputmode="text" type="text"
+              formControlName="username">
+            </ion-input>
+          </ion-item>
+
+        </ion-col>
+
+      </ion-row>
+
+      <ion-row class="ion-justify-content-center">
+
+        <ion-col size="12" size-md="4">
+
+          <ion-item>
+            <ion-label position="stacked">Contraseña</ion-label>
+            <ion-input placeholder="Capture su contraseña" enterkeyhint="done" type="password"
+              formControlName="password">
+            </ion-input>
+          </ion-item>
+
+        </ion-col>
+
+      </ion-row>
+
+      <ion-row class="ion-justify-content-center ion-margin-top" *ngIf="isSend">
+
+        <ion-col size="12" size-md="4" [ngClass]="{ 'ion-text-right': !isSend, 'ion-text-center': isSend }">
+
+          <ion-spinner name="circles"></ion-spinner>
+
+        </ion-col>
+
+      </ion-row>
+
+      <ion-row class="ion-justify-content-center ion-margin-top" *ngIf="!isSend">
+
+        <!-- <ion-col size="6" size-md="2" class="ion-align-self-end">
+
+          <ion-button color="primary" fill="clear" routerLink="/auth/sign-up" routerDirection="root">
+            Registrarme
+          </ion-button>
+
+        </ion-col> -->
+
+        <ion-col size="6" size-md="2" class="ion-align-self-end">
+
+          <ion-button color="primary" shape="round" type="submit" class="ion-float-right">
+            Ingresar
+          </ion-button>
+
+        </ion-col>
+
+      </ion-row>
+
+    </ion-grid>
+
+  </form>
+
+</ion-content>

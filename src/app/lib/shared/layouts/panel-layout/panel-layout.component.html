@@ -2,21 +2,13 @@
 
   <ion-menu contentId="main-content" type="overlay">
 
-    <ion-header>
-      <ion-toolbar color="primary" class="ion-text-center">
-        <ion-title>
-          RepairX
-        </ion-title>
-      </ion-toolbar>
-    </ion-header>
-
     <ion-content>
 
       <ng-container *ngIf="sessionService.userSessionAsObservable | async as userSession">
         <ion-item class="ion-margin-bottom">
-          <ion-avatar slot="start">
+          <ion-thumbnail slot="start">
             <img src="assets/imgs/panel-avatar.png">
-          </ion-avatar>
+          </ion-thumbnail>
           <ion-label>
             <h3>{{ userSession.name }} {{ userSession.lastName }}</h3>
             <p>Gerente</p>

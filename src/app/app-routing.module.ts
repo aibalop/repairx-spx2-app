@@ -33,7 +33,7 @@ const routes: Routes = [
     canActivate: [AuthGuard],
     children: [
       {
-        path: 'home',
+        path: 'inicio',
         title: 'Inicio',
         loadChildren: () => import('./lib/modules/dashboard/dashboard.module').then(m => m.DashboardModule)
       },

@@ -25,7 +25,7 @@ export class PanelLayoutComponent implements OnInit {
   permissions: Array<Permission> = [
     {
       parent: {
-        pathname: '/home',
+        pathname: '/inicio',
         icon: 'home',
         name: 'Inicio',
         open: false

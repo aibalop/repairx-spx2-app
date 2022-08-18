@@ -4,11 +4,13 @@ import { PanelLayoutComponent } from './layouts/panel-layout/panel-layout.compon
 import { IonicModule } from '@ionic/angular';
 import { RouterModule } from '@angular/router';
 import { MainHeaderLayoutComponent } from './layouts/main-header-layout/main-header-layout.component';
+import { BreadcrumbComponent } from './components/breadcrumb/breadcrumb.component';
 
 @NgModule({
   declarations: [
     PanelLayoutComponent,
-    MainHeaderLayoutComponent
+    MainHeaderLayoutComponent,
+    BreadcrumbComponent
   ],
   imports: [
     CommonModule,
@@ -16,7 +18,9 @@ import { MainHeaderLayoutComponent } from './layouts/main-header-layout/main-hea
     RouterModule
   ],
   exports: [
-    MainHeaderLayoutComponent
+    PanelLayoutComponent,
+    MainHeaderLayoutComponent,
+    BreadcrumbComponent
   ]
 })
 export class SharedModule { }

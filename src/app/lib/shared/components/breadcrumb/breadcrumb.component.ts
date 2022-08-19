@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Event, NavigationEnd, Router } from '@angular/router';
 
 @Component({
   selector: 'app-breadcrumb',
@@ -7,8 +8,19 @@ import { Component, OnInit } from '@angular/core';
 })
 export class BreadcrumbComponent implements OnInit {
 
-  constructor() { }
+  breadcrumbs = [];
 
-  ngOnInit() {}
+  currentUrl = '';
+
+  constructor(private router: Router) {
+    this.router.events.subscribe((event: Event) => {
+      if (event instanceof NavigationEnd) {
+        this.currentUrl = event.url;
+        this.breadcrumbs = this.currentUrl.substring(1).split('/');
+      }
+    });
+  }
+
+  ngOnInit() { }
 
 }

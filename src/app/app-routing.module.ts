@@ -20,7 +20,7 @@ export class TemplatePageTitleStrategy extends TitleStrategy {
 }
 
 const routes: Routes = [
-  { path: '', pathMatch: 'full', redirectTo: 'home' },
+  { path: '', pathMatch: 'full', redirectTo: 'inicio' },
   {
     path: 'auth',
     title: 'Autenticación',

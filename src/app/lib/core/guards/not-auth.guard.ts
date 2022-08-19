@@ -12,7 +12,7 @@ export class NotAuthGuard implements CanActivate {
   async canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
 
     if (this.sessionService.isLogged()) {
-      this.router.navigateByUrl('/home');
+      this.router.navigateByUrl('/');
       return false;
     }
 

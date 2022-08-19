@@ -1,8 +1,8 @@
-<ion-breadcrumbs>
+<ion-breadcrumbs class="ion-padding">
   <ion-breadcrumb routerLink="/inicio" routerDirection="root">
     Inicio
   </ion-breadcrumb>
-  <ion-breadcrumb href="#electronics">Electronics</ion-breadcrumb>
-  <ion-breadcrumb href="#cameras">Cameras</ion-breadcrumb>
-  <ion-breadcrumb href="#film">Film</ion-breadcrumb>
+  <ion-breadcrumb *ngFor="let breadCrumb of breadcrumbs" [routerLink]="[currentUrl]" routerDirection="root">
+    {{ breadCrumb | titlecase }}
+  </ion-breadcrumb>
 </ion-breadcrumbs>

@@ -5,12 +5,14 @@ import { IonicModule } from '@ionic/angular';
 import { RouterModule } from '@angular/router';
 import { MainHeaderLayoutComponent } from './layouts/main-header-layout/main-header-layout.component';
 import { BreadcrumbComponent } from './components/breadcrumb/breadcrumb.component';
+import { UserMenuPopoverComponent } from './components/user-menu-popover/user-menu-popover.component';
 
 @NgModule({
   declarations: [
     PanelLayoutComponent,
     MainHeaderLayoutComponent,
-    BreadcrumbComponent
+    BreadcrumbComponent,
+    UserMenuPopoverComponent
   ],
   imports: [
     CommonModule,
@@ -20,7 +22,8 @@ import { BreadcrumbComponent } from './components/breadcrumb/breadcrumb.componen
   exports: [
     PanelLayoutComponent,
     MainHeaderLayoutComponent,
-    BreadcrumbComponent
+    BreadcrumbComponent,
+    UserMenuPopoverComponent
   ]
 })
 export class SharedModule { }

@@ -52,8 +52,8 @@ export class SignInPage implements OnInit {
       this.sessionService.userSession = signInSuccess.user;
       this.form.reset();
       this.isSend = false;
-      this.socketioService.connect();
-      this.router.navigateByUrl('/home')
+      // this.socketioService.connect(); // TODO: uncomment when we need it!
+      this.router.navigateByUrl('/')
     } catch (error) {
       this.isSend = false;
       this.alertDialogService.catchError(error);

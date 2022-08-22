@@ -12,4 +12,12 @@ export class ChargesPage implements OnInit {
   ngOnInit() {
   }
 
+  onAdd(): void {
+    console.log('Se dio click en agregar');
+  }
+
+  onSearch($event: string): void {
+    console.log($event);
+  }
+
 }

@@ -1,5 +1,16 @@
 <app-main-header-layout></app-main-header-layout>
+<app-header-page title="Cargos"></app-header-page>
 <app-breadcrumb></app-breadcrumb>
 <ion-content>
+
+    <ion-grid class="ion-padding-horizontal">
+        <ion-row>
+            <ion-col class="ion-text-right">
+                <app-add-button (onClick)="onAdd()"></app-add-button>
+            </ion-col>
+        </ion-row>
+    </ion-grid>
+
+    <app-searchbar (change)="onSearch($event)"></app-searchbar>
 
 </ion-content>

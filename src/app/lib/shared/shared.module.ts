@@ -6,16 +6,24 @@ import { RouterModule } from '@angular/router';
 import { MainHeaderLayoutComponent } from './layouts/main-header-layout/main-header-layout.component';
 import { BreadcrumbComponent } from './components/breadcrumb/breadcrumb.component';
 import { UserMenuPopoverComponent } from './components/user-menu-popover/user-menu-popover.component';
+import { HeaderPageComponent } from './components/header-page/header-page.component';
+import { AddButtonComponent } from './components/add-button/add-button.component';
+import { SearchbarComponent } from './components/searchbar/searchbar.component';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
     PanelLayoutComponent,
     MainHeaderLayoutComponent,
     BreadcrumbComponent,
-    UserMenuPopoverComponent
+    UserMenuPopoverComponent,
+    HeaderPageComponent,
+    AddButtonComponent,
+    SearchbarComponent
   ],
   imports: [
     CommonModule,
+    FormsModule,
     IonicModule,
     RouterModule
   ],
@@ -23,7 +31,10 @@ import { UserMenuPopoverComponent } from './components/user-menu-popover/user-me
     PanelLayoutComponent,
     MainHeaderLayoutComponent,
     BreadcrumbComponent,
-    UserMenuPopoverComponent
+    UserMenuPopoverComponent,
+    HeaderPageComponent,
+    AddButtonComponent,
+    SearchbarComponent
   ]
 })
 export class SharedModule { }

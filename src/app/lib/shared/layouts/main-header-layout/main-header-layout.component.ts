@@ -13,7 +13,7 @@ export class MainHeaderLayoutComponent implements OnInit {
 
   ngOnInit() { }
 
-  async onOpenUserMenuPopover(e: Event): Promise<void> {
+  async onOpenUserMenu(e: Event): Promise<void> {
     const popover = await this.popoverController.create({
       component: UserMenuPopoverComponent,
       dismissOnSelect: true,

@@ -20,4 +20,12 @@ export class ChargesPage implements OnInit {
     console.log($event);
   }
 
+  onUpdate(): void {
+    console.log('OnUpdate');
+  }
+
+  onDelete(): void {
+    console.log('OnDelete');
+  }
+
 }

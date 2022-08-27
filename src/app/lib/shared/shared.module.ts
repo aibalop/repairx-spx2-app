@@ -10,6 +10,8 @@ import { HeaderPageComponent } from './components/header-page/header-page.compon
 import { AddButtonComponent } from './components/add-button/add-button.component';
 import { SearchbarComponent } from './components/searchbar/searchbar.component';
 import { FormsModule } from '@angular/forms';
+import { CrudActionsButtonComponent } from './components/crud-actions-button/crud-actions-button.component';
+import { CrudActionsMenuPopoverComponent } from './components/crud-actions-menu-popover/crud-actions-menu-popover.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +21,9 @@ import { FormsModule } from '@angular/forms';
     UserMenuPopoverComponent,
     HeaderPageComponent,
     AddButtonComponent,
-    SearchbarComponent
+    SearchbarComponent,
+    CrudActionsButtonComponent,
+    CrudActionsMenuPopoverComponent
   ],
   imports: [
     CommonModule,
@@ -34,7 +38,9 @@ import { FormsModule } from '@angular/forms';
     UserMenuPopoverComponent,
     HeaderPageComponent,
     AddButtonComponent,
-    SearchbarComponent
+    SearchbarComponent,
+    CrudActionsButtonComponent,
+    CrudActionsMenuPopoverComponent
   ]
 })
 export class SharedModule { }

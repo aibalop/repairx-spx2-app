@@ -1,9 +1,9 @@
 <app-main-header-layout></app-main-header-layout>
 <app-header-page title="Cargos"></app-header-page>
 <app-breadcrumb></app-breadcrumb>
-<ion-content>
+<ion-content class="ion-padding">
 
-    <ion-grid class="ion-padding-horizontal">
+    <ion-grid>
         <ion-row>
             <ion-col class="ion-text-right">
                 <app-add-button (onClick)="onAdd()"></app-add-button>
@@ -12,5 +12,21 @@
     </ion-grid>
 
     <app-searchbar (change)="onSearch($event)"></app-searchbar>
+
+    <ion-list class="ion-margin" lines="full">
+        <ion-item>
+            <ion-icon name="cash" slot="start"></ion-icon>
+            <ion-label>
+                <h2>Cargo 1</h2>
+                <h5>Lorem ipsum dolor sit amet consectetur adipisicing elit. Sed odit voluptas blanditiis laudantium dicta reprehenderit sapiente eum aperiam libero culpa molestiae accusamus natus, eligendi provident quidem. Dolore nisi placeat consectetur?</h5>
+            </ion-label>
+            <ion-buttons slot="end">
+                <ion-button>
+                    <ion-icon slot="icon-only" name="add"></ion-icon>
+                </ion-button>
+                <app-crud-actions-button (update)="onUpdate()" (delete)="onDelete()"></app-crud-actions-button>
+            </ion-buttons>
+        </ion-item>
+    </ion-list>
 
 </ion-content>

@@ -1,7 +1,7 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { PopoverController } from '@ionic/angular';
 import { ECrudActions } from 'src/app/lib/core/enums/crud-actions.enum';
-import { CrudActionsMenuPopoverComponent } from '../crud-actions-menu-popover/crud-actions-menu-popover.component';
+import { CrudActionsMenuPopoverComponent } from '../popovers/crud-actions-menu-popover/crud-actions-menu-popover.component';
 
 @Component({
   selector: 'app-crud-actions-button',

@@ -1,0 +1,11 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title *ngIf="!isView">{{ isEdit ? editText : addText }}</ion-title>
+    <ion-title *ngIf="isView">{{ viewText }}</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="modalController.dismiss()">
+        <ion-icon slot="icon-only" name="close-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { PopoverController } from '@ionic/angular';
-import { UserMenuPopoverComponent } from '../../components/user-menu-popover/user-menu-popover.component';
+import { UserMenuPopoverComponent } from '../../components/popovers/user-menu-popover/user-menu-popover.component';
 
 @Component({
   selector: 'app-main-header-layout',

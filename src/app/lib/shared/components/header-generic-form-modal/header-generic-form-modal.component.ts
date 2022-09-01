@@ -11,6 +11,8 @@ export class HeaderGenericFormModalComponent implements OnInit {
   @Input() isView: boolean = false;
 
   @Input() isEdit: boolean = false;
+  
+  @Input() isSend: boolean = false;
 
   @Input() editText: string = 'Editar';
 

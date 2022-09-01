@@ -1,4 +1,4 @@
-<app-header-generic-form-modal [isEdit]="isEdit" [isView]="isView"></app-header-generic-form-modal>
+<app-header-generic-form-modal [isEdit]="isEdit" [isView]="isView" [isSend]="isSend"></app-header-generic-form-modal>
 <ion-content class="ion-padding">
 
   <form [formGroup]="form" (submit)="onSubmit()">
@@ -10,18 +10,21 @@
         <ion-col size="12">
 
           <ion-item>
-            <ion-label position="stacked">Nombre del cargo</ion-label>
+            <ion-label position="stacked">Nombre del cargo*</ion-label>
             <ion-input placeholder="Nombre del cargo" enterkeyhint="next" inputmode="text" type="text"
               formControlName="name" required [readonly]="isView">
             </ion-input>
           </ion-item>
-
+          <ion-note color="danger" class="ion-padding-start"
+            *ngIf="form.get('name').invalid && form.get('name').touched">
+            Campo requerido
+          </ion-note>
         </ion-col>
 
         <ion-col size="12">
 
           <ion-item>
-            <ion-label position="floating">Descripción</ion-label>
+            <ion-label position="stacked">Descripción</ion-label>
             <ion-textarea formControlName="description" enterkeyhint="next" inputmode="text" placeholder="Descripción"
               [readonly]="isView" rows="4"></ion-textarea>
           </ion-item>

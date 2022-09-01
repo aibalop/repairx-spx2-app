@@ -10,15 +10,15 @@ import { ChargeFormModalComponent } from '../../components/modals/charge-form-mo
 export class ChargesPage implements OnInit {
 
   constructor(
-    private modalController: ModalController
+    private _modalController: ModalController
   ) { }
 
   ngOnInit() {
   }
 
   async onAdd(): Promise<void> {
-    console.log('Se dio click en agregar');
-    const createModal = await this.modalController.create({
+
+    const createModal = await this._modalController.create({
       component: ChargeFormModalComponent,
       breakpoints: [0.25, 0.5, 0.75],
       initialBreakpoint: 0.75,
@@ -26,6 +26,14 @@ export class ChargesPage implements OnInit {
     });
 
     await createModal.present();
+
+    const { data } = await createModal.onDidDismiss();
+
+    if (data) {
+      // TODO: reload page list
+      console.log(data);
+    }
+
   }
 
   onSearch($event: string): void {

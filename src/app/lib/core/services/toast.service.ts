@@ -13,8 +13,8 @@ export class ToastService {
   async success(
     message: string,
     header: string = '',
-    duration: number = 1500,
-    position: 'bottom' | 'top' | 'middle' = 'bottom'): Promise<void> {
+    duration: number = 2500,
+    position: 'bottom' | 'top' | 'middle' = 'top'): Promise<void> {
     const toast = await this.toastController.create({
       color: 'success',
       message,
@@ -28,8 +28,8 @@ export class ToastService {
   async warning(
     message: string,
     header: string = '',
-    duration: number = 1500,
-    position: 'bottom' | 'top' | 'middle' = 'bottom'): Promise<void> {
+    duration: number = 2500,
+    position: 'bottom' | 'top' | 'middle' = 'top'): Promise<void> {
     const toast = await this.toastController.create({
       color: 'warning',
       message,
@@ -43,8 +43,8 @@ export class ToastService {
   async info(
     message: string,
     header: string = '',
-    duration: number = 1500,
-    position: 'bottom' | 'top' | 'middle' = 'bottom'): Promise<void> {
+    duration: number = 2500,
+    position: 'bottom' | 'top' | 'middle' = 'top'): Promise<void> {
     const toast = await this.toastController.create({
       color: 'dark',
       message,
@@ -58,8 +58,8 @@ export class ToastService {
   async danger(
     message: string,
     header: string = '',
-    duration: number = 1500,
-    position: 'bottom' | 'top' | 'middle' = 'bottom'): Promise<void> {
+    duration: number = 2500,
+    position: 'bottom' | 'top' | 'middle' = 'top'): Promise<void> {
     const toast = await this.toastController.create({
       color: 'danger',
       message,

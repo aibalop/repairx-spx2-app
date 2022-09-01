@@ -14,6 +14,7 @@ import { CrudActionsButtonComponent } from './components/crud-actions-button/cru
 import { CrudActionsMenuPopoverComponent } from './components/popovers/crud-actions-menu-popover/crud-actions-menu-popover.component';
 import { HeaderGenericFormModalComponent } from './components/header-generic-form-modal/header-generic-form-modal.component';
 import { ConfirmCancelButtonsFormModalComponent } from './components/confirm-cancel-buttons-form-modal/confirm-cancel-buttons-form-modal.component';
+import { NotFoundDataComponent } from './components/not-found-data/not-found-data.component';
 
 @NgModule({
   declarations: [
@@ -28,6 +29,7 @@ import { ConfirmCancelButtonsFormModalComponent } from './components/confirm-can
     CrudActionsMenuPopoverComponent,
     HeaderGenericFormModalComponent,
     ConfirmCancelButtonsFormModalComponent,
+    NotFoundDataComponent
   ],
   imports: [
     CommonModule,
@@ -46,7 +48,8 @@ import { ConfirmCancelButtonsFormModalComponent } from './components/confirm-can
     CrudActionsButtonComponent,
     CrudActionsMenuPopoverComponent,
     HeaderGenericFormModalComponent,
-    ConfirmCancelButtonsFormModalComponent
+    ConfirmCancelButtonsFormModalComponent,
+    NotFoundDataComponent
   ]
 })
 export class SharedModule { }

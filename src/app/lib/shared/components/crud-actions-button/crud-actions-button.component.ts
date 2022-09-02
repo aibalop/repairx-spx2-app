@@ -10,6 +10,8 @@ import { CrudActionsMenuPopoverComponent } from '../popovers/crud-actions-menu-p
 })
 export class CrudActionsButtonComponent implements OnInit {
 
+  @Output() view: EventEmitter<void> = new EventEmitter();
+
   @Output() update: EventEmitter<void> = new EventEmitter();
 
   @Output() delete: EventEmitter<void> = new EventEmitter();
@@ -34,12 +36,16 @@ export class CrudActionsButtonComponent implements OnInit {
       return;
     }
 
-    if (data === ECrudActions.UPDATE) {
-      this.update.emit();
-    }
-
-    if (data === ECrudActions.DELETE) {
-      this.delete.emit();
+    switch (data) {
+      case ECrudActions.READ:
+        this.view.emit();
+        break;
+      case ECrudActions.UPDATE:
+        this.update.emit();
+        break;
+      case ECrudActions.DELETE:
+        this.delete.emit();
+        break;
     }
 
   }

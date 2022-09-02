@@ -16,6 +16,8 @@ export class ChargeFormModalComponent implements OnInit {
 
   @Input() isEdit: boolean = false;
 
+  @Input() chargeId: string;
+
   form = new FormGroup({
     name: new FormControl(null, Validators.required),
     description: new FormControl(null)
@@ -30,7 +32,11 @@ export class ChargeFormModalComponent implements OnInit {
     private _chargeApiService: ChargeApiService
   ) { }
 
-  ngOnInit() { }
+  ngOnInit() {
+    if (this.chargeId) {
+      this._getCharge();
+    }
+  }
 
   onSubmit(): void {
 
@@ -41,7 +47,25 @@ export class ChargeFormModalComponent implements OnInit {
     }
 
     this.isSend = true;
-    this._create();
+
+    if (this.isEdit) {
+      this._update();
+    } else {
+      this._create();
+    }
+
+  }
+
+  private async _getCharge(): Promise<void> {
+
+    try {
+      const charge = await this._chargeApiService.getById(this.chargeId).toPromise();
+      this.form.patchValue(charge);
+    } catch (error) {
+      this._toastService.danger('No se pudo obtener los datos del cargo', 'Operación Fallida');
+      this._alertDialogService.catchError(error);
+      this._modalController.dismiss(true);
+    }
 
   }
 
@@ -54,6 +78,20 @@ export class ChargeFormModalComponent implements OnInit {
     } catch (error) {
       this.isSend = false;
       this._toastService.danger('No se pudo completar el registro', 'Operación Fallida');
+      this._alertDialogService.catchError(error);
+    }
+
+  }
+
+  private async _update(): Promise<void> {
+
+    try {
+      const chargeUpdated = await this._chargeApiService.update(this.chargeId, this.form.value).toPromise();
+      this._toastService.success('Cargo actualizado correctamente', 'Operación Completada');
+      this._modalController.dismiss(chargeUpdated);
+    } catch (error) {
+      this.isSend = false;
+      this._toastService.danger('No se pudo completar la actualización', 'Operación Fallida');
       this._alertDialogService.catchError(error);
     }
 

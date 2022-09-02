@@ -6,29 +6,35 @@
     <ion-grid>
         <ion-row>
             <ion-col class="ion-text-right">
-                <app-add-button (onClick)="onAdd()"></app-add-button>
+                <app-add-button (onClick)="onOpenFormModal()"></app-add-button>
             </ion-col>
         </ion-row>
     </ion-grid>
 
-    <app-searchbar (change)="onSearch($event)"></app-searchbar>
+    <app-searchbar (search)="onSearch($event)"></app-searchbar>
 
-    <ion-list class="ion-margin" lines="full">
-        <ion-item>
-            <ion-icon name="cash" slot="start"></ion-icon>
-            <ion-label>
-                <h2>Cargo 1</h2>
-                <h5>Lorem ipsum dolor sit amet consectetur adipisicing elit. Sed odit voluptas blanditiis laudantium dicta reprehenderit sapiente eum aperiam libero culpa molestiae accusamus natus, eligendi provident quidem. Dolore nisi placeat consectetur?</h5>
-            </ion-label>
-            <ion-buttons slot="end">
-                <ion-button>
-                    <ion-icon slot="icon-only" name="add"></ion-icon>
-                </ion-button>
-                <app-crud-actions-button (update)="onUpdate()" (delete)="onDelete()"></app-crud-actions-button>
-            </ion-buttons>
-        </ion-item>
-    </ion-list>
+    <ng-container *ngIf="list">
+        <ion-list class="ion-margin" lines="full" *ngFor="let charge of list.data">
+            <ion-item>
+                <ion-icon name="cash" slot="start"></ion-icon>
+                <ion-label>
+                    <h2>{{ charge.name }}</h2>
+                    <p>{{ charge.description }}</p>
+                </ion-label>
+                <ion-buttons slot="end">
+                    <app-crud-actions-button (update)="onOpenFormModal(charge._id)"
+                        (view)="onOpenFormModal(charge._id, true)" (delete)="onDelete(charge._id)">
+                    </app-crud-actions-button>
+                </ion-buttons>
+            </ion-item>
+        </ion-list>
+    </ng-container>
 
-    <app-not-found-data></app-not-found-data>
+    <ion-infinite-scroll threshold="100px" (ionInfinite)="doInfinite($event)">
+        <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="Cargando...">
+        </ion-infinite-scroll-content>
+    </ion-infinite-scroll>
+
+    <app-not-found-data *ngIf="!list || list.data.length === 0"></app-not-found-data>
 
 </ion-content>

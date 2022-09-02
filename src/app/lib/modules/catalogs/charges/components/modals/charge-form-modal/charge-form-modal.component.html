@@ -33,11 +33,10 @@
 
       </ion-row>
 
-      <app-confirm-cancel-buttons-form-modal [isSend]="isSend"></app-confirm-cancel-buttons-form-modal>
+      <app-confirm-cancel-buttons-form-modal *ngIf="!isView" [isSend]="isSend"></app-confirm-cancel-buttons-form-modal>
 
     </ion-grid>
 
   </form>
-
 
 </ion-content>

@@ -11,6 +11,10 @@ export class CrudActionsMenuPopoverComponent {
 
   constructor(private popoverController: PopoverController) { }
 
+  onView(): void {
+    this.popoverController.dismiss(ECrudActions.READ);
+  }
+  
   onUpdate(): void {
     this.popoverController.dismiss(ECrudActions.UPDATE);
   }

@@ -1,5 +1,9 @@
 <ion-content>
   <ion-list class="ion-no-padding" lines="full">
+    <ion-item [button]="true" [detail]="false" (click)="onView()">
+      <ion-icon name="eye-outline" slot="start"></ion-icon>
+      Ver
+    </ion-item>
     <ion-item [button]="true" [detail]="false" (click)="onUpdate()">
       <ion-icon name="pencil-outline" slot="start"></ion-icon>
       Editar

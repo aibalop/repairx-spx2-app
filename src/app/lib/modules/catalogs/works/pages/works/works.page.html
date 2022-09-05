@@ -1,5 +1,50 @@
 <app-main-header-layout></app-main-header-layout>
+<app-header-page title="Servicios"></app-header-page>
 <app-breadcrumb></app-breadcrumb>
-<ion-content>
+<ion-content class="ion-padding">
+
+    <ion-grid>
+
+        <ion-row>
+            <ion-col size="12" class="ion-text-right">
+                <app-add-button (onClick)="onOpenFormModal()"></app-add-button>
+            </ion-col>
+        </ion-row>
+
+        <ion-row>
+            <ion-col size="12">
+                <app-searchbar (search)="onSearch($event)"></app-searchbar>
+            </ion-col>
+        </ion-row>
+
+        <ion-row>
+            <ion-col size="12">
+                <ng-container *ngIf="list">
+                    <ion-list lines="full" *ngFor="let charge of list.data">
+                        <ion-item>
+                            <ion-icon name="cash" slot="start"></ion-icon>
+                            <ion-label>
+                                <h2>{{ charge.name }}</h2>
+                                <p>{{ charge.description }}</p>
+                            </ion-label>
+                            <ion-buttons slot="end">
+                                <app-crud-actions-button (update)="onOpenFormModal(charge._id)"
+                                    (view)="onOpenFormModal(charge._id, true)" (delete)="onDelete(charge._id)">
+                                </app-crud-actions-button>
+                            </ion-buttons>
+                        </ion-item>
+                    </ion-list>
+                </ng-container>
+
+                <ion-infinite-scroll threshold="100px" (ionInfinite)="doInfinite($event)">
+                    <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="Cargando...">
+                    </ion-infinite-scroll-content>
+                </ion-infinite-scroll>
+
+                <app-not-found-data *ngIf="!list || list.data.length === 0"></app-not-found-data>
+            </ion-col>
+        </ion-row>
+
+    </ion-grid>
 
 </ion-content>

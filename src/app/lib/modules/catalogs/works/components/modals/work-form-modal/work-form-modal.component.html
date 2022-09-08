@@ -1,0 +1,77 @@
+<app-header-generic-form-modal [isEdit]="isEdit" [isView]="isView" [isSend]="isSend"></app-header-generic-form-modal>
+<ion-content class="ion-padding">
+
+  <form [formGroup]="form" (submit)="onSubmit()">
+
+    <ion-grid fixed>
+
+      <ion-row class="ion-justify-content-center">
+
+        <ion-col size="12">
+
+          <ion-item>
+            <ion-label position="stacked">Clave del servicio*</ion-label>
+            <ion-input placeholder="Clave del servicio" enterkeyhint="next" inputmode="text" type="text"
+              formControlName="key" required [readonly]="isView">
+            </ion-input>
+          </ion-item>
+          <ion-note color="danger" class="ion-padding-start" *ngIf="form.get('key').invalid && form.get('key').touched">
+            Campo requerido
+          </ion-note>
+
+        </ion-col>
+
+        <ion-col size="12">
+
+          <ion-item>
+            <ion-label position="stacked">Nombre del servicio*</ion-label>
+            <ion-input placeholder="Nombre del servicio" enterkeyhint="next" inputmode="text" type="text"
+              formControlName="name" required [readonly]="isView">
+            </ion-input>
+          </ion-item>
+          <ion-note color="danger" class="ion-padding-start"
+            *ngIf="form.get('name').invalid && form.get('name').touched">
+            Campo requerido
+          </ion-note>
+
+        </ion-col>
+
+        <ion-col size="12">
+
+          <ion-item>
+            <ion-label position="stacked">Monto*</ion-label>
+            <ion-input placeholder="Monto" enterkeyhint="next" inputmode="decimal" type="number"
+              formControlName="amount" required [readonly]="isView">
+            </ion-input>
+          </ion-item>
+          <ion-note color="danger" class="ion-padding-start"
+            *ngIf="form.get('amount').invalid && form.get('amount').touched">
+            <ng-container *ngIf="form.controls['amount'].errors.required; else patternError">
+              Campo requerido
+            </ng-container>
+            <ng-template #patternError>
+              Dato incorrecto
+            </ng-template>
+          </ion-note>
+
+        </ion-col>
+
+        <ion-col size="12">
+
+          <ion-item>
+            <ion-label position="stacked">Descripción</ion-label>
+            <ion-textarea formControlName="description" enterkeyhint="next" inputmode="text" placeholder="Descripción"
+              [readonly]="isView" rows="4"></ion-textarea>
+          </ion-item>
+
+        </ion-col>
+
+      </ion-row>
+
+      <app-confirm-cancel-buttons-form-modal *ngIf="!isView" [isSend]="isSend"></app-confirm-cancel-buttons-form-modal>
+
+    </ion-grid>
+
+  </form>
+
+</ion-content>

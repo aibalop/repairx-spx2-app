@@ -7,6 +7,6 @@ export interface IUser {
     createdAt?: string;
     updatedAt?: string;
 
-    getFullname?: () => string;
-    getUsername?: () => string;
+    getFullName: () => string;
+    getUsername: () => string;
 }

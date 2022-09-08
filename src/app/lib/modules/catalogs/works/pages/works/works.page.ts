@@ -5,6 +5,7 @@ import { IPaginationData } from 'src/app/lib/core/interfaces/pagination-data.int
 import { AlertDialogService } from 'src/app/lib/core/services/alert-dialog.service';
 import { ToastService } from 'src/app/lib/core/services/toast.service';
 import { WorkApiService } from '../../api/work.api.service';
+import { WorkFormModalComponent } from '../../components/modals/work-form-modal/work-form-modal.component';
 import { IWork } from '../../interfaces/work.interface';
 
 @Component({
@@ -38,9 +39,9 @@ export class WorksPage implements OnInit {
   async onOpenFormModal(_id: string = '', isView: boolean = false): Promise<void> {
 
     const formModal = await this._modalController.create({
-      component: ChargeFormModalComponent,
-      breakpoints: [0.25, 0.5, 0.75],
-      initialBreakpoint: 0.75,
+      component: WorkFormModalComponent,
+      breakpoints: [0.25, 0.5, 0.75, 1.0],
+      initialBreakpoint: 1.0,
       backdropDismiss: false,
       componentProps: {
         workId: _id,

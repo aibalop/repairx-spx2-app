@@ -14,7 +14,7 @@ export class User implements IUser {
         Object.assign(this, data);
     }
 
-    getFullname(): string {
+    getFullName(): string {
         return `${this.name} ${this.lastName}`;
     }
 

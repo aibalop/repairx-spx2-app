@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { CatalogsRoutes, CustomersRoutes, DashboardRoutes } from 'src/app/lib/core/enums/modules-routes.enum';
 import { SessionService } from 'src/app/lib/core/services/session.service';
 
 interface Permission {
@@ -25,7 +26,7 @@ export class PanelLayoutComponent implements OnInit {
   permissions: Array<Permission> = [
     {
       parent: {
-        pathname: '/inicio',
+        pathname: DashboardRoutes.HOME,
         icon: 'home',
         name: 'Inicio',
         open: false
@@ -33,19 +34,19 @@ export class PanelLayoutComponent implements OnInit {
     },
     {
       parent: {
-        pathname: '/catalogos',
+        pathname: CatalogsRoutes.CATALOGS,
         icon: 'cube',
         name: 'Catalogos',
         open: false
       },
       childs: [
         {
-          pathname: '/catalogos/cargos',
+          pathname: CatalogsRoutes.CHARGES,
           icon: 'cash',
           name: 'Cargos'
         },
         {
-          pathname: '/catalogos/servicios',
+          pathname: CatalogsRoutes.WORKS,
           icon: 'hammer',
           name: 'Servicios'
         }
@@ -53,7 +54,7 @@ export class PanelLayoutComponent implements OnInit {
     },
     {
       parent: {
-        pathname: '/customers',
+        pathname: CustomersRoutes.CUSTOMERS,
         icon: 'people',
         name: 'Clientes',
         open: false

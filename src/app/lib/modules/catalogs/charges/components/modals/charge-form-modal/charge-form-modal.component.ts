@@ -4,6 +4,7 @@ import { ModalController } from '@ionic/angular';
 import { AlertDialogService } from 'src/app/lib/core/services/alert-dialog.service';
 import { ToastService } from 'src/app/lib/core/services/toast.service';
 import { ChargeApiService } from '../../../api/charge.api.service';
+import { ICharge } from '../../../interfaces/charge.interface';
 
 @Component({
   selector: 'app-charge-form-modal',
@@ -72,7 +73,7 @@ export class ChargeFormModalComponent implements OnInit {
   private async _create(): Promise<void> {
 
     try {
-      const chargeCreated = await this._chargeApiService.create(this.form.value).toPromise();
+      const chargeCreated = await this._chargeApiService.create(this.form.value as ICharge).toPromise();
       this._toastService.success('Cargo creado correctamente', 'Operación Completada');
       this._modalController.dismiss(chargeCreated);
     } catch (error) {
@@ -86,7 +87,7 @@ export class ChargeFormModalComponent implements OnInit {
   private async _update(): Promise<void> {
 
     try {
-      const chargeUpdated = await this._chargeApiService.update(this.chargeId, this.form.value).toPromise();
+      const chargeUpdated = await this._chargeApiService.update(this.chargeId, this.form.value as ICharge).toPromise();
       this._toastService.success('Cargo actualizado correctamente', 'Operación Completada');
       this._modalController.dismiss(chargeUpdated);
     } catch (error) {

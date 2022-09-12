@@ -1,0 +1,17 @@
+<ion-row class="ion-margin-top">
+
+  <ion-col size="12" class="ion-text-right">
+
+    <ion-button color="danger" size="small" (click)="location.back()" fill="clear" class="ion-margin-end"
+      [disabled]="isSend">
+      {{ cancelText }}
+    </ion-button>
+
+    <ion-button color="primary" size="small" type="submit" [disabled]="isSend">
+      <ion-spinner name="circles" slot="start" *ngIf="isSend"></ion-spinner>
+      {{ confirmText }}
+    </ion-button>
+
+  </ion-col>
+
+</ion-row>

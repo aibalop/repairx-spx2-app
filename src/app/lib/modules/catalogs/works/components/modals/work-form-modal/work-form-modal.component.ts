@@ -5,6 +5,7 @@ import { AlertDialogService } from 'src/app/lib/core/services/alert-dialog.servi
 import { ToastService } from 'src/app/lib/core/services/toast.service';
 import { RegexUtil } from 'src/app/lib/core/utils/regex.util';
 import { WorkApiService } from '../../../api/work.api.service';
+import { IWork } from '../../../interfaces/work.interface';
 
 @Component({
   selector: 'app-work-form-modal',
@@ -75,7 +76,7 @@ export class WorkFormModalComponent implements OnInit {
   private async _create(): Promise<void> {
 
     try {
-      const workCreated = await this._workApiService.create(this.form.value).toPromise();
+      const workCreated = await this._workApiService.create(this.form.value as IWork).toPromise();
       this._toastService.success('Servicio creado correctamente', 'Operación Completada');
       this._modalController.dismiss(workCreated);
     } catch (error) {
@@ -89,7 +90,7 @@ export class WorkFormModalComponent implements OnInit {
   private async _update(): Promise<void> {
 
     try {
-      const workUpdated = await this._workApiService.update(this.workId, this.form.value).toPromise();
+      const workUpdated = await this._workApiService.update(this.workId, this.form.value as IWork).toPromise();
       this._toastService.success('Servicio actualizado correctamente', 'Operación Completada');
       this._modalController.dismiss(workUpdated);
     } catch (error) {

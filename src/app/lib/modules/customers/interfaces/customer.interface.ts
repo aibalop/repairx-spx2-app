@@ -6,7 +6,7 @@ export interface ICustomer {
     name: string;
     lastName: string;
     surName?: string;
-    slug: string;
+    slug?: string;
     phone: string;
     email?: string;
     address?: IAddress;

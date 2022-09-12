@@ -2,11 +2,11 @@ import { IUser } from "../../../users/interfaces/user.interface";
 
 export interface IWork {
     _id?: string;
-    key?: string;
-    name?: string;
+    key: string;
+    name: string;
     slug?: string;
     description?: string;
-    amount?: number;
+    amount: number;
     deleted?: boolean;
     createdBy?: string | IUser;
     updatedBy?: string | IUser;

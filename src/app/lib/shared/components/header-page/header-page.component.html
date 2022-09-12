@@ -1,9 +1,20 @@
 <ion-grid>
+
     <ion-row>
+
         <ion-col size="12" class="ion-margin-horizontal">
             <ion-text color="dark">
                 <h1>{{ title }}</h1>
             </ion-text>
         </ion-col>
+
+        <ion-col size="12" class="ion-margin-horizontal" *ngIf="showBackButton">
+            <ion-button size="small" (click)="location.back()" fill="clear">
+                <ion-icon slot="start" name="arrow-back-outline"></ion-icon>
+                Regresar
+            </ion-button>
+        </ion-col>
+
     </ion-row>
+
 </ion-grid>

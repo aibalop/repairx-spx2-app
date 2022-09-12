@@ -1,3 +1,4 @@
+import { Location } from '@angular/common';
 import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
@@ -9,8 +10,10 @@ export class HeaderPageComponent implements OnInit {
 
   @Input() title: string = '';
 
-  constructor() { }
+  @Input() showBackButton: boolean = false;
 
-  ngOnInit() {}
+  constructor(public location: Location) { }
+
+  ngOnInit() { }
 
 }

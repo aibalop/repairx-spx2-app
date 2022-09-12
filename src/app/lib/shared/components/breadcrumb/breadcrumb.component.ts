@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Event, NavigationEnd, Router } from '@angular/router';
+import { DashboardRoutes } from 'src/app/lib/core/enums/modules-routes.enum';
 
 @Component({
   selector: 'app-breadcrumb',
@@ -11,6 +12,8 @@ export class BreadcrumbComponent implements OnInit {
   breadcrumbs = [];
 
   currentUrl = '';
+
+  DashboardRoutes = DashboardRoutes;
 
   constructor(private router: Router) {
     this.router.events.subscribe((event: Event) => {

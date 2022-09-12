@@ -2,7 +2,7 @@ import { IUser } from "../../../users/interfaces/user.interface";
 
 export interface ICharge {
     _id?: string;
-    name?: string;
+    name: string;
     slug?: string;
     description?: string;
     deleted?: boolean;

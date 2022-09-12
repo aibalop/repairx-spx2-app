@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { IUser } from '../../modules/users/interfaces/user.interface';
+import { AuthRoutes } from '../enums/modules-routes.enum';
 import { LocalStoreService } from './local-store.service';
 
 @Injectable({
@@ -51,7 +52,7 @@ export class SessionService {
     this.userSession = null;
     this.token = null;
     this.store.clear();
-    this.router.navigate(['/auth/sign-in']);
+    this.router.navigate([AuthRoutes.SIGN_IN]);
   }
 
   clearSession(): void {

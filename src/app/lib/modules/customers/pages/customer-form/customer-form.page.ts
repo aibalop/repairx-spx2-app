@@ -58,7 +58,7 @@ export class CustomerFormPage implements OnInit, OnDestroy {
 
     this.isEdit = this._router.url.includes(CustomersRoutes.CUSTOMERS_EDIT);
 
-    this.titleHeader = this.isView ? 'ver Cliente' : this.titleHeader;
+    this.titleHeader = this.isView ? 'Ver Cliente' : this.titleHeader;
 
     this.titleHeader = this.isEdit ? 'Editar Cliente' : this.titleHeader;
 

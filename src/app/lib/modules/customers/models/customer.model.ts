@@ -22,4 +22,12 @@ export class Customer implements ICustomer {
         return `${this.name} ${this.lastName}${this.surName ? ' ' + this.surName : ''}`;
     }
 
+    getPhoneFormat(): string {
+        try {
+            return `${this.phone.substring(0, 3)}-${this.phone.substring(3, 6)}-${this.phone.slice(6, 8)}-${this.phone.substring(8, 10)}`;
+        } catch (error) {
+            return this.phone;
+        }
+    };
+
 }

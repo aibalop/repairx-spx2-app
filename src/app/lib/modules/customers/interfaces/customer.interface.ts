@@ -19,4 +19,7 @@ export interface ICustomer {
     deletedAt?: Date | string;
 
     getFullName: () => string;
+
+    getPhoneFormat: () => string;
+
 }

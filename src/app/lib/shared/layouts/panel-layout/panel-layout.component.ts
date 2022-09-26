@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { CatalogsRoutes, CustomersRoutes, DashboardRoutes } from 'src/app/lib/core/enums/modules-routes.enum';
+import { ECatalogsRoutes, ECustomersRoutes, EDashboardRoutes, EOrderRepairsRoutes } from 'src/app/lib/core/enums/modules-routes.enum';
 import { SessionService } from 'src/app/lib/core/services/session.service';
 
 interface Permission {
@@ -26,7 +26,7 @@ export class PanelLayoutComponent implements OnInit {
   permissions: Array<Permission> = [
     {
       parent: {
-        pathname: DashboardRoutes.HOME,
+        pathname: EDashboardRoutes.HOME,
         icon: 'home',
         name: 'Inicio',
         open: false
@@ -34,19 +34,19 @@ export class PanelLayoutComponent implements OnInit {
     },
     {
       parent: {
-        pathname: CatalogsRoutes.CATALOGS,
+        pathname: ECatalogsRoutes.CATALOGS,
         icon: 'cube',
         name: 'Catalogos',
         open: false
       },
       childs: [
         {
-          pathname: CatalogsRoutes.CHARGES,
+          pathname: ECatalogsRoutes.CHARGES,
           icon: 'cash',
           name: 'Cargos'
         },
         {
-          pathname: CatalogsRoutes.WORKS,
+          pathname: ECatalogsRoutes.WORKS,
           icon: 'hammer',
           name: 'Servicios'
         }
@@ -54,7 +54,7 @@ export class PanelLayoutComponent implements OnInit {
     },
     {
       parent: {
-        pathname: CustomersRoutes.CUSTOMERS,
+        pathname: ECustomersRoutes.CUSTOMERS,
         icon: 'people',
         name: 'Clientes',
         open: false
@@ -62,7 +62,7 @@ export class PanelLayoutComponent implements OnInit {
     },
     {
       parent: {
-        pathname: '/order-repairs',
+        pathname: EOrderRepairsRoutes.ORDER_REPAIRS,
         icon: 'journal',
         name: 'Ordenes',
         open: false

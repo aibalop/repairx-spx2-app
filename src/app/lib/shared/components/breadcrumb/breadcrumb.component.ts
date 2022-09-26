@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Event, NavigationEnd, Router } from '@angular/router';
-import { DashboardRoutes } from 'src/app/lib/core/enums/modules-routes.enum';
+import { EDashboardRoutes } from 'src/app/lib/core/enums/modules-routes.enum';
 
 @Component({
   selector: 'app-breadcrumb',
@@ -13,12 +13,12 @@ export class BreadcrumbComponent implements OnInit {
 
   currentUrl = '';
 
-  DashboardRoutes = DashboardRoutes;
+  EDashboardRoutes = EDashboardRoutes;
 
   constructor(private router: Router) {
     this.router.events.subscribe((event: Event) => {
       if (event instanceof NavigationEnd) {
-        this.currentUrl = event.url;
+        this.currentUrl = event.url.replace('-', ' ');
         this.breadcrumbs = this.currentUrl.substring(1).split('/');
       }
     });

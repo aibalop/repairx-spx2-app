@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { ActivatedRouteSnapshot, CanActivate, Router } from '@angular/router';
 import { Observable } from 'rxjs';
-import { AuthRoutes } from '../enums/modules-routes.enum';
+import { EAuthRoutes } from '../enums/modules-routes.enum';
 import { SessionService } from '../services/session.service';
 
 @Injectable({
@@ -32,7 +32,7 @@ export class AuthGuard implements CanActivate {
         // }
 
       } else {
-        this.router.navigate([AuthRoutes.SIGN_IN]);
+        this.router.navigate([EAuthRoutes.SIGN_IN]);
         subscriber.next(false);
       }
     });

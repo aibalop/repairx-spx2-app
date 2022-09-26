@@ -45,6 +45,10 @@ const routes: Routes = [
         path: 'clientes',
         loadChildren: () => import('./lib/modules/customers/customers.module').then(m => m.CustomersModule)
       },
+      {
+        path: 'ordenes-reparacion',
+        loadChildren: () => import('./lib/modules/order-repairs/order-repairs.module').then(m => m.OrderRepairsModule)
+      },
     ]
   },
   // { path: '**', component: PathNotFoundComponent }

@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { IonInfiniteScroll, ModalController } from '@ionic/angular';
-import { CustomersRoutes } from 'src/app/lib/core/enums/modules-routes.enum';
+import { ECustomersRoutes } from 'src/app/lib/core/enums/modules-routes.enum';
 import { IFilterGeneric } from 'src/app/lib/core/interfaces/filter-generic.interface';
 import { IPaginationData } from 'src/app/lib/core/interfaces/pagination-data.interface';
 import { AlertDialogService } from 'src/app/lib/core/services/alert-dialog.service';
@@ -15,6 +15,7 @@ import { Customer } from '../../models/customer.model';
   styleUrls: ['./customers.page.scss'],
 })
 export class CustomersPage implements OnInit {
+
   @ViewChild(IonInfiniteScroll) infiniteScroll: IonInfiniteScroll;
 
   list: IPaginationData<Customer>;
@@ -39,15 +40,15 @@ export class CustomersPage implements OnInit {
   async onOpenForm(_id: string = '', isView: boolean = false): Promise<void> {
 
     if (!_id && !isView) {
-      this._router.navigate([CustomersRoutes.CUSTOMERS_NEW]);
+      this._router.navigate([ECustomersRoutes.CUSTOMERS_NEW]);
     }
 
     if (_id && !isView) {
-      this._router.navigate([CustomersRoutes.CUSTOMERS_EDIT, _id]);
+      this._router.navigate([ECustomersRoutes.CUSTOMERS_EDIT, _id]);
     }
 
     if (_id && isView) {
-      this._router.navigate([CustomersRoutes.CUSTOMERS_VIEW, _id]);
+      this._router.navigate([ECustomersRoutes.CUSTOMERS_VIEW, _id]);
     }
 
   }

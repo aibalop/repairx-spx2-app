@@ -2,7 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
-import { CustomersRoutes } from 'src/app/lib/core/enums/modules-routes.enum';
+import { ECustomersRoutes } from 'src/app/lib/core/enums/modules-routes.enum';
 import { AlertDialogService } from 'src/app/lib/core/services/alert-dialog.service';
 import { ToastService } from 'src/app/lib/core/services/toast.service';
 import { CustomerApiService } from '../../api/customer.api.service';
@@ -54,9 +54,9 @@ export class CustomerFormPage implements OnInit, OnDestroy {
     private _activatedRoute: ActivatedRoute
   ) {
 
-    this.isView = this._router.url.includes(CustomersRoutes.CUSTOMERS_VIEW);
+    this.isView = this._router.url.includes(ECustomersRoutes.CUSTOMERS_VIEW);
 
-    this.isEdit = this._router.url.includes(CustomersRoutes.CUSTOMERS_EDIT);
+    this.isEdit = this._router.url.includes(ECustomersRoutes.CUSTOMERS_EDIT);
 
     this.titleHeader = this.isView ? 'Ver Cliente' : this.titleHeader;
 
@@ -75,7 +75,7 @@ export class CustomerFormPage implements OnInit, OnDestroy {
         if (this.customerId) {
           this._getCustomer();
         } else {
-          this._router.navigate([CustomersRoutes.CUSTOMERS]);
+          this._router.navigate([ECustomersRoutes.CUSTOMERS]);
         }
 
       });
@@ -118,7 +118,7 @@ export class CustomerFormPage implements OnInit, OnDestroy {
     } catch (error) {
       this._toastService.danger('No se pudo obtener los datos del cliente', 'Operación Fallida');
       this._alertDialogService.catchError(error);
-      this._router.navigate([CustomersRoutes.CUSTOMERS]);
+      this._router.navigate([ECustomersRoutes.CUSTOMERS]);
     }
 
   }
@@ -128,7 +128,7 @@ export class CustomerFormPage implements OnInit, OnDestroy {
     try {
       await this._customerApiService.create(this.form.value as ICustomer).toPromise();
       this._toastService.success('Cliente creado correctamente', 'Operación Completada');
-      this._router.navigate([CustomersRoutes.CUSTOMERS]);
+      this._router.navigate([ECustomersRoutes.CUSTOMERS]);
     } catch (error) {
       this.isSend = false;
       this._toastService.danger('No se pudo completar el registro', 'Operación Fallida');
@@ -142,7 +142,7 @@ export class CustomerFormPage implements OnInit, OnDestroy {
     try {
       await this._customerApiService.update(this.customerId, this.form.value as ICustomer).toPromise();
       this._toastService.success('Cliente actualizado correctamente', 'Operación Completada');
-      this._router.navigate([CustomersRoutes.CUSTOMERS]);
+      this._router.navigate([ECustomersRoutes.CUSTOMERS]);
     } catch (error) {
       this.isSend = false;
       this._toastService.danger('No se pudo completar la actualización', 'Operación Fallida');

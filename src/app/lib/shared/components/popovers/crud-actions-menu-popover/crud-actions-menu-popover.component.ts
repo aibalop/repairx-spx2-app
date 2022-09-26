@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { PopoverController } from '@ionic/angular';
 import { ECrudActions } from 'src/app/lib/core/enums/crud-actions.enum';
 
@@ -8,6 +8,8 @@ import { ECrudActions } from 'src/app/lib/core/enums/crud-actions.enum';
   styleUrls: ['./crud-actions-menu-popover.component.scss'],
 })
 export class CrudActionsMenuPopoverComponent {
+
+  @Input() showDelete: boolean = true;
 
   constructor(private popoverController: PopoverController) { }
 

@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { PopoverController } from '@ionic/angular';
 import { ECrudActions } from 'src/app/lib/core/enums/crud-actions.enum';
 import { CrudActionsMenuPopoverComponent } from '../popovers/crud-actions-menu-popover/crud-actions-menu-popover.component';
@@ -9,6 +9,8 @@ import { CrudActionsMenuPopoverComponent } from '../popovers/crud-actions-menu-p
   styleUrls: ['./crud-actions-button.component.scss'],
 })
 export class CrudActionsButtonComponent implements OnInit {
+
+  @Input() showDelete: boolean = true;
 
   @Output() view: EventEmitter<void> = new EventEmitter();
 
@@ -23,6 +25,9 @@ export class CrudActionsButtonComponent implements OnInit {
   async onOpenCrudActionsMenu(e: Event): Promise<void> {
     const popover = await this.popoverController.create({
       component: CrudActionsMenuPopoverComponent,
+      componentProps: {
+        showDelete: this.showDelete
+      },
       dismissOnSelect: true,
       showBackdrop: true,
       event: e,

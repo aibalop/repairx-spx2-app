@@ -8,7 +8,7 @@
       <ion-icon name="pencil-outline" slot="start"></ion-icon>
       Editar
     </ion-item>
-    <ion-item [button]="true" [detail]="false" (click)="onDelete()">
+    <ion-item [button]="true" [detail]="false" (click)="onDelete()" *ngIf="showDelete">
       <ion-icon name="trash-outline" slot="start"></ion-icon>
       Eliminar
     </ion-item>

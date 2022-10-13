@@ -1,11 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { ModalController } from '@ionic/angular';
 import { Subscription } from 'rxjs';
 import { EOrderRepairsRoutes } from 'src/app/lib/core/enums/modules-routes.enum';
 import { AlertDialogService } from 'src/app/lib/core/services/alert-dialog.service';
 import { ToastService } from 'src/app/lib/core/services/toast.service';
 import { OrderRepairApiService } from '../../api/order-repair.api.service';
+import { CustomerFormShortModalComponent } from '../../components/modals/customer-form-short-modal/customer-form-short-modal.component';
+import { SearchCustomerModalComponent } from '../../components/modals/search-customer-modal/search-customer-modal.component';
 import { IOrderRepair } from '../../interfaces/order-repair.interface';
 
 @Component({
@@ -51,7 +54,8 @@ export class OrderRepairFormPage implements OnInit {
     private _toastService: ToastService,
     private _orderRepairApiService: OrderRepairApiService,
     private _router: Router,
-    private _activatedRoute: ActivatedRoute
+    private _activatedRoute: ActivatedRoute,
+    private _modalController: ModalController
   ) {
 
     this.isView = this._router.url.includes(EOrderRepairsRoutes.ORDER_REPAIRS_VIEW);
@@ -90,6 +94,40 @@ export class OrderRepairFormPage implements OnInit {
       this.subscription.unsubscribe();
     }
 
+  }
+
+  async onCreateCustomer(): Promise<void> {
+    const formModal = await this._modalController.create({
+      component: CustomerFormShortModalComponent,
+      breakpoints: [0.25, 0.5, 0.75],
+      initialBreakpoint: 0.75,
+      backdropDismiss: false
+    });
+
+    await formModal.present();
+
+    const { data } = await formModal.onDidDismiss();
+
+    if (data) {
+      console.log('CustomerCreated -> ', data);
+    }
+  }
+
+  async onSearchCustomer(): Promise<void> {
+    const searchModal = await this._modalController.create({
+      component: SearchCustomerModalComponent,
+      breakpoints: [0.25, 0.5, 0.75, 1.0],
+      initialBreakpoint: 1.0,
+      backdropDismiss: false
+    });
+
+    await searchModal.present();
+
+    const { data } = await searchModal.onDidDismiss();
+
+    if (data) {
+      console.log('CustomerFound -> ', data);
+    }
   }
 
   onSubmit(): void {

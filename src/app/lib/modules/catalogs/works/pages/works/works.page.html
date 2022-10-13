@@ -19,23 +19,21 @@
 
         <ion-row>
             <ion-col size="12">
-                <ng-container *ngIf="list">
-                    <ion-list lines="full" *ngFor="let work of list.data">
-                        <ion-item>
-                            <ion-icon name="hammer" slot="start"></ion-icon>
-                            <ion-label>
-                                <h2>{{ work.key }} - {{ work.name }}</h2>
-                                <p>{{ work.amount | currency:'MXN' }}</p>
-                                <p>{{ work.description }}</p>
-                            </ion-label>
-                            <ion-buttons slot="end">
-                                <app-crud-actions-button (update)="onOpenFormModal(work._id)"
-                                    (view)="onOpenFormModal(work._id, true)" (delete)="onDelete(work._id)">
-                                </app-crud-actions-button>
-                            </ion-buttons>
-                        </ion-item>
-                    </ion-list>
-                </ng-container>
+                <ion-list lines="full" *ngIf="list">
+                    <ion-item *ngFor="let work of list.data">
+                        <ion-icon name="hammer" slot="start"></ion-icon>
+                        <ion-label>
+                            <h2>{{ work.key }} - {{ work.name }}</h2>
+                            <p>{{ work.amount | currency:'MXN' }}</p>
+                            <p>{{ work.description }}</p>
+                        </ion-label>
+                        <ion-buttons slot="end">
+                            <app-crud-actions-button (update)="onOpenFormModal(work._id)"
+                                (view)="onOpenFormModal(work._id, true)" (delete)="onDelete(work._id)">
+                            </app-crud-actions-button>
+                        </ion-buttons>
+                    </ion-item>
+                </ion-list>
 
                 <ion-infinite-scroll threshold="100px" (ionInfinite)="doInfinite($event)">
                     <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="Cargando...">

@@ -1,3 +1,82 @@
-<p>
-  customer-form-short-modal works!
-</p>
+<app-header-generic-form-modal [isSend]="isSend" addText="Agregar Cliente"></app-header-generic-form-modal>
+<ion-content class="ion-padding">
+
+  <form [formGroup]="form" (submit)="onSubmit()">
+
+    <ion-grid fixed>
+
+      <ion-row class="ion-justify-content-center">
+
+        <ion-col sizeXs="12" sizeSm="12" sizeMd="6">
+
+          <ion-item>
+            <ion-label position="stacked">Nombre*</ion-label>
+            <ion-input placeholder="Nombre" enterkeyhint="next" inputmode="text" type="text" formControlName="name"
+              required>
+            </ion-input>
+          </ion-item>
+          <ion-note color="danger" class="ion-padding-start"
+            *ngIf="form.get('name').invalid && form.get('name').touched">
+            Campo requerido
+          </ion-note>
+
+        </ion-col>
+
+        <ion-col sizeXs="12" sizeSm="12" sizeMd="6">
+
+          <ion-item>
+            <ion-label position="stacked">Primer apellido*</ion-label>
+            <ion-input placeholder="Primer apellido" enterkeyhint="next" inputmode="text" type="text"
+              formControlName="lastName" required>
+            </ion-input>
+          </ion-item>
+          <ion-note color="danger" class="ion-padding-start"
+            *ngIf="form.get('lastName').invalid && form.get('lastName').touched">
+            Campo requerido
+          </ion-note>
+
+        </ion-col>
+
+        <ion-col sizeXs="12" sizeSm="12" sizeMd="6">
+
+          <ion-item>
+            <ion-label position="stacked">Teléfono*</ion-label>
+            <ion-input placeholder="Teléfono" enterkeyhint="next" inputmode="tel" type="tel" maxlength="10"
+              formControlName="phone" required>
+            </ion-input>
+          </ion-item>
+          <ion-note color="danger" class="ion-padding-start"
+            *ngIf="form.get('phone').invalid && form.get('phone').touched">
+            <ng-container *ngIf="form.controls['phone'].errors.required; else minMaxLengthError">
+              Campo requerido
+            </ng-container>
+            <ng-template #minMaxLengthError>
+              Debe tener 10 dígitos
+            </ng-template>
+          </ion-note>
+
+        </ion-col>
+
+        <ion-col sizeXs="12" sizeSm="12" sizeMd="6">
+
+          <ion-item>
+            <ion-label position="stacked">Email</ion-label>
+            <ion-input placeholder="Email" enterkeyhint="next" inputmode="email" type="email" formControlName="email">
+            </ion-input>
+          </ion-item>
+          <ion-note color="danger" class="ion-padding-start"
+            *ngIf="form.get('email').invalid && form.get('email').touched">
+            Email no válido
+          </ion-note>
+
+        </ion-col>
+
+      </ion-row>
+
+      <app-confirm-cancel-buttons-form-modal [isSend]="isSend"></app-confirm-cancel-buttons-form-modal>
+
+    </ion-grid>
+
+  </form>
+
+</ion-content>

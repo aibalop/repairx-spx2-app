@@ -15,32 +15,24 @@
         </ion-col>
 
         <ion-col size="12">
-
           <ion-list lines="full">
-
             <ion-item>
-
               <ion-icon name="people" slot="start"></ion-icon>
-
               <ion-label>
                 <h2>No se ha seleccionado un cliente</h2>
                 <h2>John Does</h2>
                 <p>Tel. 311-123-1212</p>
               </ion-label>
-
               <ion-buttons slot="end">
-                <ion-button>
+                <ion-button (click)="onSearchCustomer()">
                   <ion-icon slot="icon-only" name="search-outline"></ion-icon>
                 </ion-button>
-                <ion-button>
+                <ion-button (click)="onCreateCustomer()">
                   <ion-icon slot="icon-only" name="add-outline"></ion-icon>
                 </ion-button>
               </ion-buttons>
-
             </ion-item>
-
           </ion-list>
-
         </ion-col>
 
       </ion-row>

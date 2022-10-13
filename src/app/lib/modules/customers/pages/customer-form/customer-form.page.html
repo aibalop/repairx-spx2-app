@@ -59,8 +59,8 @@
 
           <ion-item>
             <ion-label position="stacked">Teléfono*</ion-label>
-            <ion-input placeholder="Teléfono" enterkeyhint="next" inputmode="tel" type="tel" formControlName="phone"
-              required [readonly]="isView">
+            <ion-input placeholder="Teléfono" enterkeyhint="next" inputmode="tel" type="tel" maxlength="10"
+              formControlName="phone" required [readonly]="isView">
             </ion-input>
           </ion-item>
           <ion-note color="danger" class="ion-padding-start"

@@ -19,22 +19,20 @@
 
         <ion-row>
             <ion-col size="12">
-                <ng-container *ngIf="list">
-                    <ion-list lines="full" *ngFor="let orderRepair of list.data">
-                        <ion-item>
-                            <ion-icon name="journal" slot="start"></ion-icon>
-                            <ion-label>
-                                <h2>{{ orderRepair.orderId }}</h2>
-                                <!-- <p>{{ orderRepair.getPhone as IPaginationData<Customer>Format() }}</p> -->
-                            </ion-label>
-                            <ion-buttons slot="end">
-                                <app-crud-actions-button (update)="onOpenForm(orderRepair._id)"
-                                    (view)="onOpenForm(orderRepair._id, true)" [showDelete]="false">
-                                </app-crud-actions-button>
-                            </ion-buttons>
-                        </ion-item>
-                    </ion-list>
-                </ng-container>
+                <ion-list lines="full" *ngIf="list">
+                    <ion-item *ngFor="let orderRepair of list.data">
+                        <ion-icon name="journal" slot="start"></ion-icon>
+                        <ion-label>
+                            <h2>{{ orderRepair.orderId }}</h2>
+                            <!-- <p>{{ orderRepair.getPhone as IPaginationData<Customer>Format() }}</p> -->
+                        </ion-label>
+                        <ion-buttons slot="end">
+                            <app-crud-actions-button (update)="onOpenForm(orderRepair._id)"
+                                (view)="onOpenForm(orderRepair._id, true)" [showDelete]="false">
+                            </app-crud-actions-button>
+                        </ion-buttons>
+                    </ion-item>
+                </ion-list>
 
                 <ion-infinite-scroll threshold="100px" (ionInfinite)="doInfinite($event)">
                     <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="Cargando...">

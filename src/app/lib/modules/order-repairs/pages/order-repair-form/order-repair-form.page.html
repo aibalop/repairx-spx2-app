@@ -8,10 +8,19 @@
 
       <ion-row class="ion-justify-content-center">
 
-        <ion-col size="12">
-          <ion-text color="dark">
-            <h6>Cliente</h6>
+        <ion-col size="12" class="col-header">
+          <ion-text>
+            <h4>Cliente</h4>
           </ion-text>
+
+          <div>
+            <ion-button fill="clear" color="light" (click)="onSearchCustomer()">
+              <ion-icon slot="icon-only" name="search-outline"></ion-icon>
+            </ion-button>
+            <ion-button fill="clear" color="light" (click)="onCreateCustomer()">
+              <ion-icon slot="icon-only" name="add-outline"></ion-icon>
+            </ion-button>
+          </div>
         </ion-col>
 
         <ion-col size="12">
@@ -19,9 +28,45 @@
             <ion-item>
               <ion-icon name="people" slot="start"></ion-icon>
               <ion-label>
-                <h2>No se ha seleccionado un cliente</h2>
-                <h2>John Does</h2>
-                <p>Tel. 311-123-1212</p>
+                <h2 *ngIf="!customerSelected">No se ha seleccionado un cliente</h2>
+                <ng-container *ngIf="customerSelected">
+                  <h2>{{ customerSelected.getFullName() }}</h2>
+                  <p>{{ customerSelected.getPhoneFormat() }}</p>
+                </ng-container>
+              </ion-label>
+            </ion-item>
+          </ion-list>
+        </ion-col>
+
+      </ion-row>
+
+      <ion-row class="ion-justify-content-center">
+
+        <ion-col size="12" class="col-header">
+          <ion-text>
+            <h4>Servicios</h4>
+          </ion-text>
+
+          <div>
+            <ion-button fill="clear" color="light" (click)="onSearchCustomer()">
+              <ion-icon slot="icon-only" name="search-outline"></ion-icon>
+            </ion-button>
+            <ion-button fill="clear" color="light" (click)="onCreateCustomer()">
+              <ion-icon slot="icon-only" name="add-outline"></ion-icon>
+            </ion-button>
+          </div>
+        </ion-col>
+
+        <!-- <ion-col size="12">
+          <ion-list lines="full">
+            <ion-item>
+              <ion-icon name="people" slot="start"></ion-icon>
+              <ion-label>
+                <h2 *ngIf="!customerSelected">No se ha seleccionado un cliente</h2>
+                <ng-container *ngIf="customerSelected">
+                  <h2>{{ customerSelected.getFullName() }}</h2>
+                  <p>{{ customerSelected.getPhoneFormat() }}</p>
+                </ng-container>
               </ion-label>
               <ion-buttons slot="end">
                 <ion-button (click)="onSearchCustomer()">
@@ -33,11 +78,11 @@
               </ion-buttons>
             </ion-item>
           </ion-list>
-        </ion-col>
+        </ion-col> -->
 
       </ion-row>
 
-      <ion-row class="ion-justify-content-center">
+      <!-- <ion-row class="ion-justify-content-center">
 
         <ion-col size="12">
           <ion-text color="dark">
@@ -230,9 +275,9 @@
 
         </ion-col>
 
-      </ion-row>
+      </ion-row> -->
 
-      <app-confirm-cancel-buttons-form *ngIf="!isView" [isSend]="isSend"></app-confirm-cancel-buttons-form>
+      <!-- <app-confirm-cancel-buttons-form *ngIf="!isView" [isSend]="isSend"></app-confirm-cancel-buttons-form> -->
 
     </ion-grid>
 

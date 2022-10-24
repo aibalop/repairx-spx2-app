@@ -59,7 +59,7 @@
 
         <ion-menu-toggle auto-hide="false" *ngIf="!permissionGroup.childs">
           <ion-item [routerLink]="[permissionGroup.parent.pathname]" routerDirection="root" routerLinkActive="selected"
-            [routerLinkActiveOptions]="{exact:true}">
+            [routerLinkActiveOptions]="{exact:false}">
             <ion-icon slot="start" [name]="permissionGroup.parent.icon">
             </ion-icon>
             <ion-label>{{ permissionGroup.parent.name }}</ion-label>
@@ -78,7 +78,7 @@
 
           <ion-menu-toggle auto-hide="false">
             <ion-item class="sub-item" *ngFor="let child of permissionGroup.childs" [routerLink]="[child.pathname]"
-              routerDirection="root" routerLinkActive="selected" [routerLinkActiveOptions]="{exact:true}">
+              routerDirection="root" routerLinkActive="selected" [routerLinkActiveOptions]="{exact:false}">
               <ion-icon slot="start" [name]="child.icon"></ion-icon>
               <ion-label>{{ child.name }}</ion-label>
             </ion-item>

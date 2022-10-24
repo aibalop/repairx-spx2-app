@@ -6,6 +6,8 @@ import { Subscription } from 'rxjs';
 import { EOrderRepairsRoutes } from 'src/app/lib/core/enums/modules-routes.enum';
 import { AlertDialogService } from 'src/app/lib/core/services/alert-dialog.service';
 import { ToastService } from 'src/app/lib/core/services/toast.service';
+import { ICustomer } from '../../../customers/interfaces/customer.interface';
+import { Customer } from '../../../customers/models/customer.model';
 import { OrderRepairApiService } from '../../api/order-repair.api.service';
 import { CustomerFormShortModalComponent } from '../../components/modals/customer-form-short-modal/customer-form-short-modal.component';
 import { SearchCustomerModalComponent } from '../../components/modals/search-customer-modal/search-customer-modal.component';
@@ -27,23 +29,10 @@ export class OrderRepairFormPage implements OnInit {
   orderRepairId: string;
 
   form = new FormGroup({
-    name: new FormControl(null, Validators.required),
-    lastName: new FormControl(null, Validators.required),
-    surName: new FormControl(null),
-    phone: new FormControl(null, [Validators.required, Validators.minLength(10), Validators.maxLength(10)]),
-    email: new FormControl(null, Validators.email),
-    address: new FormGroup({
-      street: new FormControl(null),
-      num: new FormControl(null),
-      interiorNum: new FormControl(null),
-      colony: new FormControl(null),
-      zip: new FormControl(null),
-      location: new FormControl(null),
-      city: new FormControl(null),
-      state: new FormControl(null),
-      country: new FormControl(null)
-    }),
+    customer: new FormControl(null, Validators.required),
   });
+
+  customerSelected: Customer;
 
   isSend = false;
 
@@ -109,7 +98,7 @@ export class OrderRepairFormPage implements OnInit {
     const { data } = await formModal.onDidDismiss();
 
     if (data) {
-      console.log('CustomerCreated -> ', data);
+      this._setCustomer(data);
     }
   }
 
@@ -126,8 +115,23 @@ export class OrderRepairFormPage implements OnInit {
     const { data } = await searchModal.onDidDismiss();
 
     if (data) {
-      console.log('CustomerFound -> ', data);
+      this._setCustomer(data);
     }
+  }
+
+  private _setCustomer(data: ICustomer): void {
+    this.form.patchValue({
+      customer: {
+        customerId: data._id,
+        name: data.name,
+        lastName: data.lastName,
+        surName: data.surName ?? '',
+        phone: data.phone,
+        email: data.email ?? '',
+      }
+    });
+
+    this.customerSelected = new Customer(data);
   }
 
   onSubmit(): void {

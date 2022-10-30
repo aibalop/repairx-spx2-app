@@ -11,6 +11,7 @@ import { Customer } from '../../../customers/models/customer.model';
 import { OrderRepairApiService } from '../../api/order-repair.api.service';
 import { CustomerFormShortModalComponent } from '../../components/modals/customer-form-short-modal/customer-form-short-modal.component';
 import { SearchCustomerModalComponent } from '../../components/modals/search-customer-modal/search-customer-modal.component';
+import { SearchWorkModalComponent } from '../../components/modals/search-work-modal/search-work-modal.component';
 import { IOrderRepair } from '../../interfaces/order-repair.interface';
 
 @Component({
@@ -116,6 +117,23 @@ export class OrderRepairFormPage implements OnInit {
 
     if (data) {
       this._setCustomer(data);
+    }
+  }
+
+  async onSearchWork(): Promise<void> {
+    const searchModal = await this._modalController.create({
+      component: SearchWorkModalComponent,
+      breakpoints: [0.25, 0.5, 0.75, 1.0],
+      initialBreakpoint: 1.0,
+      backdropDismiss: false
+    });
+
+    await searchModal.present();
+
+    const { data } = await searchModal.onDidDismiss();
+
+    if (data) {
+      console.log('Selected work: ', data);
     }
   }
 

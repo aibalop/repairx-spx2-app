@@ -6,11 +6,13 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SharedModule } from '../../shared/shared.module';
 import { IonicModule } from '@ionic/angular';
 import { SearchCustomerModalComponent } from './components/modals/search-customer-modal/search-customer-modal.component';
+import { SearchWorkModalComponent } from './components/modals/search-work-modal/search-work-modal.component';
 
 @NgModule({
     declarations: [
         CustomerFormShortModalComponent,
-        SearchCustomerModalComponent
+        SearchCustomerModalComponent,
+        SearchWorkModalComponent
     ],
     imports: [
         CommonModule,

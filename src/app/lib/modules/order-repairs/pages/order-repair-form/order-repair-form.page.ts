@@ -6,10 +6,12 @@ import { Subscription } from 'rxjs';
 import { EOrderRepairsRoutes } from 'src/app/lib/core/enums/modules-routes.enum';
 import { AlertDialogService } from 'src/app/lib/core/services/alert-dialog.service';
 import { ToastService } from 'src/app/lib/core/services/toast.service';
+import { Consts } from 'src/app/lib/core/utils/consts.util';
 import { ICustomer } from '../../../customers/interfaces/customer.interface';
 import { Customer } from '../../../customers/models/customer.model';
 import { OrderRepairApiService } from '../../api/order-repair.api.service';
 import { CustomerFormShortModalComponent } from '../../components/modals/customer-form-short-modal/customer-form-short-modal.component';
+import { SearchChargeModalComponent } from '../../components/modals/search-charge-modal/search-charge-modal.component';
 import { SearchCustomerModalComponent } from '../../components/modals/search-customer-modal/search-customer-modal.component';
 import { SearchWorkModalComponent } from '../../components/modals/search-work-modal/search-work-modal.component';
 import { IOrderRepair } from '../../interfaces/order-repair.interface';
@@ -89,8 +91,8 @@ export class OrderRepairFormPage implements OnInit {
   async onCreateCustomer(): Promise<void> {
     const formModal = await this._modalController.create({
       component: CustomerFormShortModalComponent,
-      breakpoints: [0.25, 0.5, 0.75],
-      initialBreakpoint: 0.75,
+      breakpoints: Consts.BREAKPOINTS_MODAL_FULL,
+      initialBreakpoint: Consts.INITIAL_BREAKPOINT_MODAL_THREE_QUARTER,
       backdropDismiss: false
     });
 
@@ -106,8 +108,8 @@ export class OrderRepairFormPage implements OnInit {
   async onSearchCustomer(): Promise<void> {
     const searchModal = await this._modalController.create({
       component: SearchCustomerModalComponent,
-      breakpoints: [0.25, 0.5, 0.75, 1.0],
-      initialBreakpoint: 1.0,
+      breakpoints: Consts.BREAKPOINTS_MODAL_FULL,
+      initialBreakpoint: Consts.INITIAL_BREAKPOINT_MODAL_FULL,
       backdropDismiss: false
     });
 
@@ -123,8 +125,8 @@ export class OrderRepairFormPage implements OnInit {
   async onSearchWork(): Promise<void> {
     const searchModal = await this._modalController.create({
       component: SearchWorkModalComponent,
-      breakpoints: [0.25, 0.5, 0.75, 1.0],
-      initialBreakpoint: 1.0,
+      breakpoints: Consts.BREAKPOINTS_MODAL_FULL,
+      initialBreakpoint: Consts.INITIAL_BREAKPOINT_MODAL_FULL,
       backdropDismiss: false
     });
 
@@ -134,6 +136,23 @@ export class OrderRepairFormPage implements OnInit {
 
     if (data) {
       console.log('Selected work: ', data);
+    }
+  }
+
+  async onSearchCharge(): Promise<void> {
+    const searchModal = await this._modalController.create({
+      component: SearchChargeModalComponent,
+      breakpoints: Consts.BREAKPOINTS_MODAL_FULL,
+      initialBreakpoint: Consts.INITIAL_BREAKPOINT_MODAL_FULL,
+      backdropDismiss: false
+    });
+
+    await searchModal.present();
+
+    const { data } = await searchModal.onDidDismiss();
+
+    if (data) {
+      console.log('Selected charge: ', data);
     }
   }
 

@@ -4,6 +4,7 @@ import { IFilterGeneric } from 'src/app/lib/core/interfaces/filter-generic.inter
 import { IPaginationData } from 'src/app/lib/core/interfaces/pagination-data.interface';
 import { AlertDialogService } from 'src/app/lib/core/services/alert-dialog.service';
 import { ToastService } from 'src/app/lib/core/services/toast.service';
+import { Consts } from 'src/app/lib/core/utils/consts.util';
 import { WorkApiService } from '../../api/work.api.service';
 import { WorkFormModalComponent } from '../../components/modals/work-form-modal/work-form-modal.component';
 import { IWork } from '../../interfaces/work.interface';
@@ -40,8 +41,8 @@ export class WorksPage implements OnInit {
 
     const formModal = await this._modalController.create({
       component: WorkFormModalComponent,
-      breakpoints: [0.25, 0.5, 0.75, 1.0],
-      initialBreakpoint: 1.0,
+      breakpoints: Consts.BREAKPOINTS_MODAL_FULL,
+      initialBreakpoint: Consts.INITIAL_BREAKPOINT_MODAL_MID,
       backdropDismiss: false,
       componentProps: {
         workId: _id,

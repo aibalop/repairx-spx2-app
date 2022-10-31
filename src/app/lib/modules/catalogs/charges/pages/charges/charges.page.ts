@@ -4,6 +4,7 @@ import { IFilterGeneric } from 'src/app/lib/core/interfaces/filter-generic.inter
 import { IPaginationData } from 'src/app/lib/core/interfaces/pagination-data.interface';
 import { AlertDialogService } from 'src/app/lib/core/services/alert-dialog.service';
 import { ToastService } from 'src/app/lib/core/services/toast.service';
+import { Consts } from 'src/app/lib/core/utils/consts.util';
 import { ChargeApiService } from '../../api/charge.api.service';
 import { ChargeFormModalComponent } from '../../components/modals/charge-form-modal/charge-form-modal.component';
 import { ICharge } from '../../interfaces/charge.interface';
@@ -40,8 +41,8 @@ export class ChargesPage implements OnInit {
 
     const formModal = await this._modalController.create({
       component: ChargeFormModalComponent,
-      breakpoints: [0.25, 0.5, 0.75],
-      initialBreakpoint: 0.75,
+      breakpoints: Consts.BREAKPOINTS_MODAL_FULL,
+      initialBreakpoint: Consts.INITIAL_BREAKPOINT_MODAL_MID,
       backdropDismiss: false,
       componentProps: {
         chargeId: _id,

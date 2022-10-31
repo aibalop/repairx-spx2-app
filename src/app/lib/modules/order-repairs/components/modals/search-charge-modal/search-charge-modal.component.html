@@ -1,0 +1,24 @@
+<app-header-generic-form-modal addText="Seleccionar Cargo"></app-header-generic-form-modal>
+<ion-toolbar>
+  <app-searchbar (search)="onSearch($event)"></app-searchbar>
+</ion-toolbar>
+<ion-content>
+
+  <ion-list lines="full" *ngIf="list">
+    <ion-item button detail detailIcon="checkbox-outline" *ngFor="let charge of list.data" (click)="onSelect(charge)">
+      <ion-icon name="cash" slot="start"></ion-icon>
+      <ion-label>
+        <h2>{{ charge.name }}</h2>
+        <p>{{ charge.description }}</p>
+      </ion-label>
+    </ion-item>
+  </ion-list>
+
+  <ion-infinite-scroll threshold="100px" (ionInfinite)="doInfinite($event)">
+    <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="Cargando...">
+    </ion-infinite-scroll-content>
+  </ion-infinite-scroll>
+
+  <app-not-found-data *ngIf="!list || list.data.length === 0"></app-not-found-data>
+
+</ion-content>

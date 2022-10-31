@@ -7,12 +7,14 @@ import { SharedModule } from '../../shared/shared.module';
 import { IonicModule } from '@ionic/angular';
 import { SearchCustomerModalComponent } from './components/modals/search-customer-modal/search-customer-modal.component';
 import { SearchWorkModalComponent } from './components/modals/search-work-modal/search-work-modal.component';
+import { SearchChargeModalComponent } from './components/modals/search-charge-modal/search-charge-modal.component';
 
 @NgModule({
     declarations: [
         CustomerFormShortModalComponent,
         SearchCustomerModalComponent,
-        SearchWorkModalComponent
+        SearchWorkModalComponent,
+        SearchChargeModalComponent
     ],
     imports: [
         CommonModule,

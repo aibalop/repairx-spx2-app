@@ -42,7 +42,7 @@ export class ChargesPage implements OnInit {
     const formModal = await this._modalController.create({
       component: ChargeFormModalComponent,
       breakpoints: Consts.BREAKPOINTS_MODAL_FULL,
-      initialBreakpoint: Consts.INITIAL_BREAKPOINT_MODAL_MID,
+      initialBreakpoint: Consts.INITIAL_BREAKPOINT_MODAL_THREE_QUARTER,
       backdropDismiss: false,
       componentProps: {
         chargeId: _id,

@@ -7,6 +7,8 @@ import { EOrderRepairsRoutes } from 'src/app/lib/core/enums/modules-routes.enum'
 import { AlertDialogService } from 'src/app/lib/core/services/alert-dialog.service';
 import { ToastService } from 'src/app/lib/core/services/toast.service';
 import { Consts } from 'src/app/lib/core/utils/consts.util';
+import { ChargeFormModalComponent } from '../../../catalogs/charges/components/modals/charge-form-modal/charge-form-modal.component';
+import { WorkFormModalComponent } from '../../../catalogs/works/components/modals/work-form-modal/work-form-modal.component';
 import { ICustomer } from '../../../customers/interfaces/customer.interface';
 import { Customer } from '../../../customers/models/customer.model';
 import { OrderRepairApiService } from '../../api/order-repair.api.service';
@@ -139,6 +141,23 @@ export class OrderRepairFormPage implements OnInit {
     }
   }
 
+  async onCreateWork(): Promise<void> {
+    const formModal = await this._modalController.create({
+      component: WorkFormModalComponent,
+      breakpoints: Consts.BREAKPOINTS_MODAL_FULL,
+      initialBreakpoint: Consts.INITIAL_BREAKPOINT_MODAL_THREE_QUARTER,
+      backdropDismiss: false
+    });
+
+    await formModal.present();
+
+    const { data } = await formModal.onDidDismiss();
+
+    if (data) {
+      console.log('Created work: ', data);
+    }
+  }
+
   async onSearchCharge(): Promise<void> {
     const searchModal = await this._modalController.create({
       component: SearchChargeModalComponent,
@@ -153,6 +172,23 @@ export class OrderRepairFormPage implements OnInit {
 
     if (data) {
       console.log('Selected charge: ', data);
+    }
+  }
+
+  async onCreateCharge(): Promise<void> {
+    const formModal = await this._modalController.create({
+      component: ChargeFormModalComponent,
+      breakpoints: Consts.BREAKPOINTS_MODAL_FULL,
+      initialBreakpoint: Consts.INITIAL_BREAKPOINT_MODAL_THREE_QUARTER,
+      backdropDismiss: false
+    });
+
+    await formModal.present();
+
+    const { data } = await formModal.onDidDismiss();
+
+    if (data) {
+      console.log('Created charge: ', data);
     }
   }
 

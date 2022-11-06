@@ -11,17 +11,21 @@ export class HeaderGenericFormModalComponent implements OnInit {
   @Input() isView: boolean = false;
 
   @Input() isEdit: boolean = false;
-  
+
   @Input() isSend: boolean = false;
 
-  @Input() editText: string = 'Editar';
+  @Input() editText: string;
 
-  @Input() addText: string = 'Agregar';
+  @Input() addText: string;
 
-  @Input() viewText: string = 'Ver';
+  @Input() viewText: string;
 
   constructor(public modalController: ModalController) { }
 
-  ngOnInit() { }
+  ngOnInit() {
+    this.editText = this.editText ?? 'Editar';
+    this.addText = this.addText ?? 'Agregar';
+    this.viewText = this.viewText ?? 'Ver';
+  }
 
 }

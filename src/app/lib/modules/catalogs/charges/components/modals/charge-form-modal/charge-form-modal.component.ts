@@ -19,6 +19,8 @@ export class ChargeFormModalComponent implements OnInit {
 
   @Input() chargeId: string;
 
+  @Input() addText: string;
+
   form = new FormGroup({
     name: new FormControl(null, Validators.required),
     description: new FormControl(null)

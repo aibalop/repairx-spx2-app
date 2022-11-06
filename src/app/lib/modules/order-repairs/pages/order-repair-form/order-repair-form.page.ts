@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ModalController } from '@ionic/angular';
 import { Subscription } from 'rxjs';
@@ -7,8 +7,11 @@ import { EOrderRepairsRoutes } from 'src/app/lib/core/enums/modules-routes.enum'
 import { AlertDialogService } from 'src/app/lib/core/services/alert-dialog.service';
 import { ToastService } from 'src/app/lib/core/services/toast.service';
 import { Consts } from 'src/app/lib/core/utils/consts.util';
+import { RegexUtil } from 'src/app/lib/core/utils/regex.util';
 import { ChargeFormModalComponent } from '../../../catalogs/charges/components/modals/charge-form-modal/charge-form-modal.component';
+import { ICharge } from '../../../catalogs/charges/interfaces/charge.interface';
 import { WorkFormModalComponent } from '../../../catalogs/works/components/modals/work-form-modal/work-form-modal.component';
+import { IWork } from '../../../catalogs/works/interfaces/work.interface';
 import { ICustomer } from '../../../customers/interfaces/customer.interface';
 import { Customer } from '../../../customers/models/customer.model';
 import { OrderRepairApiService } from '../../api/order-repair.api.service';
@@ -35,6 +38,8 @@ export class OrderRepairFormPage implements OnInit {
 
   form = new FormGroup({
     customer: new FormControl(null, Validators.required),
+    works: new FormArray([]),
+    charges: new FormArray([]),
   });
 
   customerSelected: Customer;
@@ -137,7 +142,7 @@ export class OrderRepairFormPage implements OnInit {
     const { data } = await searchModal.onDidDismiss();
 
     if (data) {
-      console.log('Selected work: ', data);
+      this._setWork(data);
     }
   }
 
@@ -146,7 +151,10 @@ export class OrderRepairFormPage implements OnInit {
       component: WorkFormModalComponent,
       breakpoints: Consts.BREAKPOINTS_MODAL_FULL,
       initialBreakpoint: Consts.INITIAL_BREAKPOINT_MODAL_THREE_QUARTER,
-      backdropDismiss: false
+      backdropDismiss: false,
+      componentProps: {
+        addText: 'Agregar Servicio'
+      }
     });
 
     await formModal.present();
@@ -154,7 +162,7 @@ export class OrderRepairFormPage implements OnInit {
     const { data } = await formModal.onDidDismiss();
 
     if (data) {
-      console.log('Created work: ', data);
+      this._setWork(data);
     }
   }
 
@@ -171,7 +179,7 @@ export class OrderRepairFormPage implements OnInit {
     const { data } = await searchModal.onDidDismiss();
 
     if (data) {
-      console.log('Selected charge: ', data);
+      this._setCharge(data);
     }
   }
 
@@ -180,7 +188,10 @@ export class OrderRepairFormPage implements OnInit {
       component: ChargeFormModalComponent,
       breakpoints: Consts.BREAKPOINTS_MODAL_FULL,
       initialBreakpoint: Consts.INITIAL_BREAKPOINT_MODAL_THREE_QUARTER,
-      backdropDismiss: false
+      backdropDismiss: false,
+      componentProps: {
+        addText: 'Agregar Cargo'
+      }
     });
 
     await formModal.present();
@@ -188,7 +199,7 @@ export class OrderRepairFormPage implements OnInit {
     const { data } = await formModal.onDidDismiss();
 
     if (data) {
-      console.log('Created charge: ', data);
+      this._setCharge(data);
     }
   }
 
@@ -205,6 +216,24 @@ export class OrderRepairFormPage implements OnInit {
     });
 
     this.customerSelected = new Customer(data);
+  }
+
+  private _setWork(data: IWork): void {
+    this.form.controls['works'].push(new FormGroup({
+      workId: new FormControl(data._id, Validators.required),
+      name: new FormControl(data.name, Validators.required),
+      amount: new FormControl(data.amount, [Validators.required, Validators.pattern(RegexUtil.CURRENCY)]),
+      notes: new FormControl(null)
+    }));
+  }
+
+  private _setCharge(data: ICharge): void {
+    this.form.controls['charges'].push(new FormGroup({
+      chargeId: new FormControl(data._id, Validators.required),
+      name: new FormControl(data.name, Validators.required),
+      amount: new FormControl(null, [Validators.required, Validators.pattern(RegexUtil.CURRENCY)]),
+      notes: new FormControl(null)
+    }));
   }
 
   onSubmit(): void {

@@ -19,6 +19,8 @@ export class WorkFormModalComponent implements OnInit {
   @Input() isEdit: boolean = false;
 
   @Input() workId: string;
+  
+  @Input() addText: string;
 
   form = new FormGroup({
     key: new FormControl(null, Validators.required),

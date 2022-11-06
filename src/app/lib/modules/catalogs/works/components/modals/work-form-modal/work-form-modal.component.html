@@ -1,4 +1,5 @@
-<app-header-generic-form-modal [isEdit]="isEdit" [isView]="isView" [isSend]="isSend"></app-header-generic-form-modal>
+<app-header-generic-form-modal [isEdit]="isEdit" [isView]="isView" [isSend]="isSend" [addText]="addText">
+</app-header-generic-form-modal>
 <ion-content class="ion-padding">
 
   <form [formGroup]="form" (submit)="onSubmit()">
@@ -40,7 +41,7 @@
 
           <ion-item>
             <ion-label position="stacked">Monto*</ion-label>
-            <ion-input placeholder="Monto" enterkeyhint="next" inputmode="decimal" type="number"
+            <ion-input placeholder="Monto" enterkeyhint="next" inputmode="decimal" type="number" class="ion-text-right"
               formControlName="amount" required [readonly]="isView">
             </ion-input>
           </ion-item>

@@ -16,8 +16,10 @@ import { ICustomer } from '../../../customers/interfaces/customer.interface';
 import { Customer } from '../../../customers/models/customer.model';
 import { OrderRepairApiService } from '../../api/order-repair.api.service';
 import { CustomerFormShortModalComponent } from '../../components/modals/customer-form-short-modal/customer-form-short-modal.component';
+import { DeviceFormModalComponent } from '../../components/modals/device-form-modal/device-form-modal.component';
 import { SearchChargeModalComponent } from '../../components/modals/search-charge-modal/search-charge-modal.component';
 import { SearchCustomerModalComponent } from '../../components/modals/search-customer-modal/search-customer-modal.component';
+import { SearchDeviceModalComponent } from '../../components/modals/search-device-modal/search-device-modal.component';
 import { SearchWorkModalComponent } from '../../components/modals/search-work-modal/search-work-modal.component';
 import { IOrderRepair } from '../../interfaces/order-repair.interface';
 
@@ -40,6 +42,7 @@ export class OrderRepairFormPage implements OnInit {
     customer: new FormControl(null, Validators.required),
     works: new FormArray([]),
     charges: new FormArray([]),
+    devices: new FormArray([]),
   });
 
   customerSelected: Customer;
@@ -200,6 +203,43 @@ export class OrderRepairFormPage implements OnInit {
 
     if (data) {
       this._setCharge(data);
+    }
+  }
+
+  async onSearchDevice(): Promise<void> {
+    const searchModal = await this._modalController.create({
+      component: SearchDeviceModalComponent,
+      breakpoints: Consts.BREAKPOINTS_MODAL_FULL,
+      initialBreakpoint: Consts.INITIAL_BREAKPOINT_MODAL_FULL,
+      backdropDismiss: false
+    });
+
+    await searchModal.present();
+
+    const { data } = await searchModal.onDidDismiss();
+
+    if (data) {
+      // this._setCharge(data);
+    }
+  }
+
+  async onCreateDevice(): Promise<void> {
+    const formModal = await this._modalController.create({
+      component: DeviceFormModalComponent,
+      breakpoints: Consts.BREAKPOINTS_MODAL_FULL,
+      initialBreakpoint: Consts.INITIAL_BREAKPOINT_MODAL_THREE_QUARTER,
+      backdropDismiss: false,
+      componentProps: {
+        addText: 'Agregar Dispositivo'
+      }
+    });
+
+    await formModal.present();
+
+    const { data } = await formModal.onDidDismiss();
+
+    if (data) {
+      // this._setCharge(data);
     }
   }
 

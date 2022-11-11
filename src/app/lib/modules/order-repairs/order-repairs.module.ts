@@ -8,13 +8,17 @@ import { IonicModule } from '@ionic/angular';
 import { SearchCustomerModalComponent } from './components/modals/search-customer-modal/search-customer-modal.component';
 import { SearchWorkModalComponent } from './components/modals/search-work-modal/search-work-modal.component';
 import { SearchChargeModalComponent } from './components/modals/search-charge-modal/search-charge-modal.component';
+import { DeviceFormModalComponent } from './components/modals/device-form-modal/device-form-modal.component';
+import { SearchDeviceModalComponent } from './components/modals/search-device-modal/search-device-modal.component';
 
 @NgModule({
     declarations: [
         CustomerFormShortModalComponent,
         SearchCustomerModalComponent,
         SearchWorkModalComponent,
-        SearchChargeModalComponent
+        SearchChargeModalComponent,
+        SearchDeviceModalComponent,
+        DeviceFormModalComponent
     ],
     imports: [
         CommonModule,

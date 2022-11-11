@@ -1,0 +1,34 @@
+<app-header-generic-form-modal [isEdit]="isEdit" [isView]="isView" [isSend]="isSend" [addText]="addText">
+</app-header-generic-form-modal>
+<ion-content class="ion-padding">
+
+  <form [formGroup]="form" (submit)="onSubmit()">
+
+    <ion-grid fixed>
+
+      <ion-row class="ion-justify-content-center">
+
+        <ion-col size="12">
+
+          <ion-item>
+            <ion-label position="stacked">Nombre del dispositivo*</ion-label>
+            <ion-input placeholder="Nombre del dispositivo" enterkeyhint="next" inputmode="text" type="text"
+              formControlName="name" required [readonly]="isView">
+            </ion-input>
+          </ion-item>
+          <ion-note color="danger" class="ion-padding-start"
+            *ngIf="form.get('name').invalid && form.get('name').touched">
+            Campo requerido
+          </ion-note>
+
+        </ion-col>
+
+      </ion-row>
+
+      <app-confirm-cancel-buttons-form-modal *ngIf="!isView" [isSend]="isSend"></app-confirm-cancel-buttons-form-modal>
+
+    </ion-grid>
+
+  </form>
+
+</ion-content>

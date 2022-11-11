@@ -187,6 +187,79 @@
 
       </ion-row>
 
+      <!-- 
+        DEVICES SECTION
+       -->
+      <ion-row class="ion-justify-content-center">
+
+        <ion-col size="12" class="col-header">
+
+          <ion-text>
+            <h4>Dispositivos</h4>
+          </ion-text>
+
+          <div>
+            <ion-button fill="clear" color="light" (click)="onSearchDevice()">
+              <ion-icon slot="icon-only" name="search-outline"></ion-icon>
+            </ion-button>
+            <ion-button fill="clear" color="light" (click)="onCreateDevice()">
+              <ion-icon slot="icon-only" name="add-outline"></ion-icon>
+            </ion-button>
+          </div>
+
+        </ion-col>
+
+        <ion-col size="12">
+
+          <ng-container formArrayName="devices">
+
+            <ion-list lines="full">
+
+              <ion-item *ngIf="!form.controls['devices'].controls.length">
+                <ion-icon name="desktop" slot="start"></ion-icon>
+                <ion-label>
+                  <h2>No ha agregado un dispositivo</h2>
+                </ion-label>
+              </ion-item>
+
+              <ng-container *ngFor="let deviceForm of form.controls['devices'].controls; let indexDevice = index">
+
+                <ng-container [formGroupName]="indexDevice">
+
+                  <ion-item>
+                    <ion-icon name="desktop" slot="start"></ion-icon>
+                    <ion-label>
+                      <h2>{{ deviceForm.get('name').value }}</h2>
+                      <ion-item lines="none">
+                        <ion-label position="stacked">Nota</ion-label>
+                        <ion-textarea rows="1" color="medium" placeholder="Agregar una nota..." formControlName="notes">
+                        </ion-textarea>
+                      </ion-item>
+                    </ion-label>
+                    <ion-item slot="end">
+                      <ion-label position="stacked">Monto*</ion-label>
+                      <ion-input placeholder="Monto" enterkeyhint="next" inputmode="decimal" type="number"
+                        class="ion-text-right" formControlName="amount" required [readonly]="isView">
+                      </ion-input>
+                    </ion-item>
+                  </ion-item>
+
+                </ng-container>
+
+              </ng-container>
+
+            </ion-list>
+
+          </ng-container>
+
+        </ion-col>
+
+      </ion-row>
+
+
+      <!-- 
+        CONFIRM BUTTONS SECTION 
+      -->
       <app-confirm-cancel-buttons-form *ngIf="!isView" [isSend]="isSend"></app-confirm-cancel-buttons-form>
 
     </ion-grid>

@@ -52,8 +52,10 @@ interface IChargeOrderRepair {
 }
 
 interface IDeviceOrderRepair {
-    deviceId: string;
-    name: string;
+    device: {
+        deviceId: string;
+        name: string;
+    };
     brand: {
         brandId: string;
         name: string;

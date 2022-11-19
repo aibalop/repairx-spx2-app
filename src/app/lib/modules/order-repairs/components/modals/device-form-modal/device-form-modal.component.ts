@@ -21,8 +21,20 @@ export class DeviceFormModalComponent implements OnInit {
 
   @Input() addText: string;
 
+  devices: Array<IDevice> = [];
+
   form = new FormGroup({
-    name: new FormControl(null, Validators.required)
+    device: new FormControl(null, Validators.required),
+    brand: new FormControl(null, Validators.required),
+    model: new FormControl(null),
+    accessory: new FormControl(null, Validators.required),
+    itsOn: new FormControl(null),
+    cards: new FormControl(null),
+    password: new FormControl(null),
+    details: new FormControl(null, Validators.required),
+    customerReport: new FormControl(null, Validators.required),
+    finalDiagnosis: new FormControl(null),
+    warrantyDays: new FormControl(0),
   });
 
   isSend = false;
@@ -31,13 +43,22 @@ export class DeviceFormModalComponent implements OnInit {
     private _modalController: ModalController,
     private _alertDialogService: AlertDialogService,
     private _toastService: ToastService,
-    private _deviceApiService: DeviceApiService
+    private _deviceApiService: DeviceApiService,
   ) { }
 
   ngOnInit() {
-    if (this.deviceId) {
-      this._getDevice();
+    this._loadDevices();
+  }
+
+  private async _loadDevices(): Promise<void> {
+
+    try {
+      const res = await this._deviceApiService.getAll({ searchText: '', limit: 20, page: 1 }).toPromise();
+      this.devices = res.data;
+    } catch (error) {
+      this._alertDialogService.catchError(error);
     }
+
   }
 
   onSubmit(): void {
@@ -50,50 +71,28 @@ export class DeviceFormModalComponent implements OnInit {
 
     this.isSend = true;
 
-    if (this.isEdit) {
-      this._update();
-    } else {
-      this._create();
-    }
+    // if (this.isEdit) {
+    //   this._update();
+    // } else {
+    //   this._create();
+    // }
 
   }
 
-  private async _getDevice(): Promise<void> {
+  async onCreateDevice(): Promise<void> {
 
-    try {
-      const charge = await this._deviceApiService.getById(this.deviceId).toPromise();
-      this.form.patchValue(charge);
-    } catch (error) {
-      this._toastService.danger('No se pudo obtener los datos del dispositivo', 'Operación Fallida');
-      this._alertDialogService.catchError(error);
-      this._modalController.dismiss(true);
+    const value = await this._alertDialogService.inputField('Agregar dispositivo', null, null, null, 'Nombre de dispositivo');
+
+    if (!value) {
+      this._toastService.warning('No se agrego el nuevo dispositivo', 'Operación incompleta');
+      return;
     }
 
-  }
-
-  private async _create(): Promise<void> {
-
     try {
-      const deviceCreated = await this._deviceApiService.create(this.form.value as IDevice).toPromise();
+      const deviceCreated = await this._deviceApiService.create({ name: value } as IDevice).toPromise();
       this._toastService.success('Dispositivo creado correctamente', 'Operación Completada');
-      this._modalController.dismiss(deviceCreated);
+      this.devices.unshift(deviceCreated);
     } catch (error) {
-      this.isSend = false;
-      this._toastService.danger('No se pudo completar el registro', 'Operación Fallida');
-      this._alertDialogService.catchError(error);
-    }
-
-  }
-
-  private async _update(): Promise<void> {
-
-    try {
-      const deviceUpdated = await this._deviceApiService.update(this.deviceId, this.form.value as IDevice).toPromise();
-      this._toastService.success('Dispositivo actualizado correctamente', 'Operación Completada');
-      this._modalController.dismiss(deviceUpdated);
-    } catch (error) {
-      this.isSend = false;
-      this._toastService.danger('No se pudo completar la actualización', 'Operación Fallida');
       this._alertDialogService.catchError(error);
     }
 

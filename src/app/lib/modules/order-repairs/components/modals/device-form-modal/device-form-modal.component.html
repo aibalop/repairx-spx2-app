@@ -8,27 +8,37 @@
 
       <ion-row class="ion-justify-content-center">
 
-        <ion-col size="12">
+        <ion-col size="11">
 
           <ion-item>
-            <ion-label position="stacked">Nombre del dispositivo*</ion-label>
-            <ion-input placeholder="Nombre del dispositivo" enterkeyhint="next" inputmode="text" type="text"
-              formControlName="name" required [readonly]="isView">
-            </ion-input>
+            <ion-label position="stacked">Dispositivo*</ion-label>
+            <ion-select interface="popover" placeholder="-Seleccionar dispositivo-">
+              <ion-select-option *ngFor="let device of devices" [value]="device._id">{{ device.name }}
+              </ion-select-option>
+            </ion-select>
           </ion-item>
           <ion-note color="danger" class="ion-padding-start"
-            *ngIf="form.get('name').invalid && form.get('name').touched">
+            *ngIf="form.get('device').invalid && form.get('device').touched">
             Campo requerido
           </ion-note>
 
         </ion-col>
 
-      </ion-row>
+        <ion-col size="1" class="ion-align-self-center">
 
-      <app-confirm-cancel-buttons-form-modal *ngIf="!isView" [isSend]="isSend"></app-confirm-cancel-buttons-form-modal>
+          <ion-button (click)="onCreateDevice()" fill="clear">
+            <ion-icon slot="icon-only" name="add"></ion-icon>
+          </ion-button>
+
+        </ion-col>
+
+      </ion-row>
 
     </ion-grid>
 
   </form>
 
 </ion-content>
+<ion-footer class="ion-padding-end ion-padding-bottom">
+  <app-confirm-cancel-buttons-form-modal *ngIf="!isView" [isSend]="isSend"></app-confirm-cancel-buttons-form-modal>
+</ion-footer>

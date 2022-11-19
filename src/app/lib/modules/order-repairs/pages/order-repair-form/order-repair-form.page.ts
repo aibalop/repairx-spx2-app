@@ -206,28 +206,9 @@ export class OrderRepairFormPage implements OnInit {
     }
   }
 
-  async onSearchDevice(): Promise<void> {
-    const searchModal = await this._modalController.create({
-      component: SearchDeviceModalComponent,
-      breakpoints: Consts.BREAKPOINTS_MODAL_FULL,
-      initialBreakpoint: Consts.INITIAL_BREAKPOINT_MODAL_FULL,
-      backdropDismiss: false
-    });
-
-    await searchModal.present();
-
-    const { data } = await searchModal.onDidDismiss();
-
-    if (data) {
-      // this._setCharge(data);
-    }
-  }
-
-  async onCreateDevice(): Promise<void> {
+  async onAddDevice(): Promise<void> {
     const formModal = await this._modalController.create({
       component: DeviceFormModalComponent,
-      breakpoints: Consts.BREAKPOINTS_MODAL_FULL,
-      initialBreakpoint: Consts.INITIAL_BREAKPOINT_MODAL_THREE_QUARTER,
       backdropDismiss: false,
       componentProps: {
         addText: 'Agregar Dispositivo'

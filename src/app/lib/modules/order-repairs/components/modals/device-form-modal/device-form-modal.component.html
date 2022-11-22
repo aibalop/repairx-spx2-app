@@ -1,19 +1,23 @@
 <app-header-generic-form-modal [isEdit]="isEdit" [isView]="isView" [isSend]="isSend" [addText]="addText">
 </app-header-generic-form-modal>
-<ion-content class="ion-padding">
-
-  <form [formGroup]="form" (submit)="onSubmit()">
+<form [formGroup]="form" (submit)="onSubmit()">
+  <ion-content class="ion-padding">
 
     <ion-grid fixed>
 
       <ion-row class="ion-justify-content-center">
 
-        <ion-col size="11">
+        <ion-col size="12">
 
           <ion-item>
             <ion-label position="stacked">Dispositivo*</ion-label>
-            <ion-select interface="popover" placeholder="-Seleccionar dispositivo-">
-              <ion-select-option *ngFor="let device of devices" [value]="device._id">{{ device.name }}
+            <ion-select interface="popover" placeholder="-Seleccionar dispositivo-" formControlName="device"
+              (ngModelChange)="onChangeDevice($event, 'device')">
+              <ion-select-option value="new">
+                -Agregar nuevo-
+              </ion-select-option>
+              <ion-select-option *ngFor="let device of devices" [value]="device">
+                {{ device.name }}
               </ion-select-option>
             </ion-select>
           </ion-item>
@@ -24,21 +28,139 @@
 
         </ion-col>
 
-        <ion-col size="1" class="ion-align-self-center">
+      </ion-row>
 
-          <ion-button (click)="onCreateDevice()" fill="clear">
-            <ion-icon slot="icon-only" name="add"></ion-icon>
-          </ion-button>
+      <ion-row class="ion-justify-content-center">
+
+        <ion-col sizeXs="12" sizeSm="12" sizeMd="6">
+
+          <ion-item>
+            <ion-label position="stacked">Marca*</ion-label>
+            <ion-select interface="popover" placeholder="-Seleccionar marca-" formControlName="brand"
+              (ngModelChange)="onChangeDevice($event, 'brand')">
+              <ion-select-option value="new">
+                -Agregar nuevo-
+              </ion-select-option>
+              <ion-select-option *ngFor="let brand of brands" [value]="brand">
+                {{ brand.name }}
+              </ion-select-option>
+            </ion-select>
+          </ion-item>
+          <ion-note color="danger" class="ion-padding-start"
+            *ngIf="form.get('brand').invalid && form.get('brand').touched">
+            Campo requerido
+          </ion-note>
+
+        </ion-col>
+
+        <ion-col sizeXs="12" sizeSm="12" sizeMd="6">
+
+          <ion-item>
+            <ion-label position="stacked">Modelo</ion-label>
+            <ion-input placeholder="Modelo" enterkeyhint="next" inputmode="text" type="text" formControlName="model"
+              [readonly]="isView">
+            </ion-input>
+          </ion-item>
 
         </ion-col>
 
       </ion-row>
 
+      <ion-row class="ion-justify-content-center">
+
+        <ion-col sizeXs="12" sizeSm="12" sizeMd="8">
+
+          <ion-item>
+            <ion-label position="stacked">Accesorio*</ion-label>
+            <ion-input placeholder="Accesorio" enterkeyhint="next" inputmode="text" type="text"
+              formControlName="accessory" required [readonly]="isView">
+            </ion-input>
+          </ion-item>
+          <ion-note color="danger" class="ion-padding-start"
+            *ngIf="form.get('accessory').invalid && form.get('accessory').touched">
+            Campo requerido
+          </ion-note>
+
+        </ion-col>
+
+        <ion-col sizeXs="12" sizeSm="12" sizeMd="4">
+
+          <ion-item>
+            <ion-label position="stacked">Escendido</ion-label>
+            <ion-toggle formControlName="itsOn" slot="end"></ion-toggle>
+          </ion-item>
+
+        </ion-col>
+
+      </ion-row>
+
+      <ion-row class="ion-justify-content-center">
+
+        <ion-col sizeXs="12" sizeSm="12" sizeMd="6">
+
+          <ion-item>
+            <ion-label position="stacked">Tarjetas</ion-label>
+            <ion-select interface="popover" placeholder="-Seleccionar tarjeta-" formControlName="cards">
+              <ion-select-option value="SIM">SIM</ion-select-option>
+              <ion-select-option value="SD">SD</ion-select-option>
+              <ion-select-option value="SIM/SD">SIM/SD</ion-select-option>
+            </ion-select>
+          </ion-item>
+
+        </ion-col>
+
+        <ion-col sizeXs="12" sizeSm="12" sizeMd="6">
+
+          <ion-item>
+            <ion-label position="stacked">Contraseña</ion-label>
+            <ion-input placeholder="Contraseña" enterkeyhint="next" inputmode="text" type="text"
+              formControlName="password" [readonly]="isView">
+            </ion-input>
+          </ion-item>
+
+        </ion-col>
+
+      </ion-row>
+
+      <ion-row class="ion-justify-content-center">
+
+        <ion-col sizeXs="12">
+
+          <ion-item>
+            <ion-label position="stacked">Detalles*</ion-label>
+            <ion-textarea formControlName="details" enterkeyhint="next" inputmode="text" placeholder="Detalles" required
+              [readonly]="isView" rows="2"></ion-textarea>
+          </ion-item>
+          <ion-note color="danger" class="ion-padding-start"
+            *ngIf="form.get('details').invalid && form.get('details').touched">
+            Campo requerido
+          </ion-note>
+
+        </ion-col>
+
+        <ion-col sizeXs="12">
+
+          <ion-item>
+            <ion-label position="stacked">Reporte del cliente*</ion-label>
+            <ion-textarea formControlName="customerReport" enterkeyhint="next" inputmode="text"
+              placeholder="Reporte del cliente" required [readonly]="isView" rows="2"></ion-textarea>
+          </ion-item>
+          <ion-note color="danger" class="ion-padding-start"
+            *ngIf="form.get('customerReport').invalid && form.get('customerReport').touched">
+            Campo requerido
+          </ion-note>
+
+        </ion-col>
+
+      </ion-row>
+
+
     </ion-grid>
 
-  </form>
 
-</ion-content>
-<ion-footer class="ion-padding-end ion-padding-bottom">
-  <app-confirm-cancel-buttons-form-modal *ngIf="!isView" [isSend]="isSend"></app-confirm-cancel-buttons-form-modal>
-</ion-footer>
+  </ion-content>
+  <ion-footer class="ion-padding-end ion-padding-bottom">
+    <app-confirm-cancel-buttons-form-modal *ngIf="!isView" [isSend]="isSend"></app-confirm-cancel-buttons-form-modal>
+  </ion-footer>
+
+</form>

@@ -9,26 +9,51 @@
       <!-- 
         CUSTOMERS SECTION 
       -->
-      <ion-row class="ion-justify-content-center">
+      <ion-row>
 
-        <ion-col size="12" class="col-header">
+        <ion-col size="12" sizeSm="12" sizeMd="4">
 
-          <ion-text>
-            <h4>Cliente</h4>
-          </ion-text>
-
-          <div>
-            <ion-button fill="clear" color="light" (click)="onSearchCustomer()">
-              <ion-icon slot="icon-only" name="search-outline"></ion-icon>
-            </ion-button>
-            <ion-button fill="clear" color="light" (click)="onCreateCustomer()">
-              <ion-icon slot="icon-only" name="add-outline"></ion-icon>
-            </ion-button>
+          <div class="header-order">
+            <span class="span-header-title">
+              <ion-text>No. Orden</ion-text>
+            </span>
+            <span>
+              <ion-text>-</ion-text>
+            </span>
+            <span class="span-header-title">
+              <ion-text>Fecha</ion-text>
+            </span>
+            <span>
+              <ion-text>{{ currentDate | date:'short' }}</ion-text>
+            </span>
+            <span class="span-header-title">
+              <ion-text>Creado por</ion-text>
+            </span>
+            <span>
+              <ion-text>John Does</ion-text>
+            </span>
           </div>
 
         </ion-col>
 
-        <ion-col size="12">
+        <ion-col size="12" sizeSm="12" sizeMd="8">
+
+          <div class="col-header">
+
+            <ion-text>
+              <h6>Cliente</h6>
+            </ion-text>
+
+            <div>
+              <ion-button fill="clear" color="primary" (click)="onSearchCustomer()">
+                <ion-icon slot="icon-only" name="search-outline"></ion-icon>
+              </ion-button>
+              <ion-button fill="clear" color="primary" (click)="onCreateCustomer()">
+                <ion-icon slot="icon-only" name="add-outline"></ion-icon>
+              </ion-button>
+            </div>
+
+          </div>
 
           <ion-list lines="full">
 
@@ -49,29 +74,29 @@
 
       </ion-row>
 
-      <!-- 
-        WORKS SECTION
-       -->
-      <ion-row class="ion-justify-content-center">
+      <ion-row>
 
-        <ion-col size="12" class="col-header">
+        <!-- 
+          WORKS SECTION
+        -->
+        <ion-col size="12" sizeSm="12" sizeMd="6">
 
-          <ion-text>
-            <h4>Servicios</h4>
-          </ion-text>
+          <div class="col-header">
 
-          <div>
-            <ion-button fill="clear" color="light" (click)="onSearchWork()">
-              <ion-icon slot="icon-only" name="search-outline"></ion-icon>
-            </ion-button>
-            <ion-button fill="clear" color="light" (click)="onCreateWork()">
-              <ion-icon slot="icon-only" name="add-outline"></ion-icon>
-            </ion-button>
+            <ion-text>
+              <h6>Servicios</h6>
+            </ion-text>
+
+            <div>
+              <ion-button fill="clear" color="primary" (click)="onSearchWork()">
+                <ion-icon slot="icon-only" name="search-outline"></ion-icon>
+              </ion-button>
+              <ion-button fill="clear" color="primary" (click)="onCreateWork()">
+                <ion-icon slot="icon-only" name="add-outline"></ion-icon>
+              </ion-button>
+            </div>
+
           </div>
-
-        </ion-col>
-
-        <ion-col size="12">
 
           <ng-container formArrayName="works">
 
@@ -116,31 +141,27 @@
 
         </ion-col>
 
-      </ion-row>
+        <!-- 
+          CHARGES SECTION
+        -->
+        <ion-col size="12" sizeSm="12" sizeMd="6">
 
-      <!-- 
-        CHARGES SECTION
-       -->
-      <ion-row class="ion-justify-content-center">
+          <div class="col-header">
 
-        <ion-col size="12" class="col-header">
+            <ion-text>
+              <h6>Cargos</h6>
+            </ion-text>
 
-          <ion-text>
-            <h4>Cargos</h4>
-          </ion-text>
+            <div>
+              <ion-button fill="clear" color="primary" (click)="onSearchCharge()">
+                <ion-icon slot="icon-only" name="search-outline"></ion-icon>
+              </ion-button>
+              <ion-button fill="clear" color="primary" (click)="onCreateCharge()">
+                <ion-icon slot="icon-only" name="add-outline"></ion-icon>
+              </ion-button>
+            </div>
 
-          <div>
-            <ion-button fill="clear" color="light" (click)="onSearchCharge()">
-              <ion-icon slot="icon-only" name="search-outline"></ion-icon>
-            </ion-button>
-            <ion-button fill="clear" color="light" (click)="onCreateCharge()">
-              <ion-icon slot="icon-only" name="add-outline"></ion-icon>
-            </ion-button>
           </div>
-
-        </ion-col>
-
-        <ion-col size="12">
 
           <ng-container formArrayName="charges">
 
@@ -190,23 +211,23 @@
       <!-- 
         DEVICES SECTION
        -->
-      <ion-row class="ion-justify-content-center">
-
-        <ion-col size="12" class="col-header">
-
-          <ion-text>
-            <h4>Dispositivos</h4>
-          </ion-text>
-
-          <div>
-            <ion-button fill="clear" color="light" (click)="onAddDevice()">
-              <ion-icon slot="icon-only" name="add-outline"></ion-icon>
-            </ion-button>
-          </div>
-
-        </ion-col>
+      <ion-row>
 
         <ion-col size="12">
+
+          <div class="col-header">
+
+            <ion-text>
+              <h6>Dispositivos</h6>
+            </ion-text>
+
+            <div>
+              <ion-button fill="clear" color="primary" (click)="onAddDevice()">
+                <ion-icon slot="icon-only" name="add-outline"></ion-icon>
+              </ion-button>
+            </div>
+
+          </div>
 
           <ng-container formArrayName="devices">
 

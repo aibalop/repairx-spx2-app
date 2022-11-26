@@ -51,6 +51,8 @@ export class OrderRepairFormPage implements OnInit {
 
   subscription: Subscription;
 
+  currentDate = new Date();
+
   constructor(
     private _alertDialogService: AlertDialogService,
     private _toastService: ToastService,

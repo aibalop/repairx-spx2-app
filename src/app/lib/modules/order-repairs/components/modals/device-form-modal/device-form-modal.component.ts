@@ -44,7 +44,7 @@ export class DeviceFormModalComponent implements OnInit {
   isSend = false;
 
   constructor(
-    private _modalController: ModalController,
+    public modalController: ModalController,
     private _alertDialogService: AlertDialogService,
     private _toastService: ToastService,
     private _deviceApiService: DeviceApiService,
@@ -102,11 +102,7 @@ export class DeviceFormModalComponent implements OnInit {
 
     this.isSend = true;
 
-    // if (this.isEdit) {
-    //   this._update();
-    // } else {
-    //   this._create();
-    // }
+    this.modalController.dismiss(this.form.value);
 
   }
 

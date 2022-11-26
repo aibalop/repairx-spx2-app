@@ -21,7 +21,7 @@ import { SearchChargeModalComponent } from '../../components/modals/search-charg
 import { SearchCustomerModalComponent } from '../../components/modals/search-customer-modal/search-customer-modal.component';
 import { SearchDeviceModalComponent } from '../../components/modals/search-device-modal/search-device-modal.component';
 import { SearchWorkModalComponent } from '../../components/modals/search-work-modal/search-work-modal.component';
-import { IOrderRepair } from '../../interfaces/order-repair.interface';
+import { IDeviceOrderRepair, IOrderRepair } from '../../interfaces/order-repair.interface';
 
 @Component({
   selector: 'app-order-repair-form',
@@ -42,7 +42,19 @@ export class OrderRepairFormPage implements OnInit {
     customer: new FormControl(null, Validators.required),
     works: new FormArray([]),
     charges: new FormArray([]),
-    devices: new FormArray([]),
+    devices: new FormControl([{
+      "device": { "deviceId": "62ee35a2264d85c55c389397", "name": "CELULAR" },
+      "brand": { "brandId": "63791c99cd46978c114a31a9", "name": "XIAOMI" },
+      "model": "X-012313",
+      "accessory": "Cargador",
+      "itsOn": false,
+      "cards": "SD",
+      "password": "0123456789",
+      "details": "La pantalla viene estrellada",
+      "customerReport": "El cliente reporta que el celular no carga al conectar el cargadorr",
+      "finalDiagnosis": null,
+      "warrantyDays": 0
+    }]),
   });
 
   customerSelected: Customer;
@@ -98,6 +110,18 @@ export class OrderRepairFormPage implements OnInit {
       this.subscription.unsubscribe();
     }
 
+  }
+
+  get works() {
+    return this.form.controls['works'] as FormArray;
+  }
+
+  get charges() {
+    return this.form.controls['charges'] as FormArray;
+  }
+
+  get devices() {
+    return this.form.controls['devices'].value as Array<IDeviceOrderRepair>;
   }
 
   async onCreateCustomer(): Promise<void> {
@@ -222,7 +246,7 @@ export class OrderRepairFormPage implements OnInit {
     const { data } = await formModal.onDidDismiss();
 
     if (data) {
-      // this._setCharge(data);
+      this.devices.push(data);
     }
   }
 
@@ -242,7 +266,7 @@ export class OrderRepairFormPage implements OnInit {
   }
 
   private _setWork(data: IWork): void {
-    this.form.controls['works'].push(new FormGroup({
+    this.works.push(new FormGroup({
       workId: new FormControl(data._id, Validators.required),
       name: new FormControl(data.name, Validators.required),
       amount: new FormControl(data.amount, [Validators.required, Validators.pattern(RegexUtil.CURRENCY)]),
@@ -251,7 +275,7 @@ export class OrderRepairFormPage implements OnInit {
   }
 
   private _setCharge(data: ICharge): void {
-    this.form.controls['charges'].push(new FormGroup({
+    this.charges.push(new FormGroup({
       chargeId: new FormControl(data._id, Validators.required),
       name: new FormControl(data.name, Validators.required),
       amount: new FormControl(null, [Validators.required, Validators.pattern(RegexUtil.CURRENCY)]),

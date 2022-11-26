@@ -51,7 +51,7 @@ interface IChargeOrderRepair {
     notes?: string;
 }
 
-interface IDeviceOrderRepair {
+export interface IDeviceOrderRepair {
     device: {
         deviceId: string;
         name: string;

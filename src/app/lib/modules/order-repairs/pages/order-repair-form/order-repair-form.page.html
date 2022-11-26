@@ -102,33 +102,33 @@
 
             <ion-list lines="full">
 
-              <ion-item *ngIf="!form.controls['works'].controls.length">
+              <ion-item *ngIf="!works.controls.length">
                 <ion-icon name="hammer" slot="start"></ion-icon>
                 <ion-label>
                   <h2>No ha agregado un servicio</h2>
                 </ion-label>
               </ion-item>
 
-              <ng-container *ngFor="let workForm of form.controls['works'].controls; let indexWork = index">
+              <ng-container *ngFor="let workForm of works.controls; let indexWork = index">
 
                 <ng-container [formGroupName]="indexWork">
 
-                  <ion-item>
+                  <ion-item color="dark">
                     <ion-icon name="hammer" slot="start"></ion-icon>
                     <ion-label>
                       <h2>{{ workForm.get('name').value }}</h2>
-                      <ion-item lines="none">
-                        <ion-label position="stacked">Nota</ion-label>
-                        <ion-textarea rows="1" color="medium" placeholder="Agregar una nota..." formControlName="notes">
-                        </ion-textarea>
-                      </ion-item>
                     </ion-label>
-                    <ion-item slot="end">
-                      <ion-label position="stacked">Monto*</ion-label>
-                      <ion-input placeholder="Monto" enterkeyhint="next" inputmode="decimal" type="number"
-                        class="ion-text-right" formControlName="amount" required [readonly]="isView">
-                      </ion-input>
-                    </ion-item>
+                  </ion-item>
+                  <ion-item>
+                    <ion-label position="stacked">Monto*</ion-label>
+                    <ion-input placeholder="Monto" enterkeyhint="next" inputmode="decimal" type="number"
+                      class="ion-text-right" formControlName="amount" required [readonly]="isView">
+                    </ion-input>
+                  </ion-item>
+                  <ion-item class="ion-margin-bottom">
+                    <ion-label position="stacked">Nota</ion-label>
+                    <ion-textarea rows="1" color="medium" placeholder="Agregar una nota..." formControlName="notes">
+                    </ion-textarea>
                   </ion-item>
 
                 </ng-container>
@@ -167,33 +167,33 @@
 
             <ion-list lines="full">
 
-              <ion-item *ngIf="!form.controls['charges'].controls.length">
+              <ion-item *ngIf="!charges.controls.length">
                 <ion-icon name="cash" slot="start"></ion-icon>
                 <ion-label>
                   <h2>No ha agregado un cargo</h2>
                 </ion-label>
               </ion-item>
 
-              <ng-container *ngFor="let chargeForm of form.controls['charges'].controls; let indexCharge = index">
+              <ng-container *ngFor="let chargeForm of charges.controls; let indexCharge = index">
 
                 <ng-container [formGroupName]="indexCharge">
 
-                  <ion-item>
+                  <ion-item color="dark">
                     <ion-icon name="cash" slot="start"></ion-icon>
                     <ion-label>
                       <h2>{{ chargeForm.get('name').value }}</h2>
-                      <ion-item lines="none">
-                        <ion-label position="stacked">Nota</ion-label>
-                        <ion-textarea rows="1" color="medium" placeholder="Agregar una nota..." formControlName="notes">
-                        </ion-textarea>
-                      </ion-item>
                     </ion-label>
-                    <ion-item slot="end">
-                      <ion-label position="stacked">Monto*</ion-label>
-                      <ion-input placeholder="Monto" enterkeyhint="next" inputmode="decimal" type="number"
-                        class="ion-text-right" formControlName="amount" required [readonly]="isView">
-                      </ion-input>
-                    </ion-item>
+                  </ion-item>
+                  <ion-item>
+                    <ion-label position="stacked">Monto*</ion-label>
+                    <ion-input placeholder="Monto" enterkeyhint="next" inputmode="decimal" type="number"
+                      class="ion-text-right" formControlName="amount" required [readonly]="isView">
+                    </ion-input>
+                  </ion-item>
+                  <ion-item class="ion-margin-bottom">
+                    <ion-label position="stacked">Nota</ion-label>
+                    <ion-textarea rows="1" color="medium" placeholder="Agregar una nota..." formControlName="notes">
+                    </ion-textarea>
                   </ion-item>
 
                 </ng-container>
@@ -229,46 +229,65 @@
 
           </div>
 
-          <ng-container formArrayName="devices">
+          <ion-list lines="full">
 
-            <ion-list lines="full">
+            <ion-item *ngIf="!devices.length">
+              <ion-icon name="desktop" slot="start"></ion-icon>
+              <ion-label>
+                <h2>No ha agregado un dispositivo</h2>
+              </ion-label>
+            </ion-item>
 
-              <ion-item *ngIf="!form.controls['devices'].controls.length">
+            <ng-container *ngFor="let deviceOrderRepair of devices">
+
+              <ion-item color="dark">
                 <ion-icon name="desktop" slot="start"></ion-icon>
                 <ion-label>
-                  <h2>No ha agregado un dispositivo</h2>
+                  <h2>{{ deviceOrderRepair.device.name }}</h2>
+                  <h3>
+                    {{ deviceOrderRepair.brand.name }}
+                    {{ deviceOrderRepair.model ? ' >> ' + deviceOrderRepair.model : ''}}
+                  </h3>
                 </ion-label>
               </ion-item>
 
-              <ng-container *ngFor="let deviceForm of form.controls['devices'].controls; let indexDevice = index">
+              <ion-row>
 
-                <ng-container [formGroupName]="indexDevice">
-
-                  <ion-item>
-                    <ion-icon name="desktop" slot="start"></ion-icon>
+                <ion-col size="12" sizeSm="12" sizeMd="6">
+                  <ion-item lines="none">
                     <ion-label>
-                      <h2>{{ deviceForm.get('name').value }}</h2>
-                      <ion-item lines="none">
-                        <ion-label position="stacked">Nota</ion-label>
-                        <ion-textarea rows="1" color="medium" placeholder="Agregar una nota..." formControlName="notes">
-                        </ion-textarea>
-                      </ion-item>
+                      <h3>¿Escendido?</h3>
+                      <p>{{ deviceOrderRepair.itsOn ? 'Si':'No' }}</p>
+                      <h3>Tarjeta</h3>
+                      <p>{{ deviceOrderRepair.cards }}</p>
+                      <h3>Accesorios</h3>
+                      <p class="ion-text-wrap">{{ deviceOrderRepair.accessory }}</p>
+                      <h3>Contraseña</h3>
+                      <p class="ion-text-wrap">{{ deviceOrderRepair.password ?? '-Sin contraseña-' }}</p>
+                      <!-- <h3>Garantía</h3>
+                      <p>{{ deviceOrderRepair.warrantyDays ? deviceOrderRepair.warrantyDays : '-Sin garantía-' }}</p> -->
                     </ion-label>
-                    <ion-item slot="end">
-                      <ion-label position="stacked">Monto*</ion-label>
-                      <ion-input placeholder="Monto" enterkeyhint="next" inputmode="decimal" type="number"
-                        class="ion-text-right" formControlName="amount" required [readonly]="isView">
-                      </ion-input>
-                    </ion-item>
                   </ion-item>
+                </ion-col>
 
-                </ng-container>
+                <ion-col size="12" sizeSm="12" sizeMd="6">
+                  <ion-item lines="none">
+                    <ion-label>
+                      <h3>Detalle</h3>
+                      <p class="ion-text-wrap">{{ deviceOrderRepair.details }}</p>
+                      <h3>Reporto cliente</h3>
+                      <p class="ion-text-wrap">{{ deviceOrderRepair.customerReport }}</p>
+                      <!-- <h3>Diagnostico</h3>
+                      <p class="ion-text-wrap">{{ deviceOrderRepair.finalDiagnosis }}</p> -->
+                    </ion-label>
+                  </ion-item>
+                </ion-col>
 
-              </ng-container>
+              </ion-row>
 
-            </ion-list>
+            </ng-container>
 
-          </ng-container>
+          </ion-list>
 
         </ion-col>
 

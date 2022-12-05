@@ -86,6 +86,7 @@
                 <ion-icon slot="icon-only" name="search-outline"></ion-icon>
               </ion-button>
               <ion-button fill="clear" color="primary" (click)="onCreateWork()">
+
                 <ion-icon slot="icon-only" name="add-outline"></ion-icon>
               </ion-button>
             </div>
@@ -112,6 +113,9 @@
                     <ion-label>
                       <h2>{{ workForm.get('name').value }}</h2>
                     </ion-label>
+                    <ion-button color="danger" fill="clear" slot="end" (click)="works.removeAt(indexWork)">
+                      <ion-icon slot="icon-only" name="trash"></ion-icon>
+                    </ion-button>
                   </ion-item>
                   <ion-item>
                     <ion-label position="stacked">Monto*</ion-label>
@@ -177,6 +181,9 @@
                     <ion-label>
                       <h2>{{ chargeForm.get('name').value }}</h2>
                     </ion-label>
+                    <ion-button color="danger" fill="clear" slot="end" (click)="charges.removeAt(indexCharge)">
+                      <ion-icon slot="icon-only" name="trash"></ion-icon>
+                    </ion-button>
                   </ion-item>
                   <ion-item>
                     <ion-label position="stacked">Monto*</ion-label>
@@ -232,7 +239,7 @@
               </ion-label>
             </ion-item>
 
-            <ng-container *ngFor="let deviceOrderRepair of devices">
+            <ng-container *ngFor="let deviceOrderRepair of devices; let indexDevice = index">
 
               <ion-item color="dark">
                 <ion-icon name="desktop" slot="start"></ion-icon>
@@ -243,6 +250,9 @@
                     {{ deviceOrderRepair.model ? ' >> ' + deviceOrderRepair.model : ''}}
                   </h3>
                 </ion-label>
+                <ion-button color="danger" fill="clear" slot="end" (click)="devices.splice(indexDevice, 1)">
+                  <ion-icon slot="icon-only" name="trash"></ion-icon>
+                </ion-button>
               </ion-item>
 
               <ion-row>
@@ -285,6 +295,26 @@
 
         </ion-col>
 
+      </ion-row>
+
+      <!--
+        TOTALS SECTION
+      -->
+      <ion-row>
+        <ion-col size="12">
+          <ion-list>
+            <ion-item>
+              <ion-label slot="end" class="ion-text-end">
+                <h3>Importe</h3>
+                <p>{{ 1000 | currency:'MXN' }}</p>
+                <h3>Anticipo</h3>
+                <p>{{ 500 | currency:'MXN' }}</p>
+                <h3>Resta</h3>
+                <p>{{ 500 | currency:'MXN' }}</p>
+              </ion-label>
+            </ion-item>
+          </ion-list>
+        </ion-col>
       </ion-row>
 
 

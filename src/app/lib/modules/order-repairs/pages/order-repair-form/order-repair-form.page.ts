@@ -42,19 +42,7 @@ export class OrderRepairFormPage implements OnInit {
     customer: new FormControl(null, Validators.required),
     works: new FormArray([]),
     charges: new FormArray([]),
-    devices: new FormControl([{
-      "device": { "deviceId": "62ee35a2264d85c55c389397", "name": "CELULAR" },
-      "brand": { "brandId": "63791c99cd46978c114a31a9", "name": "XIAOMI" },
-      "model": "X-012313",
-      "accessory": "Cargador",
-      "itsOn": false,
-      "cards": "SD",
-      "password": "0123456789",
-      "details": "La pantalla viene estrellada",
-      "customerReport": "El cliente reporta que el celular no carga al conectar el cargadorr",
-      "finalDiagnosis": null,
-      "warrantyDays": 0
-    }]),
+    devices: new FormControl([]),
   });
 
   customerSelected: Customer;

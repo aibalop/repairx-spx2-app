@@ -1,0 +1,57 @@
+<app-header-generic-form-modal [isSend]="isSend" addText="Complementar pedido">
+</app-header-generic-form-modal>
+<ion-content class="ion-padding">
+
+  <form [formGroup]="form" (submit)="onSubmit()">
+
+    <ion-grid fixed>
+
+      <ion-row class="ion-justify-content-center">
+
+        <ion-col size="12" sizeSm="12" sizeMd="4">
+
+          <!-- <ion-item>
+            <ion-label>Pick date</ion-label>
+            <ion-input id="date" class="ion-text-end"></ion-input>
+            <ion-popover trigger="date" size="cover">
+              <ng-template>
+                <ion-datetime presentation="date" locale="sl-SI"></ion-datetime>
+              </ng-template>
+            </ion-popover>
+          </ion-item>
+          <ion-note color="danger" class="ion-padding-start"
+            *ngIf="form.get('deliveryDate').invalid && form.get('deliveryDate').touched">
+            Campo requerido
+          </ion-note> -->
+
+        </ion-col>
+
+        <ion-col size="12">
+
+          <ion-item>
+            <ion-label position="stacked">Anticipo*</ion-label>
+            <ion-input placeholder="Monto" enterkeyhint="next" inputmode="decimal" type="number" class="ion-text-right"
+              formControlName="advanceAmount" required>
+            </ion-input>
+          </ion-item>
+          <ion-note color="danger" class="ion-padding-start"
+            *ngIf="form.get('advanceAmount').invalid && form.get('advanceAmount').touched">
+            <ng-container *ngIf="form.controls['advanceAmount'].errors.required; else patternError">
+              Campo requerido
+            </ng-container>
+            <ng-template #patternError>
+              Dato incorrecto
+            </ng-template>
+          </ion-note>
+
+        </ion-col>
+
+      </ion-row>
+
+      <app-confirm-cancel-buttons-form-modal [isSend]="isSend"></app-confirm-cancel-buttons-form-modal>
+
+    </ion-grid>
+
+  </form>
+
+</ion-content>

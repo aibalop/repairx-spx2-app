@@ -19,7 +19,7 @@ import { CustomerFormShortModalComponent } from '../../components/modals/custome
 import { DeviceFormModalComponent } from '../../components/modals/device-form-modal/device-form-modal.component';
 import { SearchChargeModalComponent } from '../../components/modals/search-charge-modal/search-charge-modal.component';
 import { SearchCustomerModalComponent } from '../../components/modals/search-customer-modal/search-customer-modal.component';
-import { SearchDeviceModalComponent } from '../../components/modals/search-device-modal/search-device-modal.component';
+import { CompleteOrderRepairModalComponent } from '../../components/modals/complete-order-repair-modal/complete-order-repair-modal.component';
 import { SearchWorkModalComponent } from '../../components/modals/search-work-modal/search-work-modal.component';
 import { IDeviceOrderRepair, IOrderRepair } from '../../interfaces/order-repair.interface';
 
@@ -271,24 +271,6 @@ export class OrderRepairFormPage implements OnInit {
     }));
   }
 
-  onSubmit(): void {
-
-    if (this.form.invalid) {
-      this.form.markAllAsTouched();
-      this._toastService.warning('Complete los campos obligatorios', 'Datos Incompletos');
-      return;
-    }
-
-    this.isSend = true;
-
-    if (this.isEdit) {
-      this._update();
-    } else {
-      this._create();
-    }
-
-  }
-
   private async _getOrderRepair(): Promise<void> {
 
     try {
@@ -327,6 +309,35 @@ export class OrderRepairFormPage implements OnInit {
       this._toastService.danger('No se pudo completar la actualización', 'Operación Fallida');
       this._alertDialogService.catchError(error);
     }
+
+  }
+
+  async onSubmit(): Promise<void> {
+
+    // TODO: if is create order then ask data to complete the order
+    const formModal = await this._modalController.create({
+      component: CompleteOrderRepairModalComponent,
+      breakpoints: Consts.BREAKPOINTS_MODAL_FULL,
+      initialBreakpoint: Consts.INITIAL_BREAKPOINT_MODAL_THREE_QUARTER,
+      backdropDismiss: false,
+      componentProps: {}
+    });
+
+    await formModal.present();
+
+    // if (this.form.invalid) {
+    //   this.form.markAllAsTouched();
+    //   this._toastService.warning('Complete los campos obligatorios', 'Datos Incompletos');
+    //   return;
+    // }
+
+    // this.isSend = true;
+
+    // if (this.isEdit) {
+    //   this._update();
+    // } else {
+    //   this._create();
+    // }
 
   }
 

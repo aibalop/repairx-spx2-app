@@ -1,19 +1,19 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { IonicModule } from '@ionic/angular';
 
-import { SearchDeviceModalComponent } from './search-device-modal.component';
+import { CompleteOrderRepairModalComponent } from './complete-order-repair-modal.component';
 
-describe('SearchDeviceModalComponent', () => {
-  let component: SearchDeviceModalComponent;
-  let fixture: ComponentFixture<SearchDeviceModalComponent>;
+describe('CompleteOrderRepairModalComponent', () => {
+  let component: CompleteOrderRepairModalComponent;
+  let fixture: ComponentFixture<CompleteOrderRepairModalComponent>;
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [ SearchDeviceModalComponent ],
+      declarations: [ CompleteOrderRepairModalComponent ],
       imports: [IonicModule.forRoot()]
     }).compileComponents();
 
-    fixture = TestBed.createComponent(SearchDeviceModalComponent);
+    fixture = TestBed.createComponent(CompleteOrderRepairModalComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   }));

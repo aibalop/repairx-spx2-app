@@ -1,27 +1,38 @@
-import { Component, OnInit } from '@angular/core';
-import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
-import { ModalController } from '@ionic/angular';
-import { Subscription } from 'rxjs';
-import { EOrderRepairsRoutes } from 'src/app/lib/core/enums/modules-routes.enum';
-import { AlertDialogService } from 'src/app/lib/core/services/alert-dialog.service';
-import { ToastService } from 'src/app/lib/core/services/toast.service';
-import { Consts } from 'src/app/lib/core/utils/consts.util';
-import { RegexUtil } from 'src/app/lib/core/utils/regex.util';
-import { ChargeFormModalComponent } from '../../../catalogs/charges/components/modals/charge-form-modal/charge-form-modal.component';
-import { ICharge } from '../../../catalogs/charges/interfaces/charge.interface';
-import { WorkFormModalComponent } from '../../../catalogs/works/components/modals/work-form-modal/work-form-modal.component';
-import { IWork } from '../../../catalogs/works/interfaces/work.interface';
-import { ICustomer } from '../../../customers/interfaces/customer.interface';
-import { Customer } from '../../../customers/models/customer.model';
-import { OrderRepairApiService } from '../../api/order-repair.api.service';
-import { CustomerFormShortModalComponent } from '../../components/modals/customer-form-short-modal/customer-form-short-modal.component';
-import { DeviceFormModalComponent } from '../../components/modals/device-form-modal/device-form-modal.component';
-import { SearchChargeModalComponent } from '../../components/modals/search-charge-modal/search-charge-modal.component';
-import { SearchCustomerModalComponent } from '../../components/modals/search-customer-modal/search-customer-modal.component';
-import { CompleteOrderRepairModalComponent } from '../../components/modals/complete-order-repair-modal/complete-order-repair-modal.component';
-import { SearchWorkModalComponent } from '../../components/modals/search-work-modal/search-work-modal.component';
-import { IDeviceOrderRepair, IOrderRepair } from '../../interfaces/order-repair.interface';
+import {Component, OnInit} from '@angular/core';
+import {FormArray, FormControl, FormGroup, Validators} from '@angular/forms';
+import {ActivatedRoute, Router} from '@angular/router';
+import {ModalController} from '@ionic/angular';
+import {Subscription} from 'rxjs';
+import {EOrderRepairsRoutes} from 'src/app/lib/core/enums/modules-routes.enum';
+import {AlertDialogService} from 'src/app/lib/core/services/alert-dialog.service';
+import {ToastService} from 'src/app/lib/core/services/toast.service';
+import {Consts} from 'src/app/lib/core/utils/consts.util';
+import {RegexUtil} from 'src/app/lib/core/utils/regex.util';
+import {
+  ChargeFormModalComponent
+} from '../../../catalogs/charges/components/modals/charge-form-modal/charge-form-modal.component';
+import {ICharge} from '../../../catalogs/charges/interfaces/charge.interface';
+import {
+  WorkFormModalComponent
+} from '../../../catalogs/works/components/modals/work-form-modal/work-form-modal.component';
+import {IWork} from '../../../catalogs/works/interfaces/work.interface';
+import {ICustomer} from '../../../customers/interfaces/customer.interface';
+import {Customer} from '../../../customers/models/customer.model';
+import {OrderRepairApiService} from '../../api/order-repair.api.service';
+import {
+  CustomerFormShortModalComponent
+} from '../../components/modals/customer-form-short-modal/customer-form-short-modal.component';
+import {DeviceFormModalComponent} from '../../components/modals/device-form-modal/device-form-modal.component';
+import {SearchChargeModalComponent} from '../../components/modals/search-charge-modal/search-charge-modal.component';
+import {
+  SearchCustomerModalComponent
+} from '../../components/modals/search-customer-modal/search-customer-modal.component';
+import {
+  CompleteOrderRepairModalComponent
+} from '../../components/modals/complete-order-repair-modal/complete-order-repair-modal.component';
+import {SearchWorkModalComponent} from '../../components/modals/search-work-modal/search-work-modal.component';
+import {IDeviceOrderRepair, IOrderRepair} from '../../interfaces/order-repair.interface';
+import {CurrencyCalculateUtil} from '../../../../core/utils/currency-calculate.util';
 
 @Component({
   selector: 'app-order-repair-form',
@@ -43,6 +54,11 @@ export class OrderRepairFormPage implements OnInit {
     works: new FormArray([]),
     charges: new FormArray([]),
     devices: new FormControl([]),
+    remainingAmount: new FormControl(0),
+    advanceAmount: new FormControl(0),
+    discountAmount: new FormControl(0),
+    subtotalAmount: new FormControl(0),
+    totalAmount: new FormControl(0),
   });
 
   customerSelected: Customer;
@@ -122,7 +138,7 @@ export class OrderRepairFormPage implements OnInit {
 
     await formModal.present();
 
-    const { data } = await formModal.onDidDismiss();
+    const {data} = await formModal.onDidDismiss();
 
     if (data) {
       this._setCustomer(data);
@@ -139,7 +155,7 @@ export class OrderRepairFormPage implements OnInit {
 
     await searchModal.present();
 
-    const { data } = await searchModal.onDidDismiss();
+    const {data} = await searchModal.onDidDismiss();
 
     if (data) {
       this._setCustomer(data);
@@ -156,7 +172,7 @@ export class OrderRepairFormPage implements OnInit {
 
     await searchModal.present();
 
-    const { data } = await searchModal.onDidDismiss();
+    const {data} = await searchModal.onDidDismiss();
 
     if (data) {
       this._setWork(data);
@@ -176,7 +192,7 @@ export class OrderRepairFormPage implements OnInit {
 
     await formModal.present();
 
-    const { data } = await formModal.onDidDismiss();
+    const {data} = await formModal.onDidDismiss();
 
     if (data) {
       this._setWork(data);
@@ -193,7 +209,7 @@ export class OrderRepairFormPage implements OnInit {
 
     await searchModal.present();
 
-    const { data } = await searchModal.onDidDismiss();
+    const {data} = await searchModal.onDidDismiss();
 
     if (data) {
       this._setCharge(data);
@@ -213,7 +229,7 @@ export class OrderRepairFormPage implements OnInit {
 
     await formModal.present();
 
-    const { data } = await formModal.onDidDismiss();
+    const {data} = await formModal.onDidDismiss();
 
     if (data) {
       this._setCharge(data);
@@ -231,7 +247,7 @@ export class OrderRepairFormPage implements OnInit {
 
     await formModal.present();
 
-    const { data } = await formModal.onDidDismiss();
+    const {data} = await formModal.onDidDismiss();
 
     if (data) {
       this.devices.push(data);
@@ -239,12 +255,17 @@ export class OrderRepairFormPage implements OnInit {
   }
 
   onCalculateAmount(): void {
-    console.log(this.form.valid);
-    console.log(this.form.value);
-    if (this.form.valid) {
-      // TODO: calculamos el importe total si el form esta correcto
-      
-    }    
+    //if (this.form.get('works').valid && this.form.get('charges').valid) {
+      const workAmounts = this.works.controls.map(control => control.get('amount').value ?? 0);
+      const chargeAmounts = this.charges.controls.map(control => control.get('amount').value ?? 0);
+      const subtotal = CurrencyCalculateUtil.calculateSummation([...workAmounts, ...chargeAmounts]);
+      const total = CurrencyCalculateUtil.calculateSubtraction(subtotal, this.form.get('discountAmount').value);
+      this.form.patchValue({
+        subtotalAmount: subtotal,
+        totalAmount: total,
+        remainingAmount: CurrencyCalculateUtil.calculateSubtraction(total, this.form.get('advanceAmount').value),
+      });
+   // }
   }
 
   private _setCustomer(data: ICustomer): void {

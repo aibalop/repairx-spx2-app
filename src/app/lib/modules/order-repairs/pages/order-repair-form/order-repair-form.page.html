@@ -6,8 +6,8 @@
 
     <ion-grid>
 
-      <!-- 
-        CUSTOMERS SECTION 
+      <!--
+        CUSTOMERS SECTION
       -->
       <ion-row>
 
@@ -18,11 +18,11 @@
             <ion-item>
               <ion-label>
                 <h2>No. Orden</h2>
-                <p>XXXXX</p>
+                <p>-Por confirmar-</p>
                 <h2>Fecha</h2>
                 <p>{{ currentDate | date:'short' }}</p>
-                <h2>Creado por</h2>
-                <p>John Does</p>
+                <!--<h2>Creado por</h2>
+                <p>-</p>-->
               </ion-label>
             </ion-item>
 
@@ -70,7 +70,7 @@
 
       <ion-row>
 
-        <!-- 
+        <!--
           WORKS SECTION
         -->
         <ion-col size="12" sizeSm="12" sizeMd="6">
@@ -120,8 +120,8 @@
                   <ion-item>
                     <ion-label position="stacked">Monto*</ion-label>
                     <ion-input placeholder="Monto" enterkeyhint="next" inputmode="decimal" type="number"
-                      class="ion-text-right" formControlName="amount" required [readonly]="isView"
-                      (ngModelChange)="onCalculateAmount()" [debounce]="500">
+                               class="ion-text-right" formControlName="amount" required [readonly]="isView"
+                               (ngModelChange)="onCalculateAmount()" [debounce]="500">
                     </ion-input>
                   </ion-item>
                   <ion-item class="ion-margin-bottom">
@@ -140,7 +140,7 @@
 
         </ion-col>
 
-        <!-- 
+        <!--
           CHARGES SECTION
         -->
         <ion-col size="12" sizeSm="12" sizeMd="6">
@@ -189,8 +189,8 @@
                   <ion-item>
                     <ion-label position="stacked">Monto*</ion-label>
                     <ion-input placeholder="Monto" enterkeyhint="next" inputmode="decimal" type="number"
-                      class="ion-text-right" formControlName="amount" required [readonly]="isView"
-                      (ngModelChange)="onCalculateAmount()" [debounce]="500">
+                               class="ion-text-right" formControlName="amount" required [readonly]="isView"
+                               (ngModelChange)="onCalculateAmount()" [debounce]="500">
                     </ion-input>
                   </ion-item>
                   <ion-item class="ion-margin-bottom">
@@ -211,7 +211,7 @@
 
       </ion-row>
 
-      <!-- 
+      <!--
         DEVICES SECTION
        -->
       <ion-row>
@@ -263,7 +263,7 @@
                   <ion-item lines="none">
                     <ion-label>
                       <h3>¿Escendido?</h3>
-                      <p>{{ deviceOrderRepair.itsOn ? 'Si':'No' }}</p>
+                      <p>{{ deviceOrderRepair.itsOn ? 'Si' : 'No' }}</p>
                       <h3>Tarjeta</h3>
                       <p>{{ deviceOrderRepair.cards }}</p>
                       <h3>Accesorios</h3>
@@ -308,11 +308,11 @@
             <ion-item>
               <ion-label slot="end" class="ion-text-end">
                 <h3>Importe</h3>
-                <p>{{ 1000 | currency:'MXN' }}</p>
+                <p>{{ form.get('totalAmount').value | currency:'MXN' }}</p>
                 <h3>Anticipo</h3>
-                <p>{{ 0 | currency:'MXN' }}</p>
+                <p>{{ form.get('advanceAmount').value | currency:'MXN' }}</p>
                 <h3>Resta</h3>
-                <p>{{ 500 | currency:'MXN' }}</p>
+                <p>{{ form.get('remainingAmount').value | currency:'MXN' }}</p>
               </ion-label>
             </ion-item>
           </ion-list>
@@ -320,8 +320,8 @@
       </ion-row>
 
 
-      <!-- 
-        CONFIRM BUTTONS SECTION 
+      <!--
+        CONFIRM BUTTONS SECTION
       -->
       <app-confirm-cancel-buttons-form *ngIf="!isView" [isSend]="isSend"></app-confirm-cancel-buttons-form>
 

@@ -22,6 +22,7 @@
     "@ionic/angular": "^6.1.9",
     "@ionic/storage": "^3.0.6",
     "@ionic/storage-angular": "^3.0.6",
+    "currency.js": "^2.0.4",
     "rxjs": "~6.6.0",
     "socket.io-client": "^4.5.1",
     "tslib": "^2.2.0",

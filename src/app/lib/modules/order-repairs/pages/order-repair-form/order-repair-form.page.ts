@@ -238,6 +238,15 @@ export class OrderRepairFormPage implements OnInit {
     }
   }
 
+  onCalculateAmount(): void {
+    console.log(this.form.valid);
+    console.log(this.form.value);
+    if (this.form.valid) {
+      // TODO: calculamos el importe total si el form esta correcto
+      
+    }    
+  }
+
   private _setCustomer(data: ICustomer): void {
     this.form.patchValue({
       customer: {

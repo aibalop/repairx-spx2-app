@@ -120,7 +120,8 @@
                   <ion-item>
                     <ion-label position="stacked">Monto*</ion-label>
                     <ion-input placeholder="Monto" enterkeyhint="next" inputmode="decimal" type="number"
-                      class="ion-text-right" formControlName="amount" required [readonly]="isView">
+                      class="ion-text-right" formControlName="amount" required [readonly]="isView"
+                      (ngModelChange)="onCalculateAmount()" [debounce]="500">
                     </ion-input>
                   </ion-item>
                   <ion-item class="ion-margin-bottom">
@@ -188,7 +189,8 @@
                   <ion-item>
                     <ion-label position="stacked">Monto*</ion-label>
                     <ion-input placeholder="Monto" enterkeyhint="next" inputmode="decimal" type="number"
-                      class="ion-text-right" formControlName="amount" required [readonly]="isView">
+                      class="ion-text-right" formControlName="amount" required [readonly]="isView"
+                      (ngModelChange)="onCalculateAmount()" [debounce]="500">
                     </ion-input>
                   </ion-item>
                   <ion-item class="ion-margin-bottom">

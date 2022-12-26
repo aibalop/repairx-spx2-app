@@ -268,6 +268,40 @@ export class OrderRepairFormPage implements OnInit {
    // }
   }
 
+  async onSubmit(): Promise<void> {
+    if (this.form.invalid) {
+      this.form.markAllAsTouched();
+      this._toastService.warning('Complete los campos obligatorios', 'Datos Incompletos');
+      return;
+    }
+
+    const confirm = await this._alertDialogService.confirm('Confirmar', '¿Desea continuar con la generación del pedido?');
+
+    if (!confirm) {
+      return;
+    }
+
+    this.isSend = true;
+
+    const formModal = await this._modalController.create({
+      component: CompleteOrderRepairModalComponent,
+      breakpoints: Consts.BREAKPOINTS_MODAL_FULL,
+      initialBreakpoint: Consts.INITIAL_BREAKPOINT_MODAL_THREE_QUARTER,
+      backdropDismiss: false,
+      componentProps: {}
+    });
+
+    await formModal.present();
+    const { data } = await formModal.onDidDismiss();
+    this.form.patchValue(data);
+    this.onCalculateAmount();
+    if (this.isEdit) {
+      this._update();
+    } else {
+      this._create();
+    }
+  }
+
   private _setCustomer(data: ICustomer): void {
     this.form.patchValue({
       customer: {
@@ -339,35 +373,6 @@ export class OrderRepairFormPage implements OnInit {
       this._toastService.danger('No se pudo completar la actualización', 'Operación Fallida');
       this._alertDialogService.catchError(error);
     }
-
-  }
-
-  async onSubmit(): Promise<void> {
-
-    // TODO: if is create order then ask data to complete the order
-    const formModal = await this._modalController.create({
-      component: CompleteOrderRepairModalComponent,
-      breakpoints: Consts.BREAKPOINTS_MODAL_FULL,
-      initialBreakpoint: Consts.INITIAL_BREAKPOINT_MODAL_THREE_QUARTER,
-      backdropDismiss: false,
-      componentProps: {}
-    });
-
-    await formModal.present();
-
-    // if (this.form.invalid) {
-    //   this.form.markAllAsTouched();
-    //   this._toastService.warning('Complete los campos obligatorios', 'Datos Incompletos');
-    //   return;
-    // }
-
-    // this.isSend = true;
-
-    // if (this.isEdit) {
-    //   this._update();
-    // } else {
-    //   this._create();
-    // }
 
   }
 

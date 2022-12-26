@@ -8,34 +8,32 @@
 
       <ion-row class="ion-justify-content-center">
 
-        <ion-col size="12" sizeSm="12" sizeMd="4">
-
-          <!-- <ion-item>
-            <ion-label>Pick date</ion-label>
-            <ion-input id="date" class="ion-text-end"></ion-input>
-            <ion-popover trigger="date" size="cover">
+        <ion-col size="12">
+          <ion-item>
+            <ion-label position="stacked">Fecha de entrega*</ion-label>
+            <ion-input value="{{ form.get('deliveryDate').value | date: 'dd MMM yyyy' }}" id="date"></ion-input>
+            <ion-popover trigger="date">
               <ng-template>
-                <ion-datetime presentation="date" locale="sl-SI"></ion-datetime>
+                <ion-datetime #dateTimeDelivery presentation="date" formControlName="deliveryDate" locale="es-ES"
+                              (ionChange)="dateTimeDelivery.confirm(true)" [min]="today"></ion-datetime>
               </ng-template>
             </ion-popover>
           </ion-item>
           <ion-note color="danger" class="ion-padding-start"
-            *ngIf="form.get('deliveryDate').invalid && form.get('deliveryDate').touched">
+                    *ngIf="form.get('deliveryDate').invalid && form.get('deliveryDate').touched">
             Campo requerido
-          </ion-note> -->
-
+          </ion-note>
         </ion-col>
 
         <ion-col size="12">
-
           <ion-item>
             <ion-label position="stacked">Anticipo*</ion-label>
             <ion-input placeholder="Monto" enterkeyhint="next" inputmode="decimal" type="number" class="ion-text-right"
-              formControlName="advanceAmount" required>
+                       formControlName="advanceAmount" required>
             </ion-input>
           </ion-item>
           <ion-note color="danger" class="ion-padding-start"
-            *ngIf="form.get('advanceAmount').invalid && form.get('advanceAmount').touched">
+                    *ngIf="form.get('advanceAmount').invalid && form.get('advanceAmount').touched">
             <ng-container *ngIf="form.controls['advanceAmount'].errors.required; else patternError">
               Campo requerido
             </ng-container>
@@ -43,7 +41,6 @@
               Dato incorrecto
             </ng-template>
           </ion-note>
-
         </ion-col>
 
       </ion-row>

@@ -11,11 +11,11 @@ import { RegexUtil } from 'src/app/lib/core/utils/regex.util';
 })
 export class CompleteOrderRepairModalComponent implements OnInit {
 
+  today = new Date().toISOString();
   form = new FormGroup({
     advanceAmount: new FormControl(null, [Validators.required, Validators.pattern(RegexUtil.CURRENCY)]),
-    deliveryDate: new FormControl(null, Validators.required)
+    deliveryDate: new FormControl(this.today, Validators.required)
   });
-
   isSend = false;
 
   constructor(
@@ -37,5 +37,4 @@ export class CompleteOrderRepairModalComponent implements OnInit {
 
     this._modalController.dismiss(this.form.value);
   }
-
 }

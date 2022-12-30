@@ -18,7 +18,7 @@
             <ion-item>
               <ion-label>
                 <h2>No. Orden</h2>
-                <p>-Por confirmar-</p>
+                <p>-</p>
                 <h2>Fecha</h2>
                 <p>{{ currentDate | date:'short' }}</p>
                 <!--<h2>Creado por</h2>
@@ -113,7 +113,7 @@
                     <ion-label>
                       <h2>{{ workForm.get('name').value }}</h2>
                     </ion-label>
-                    <ion-button color="danger" fill="clear" slot="end" (click)="works.removeAt(indexWork)">
+                    <ion-button color="danger" fill="clear" slot="end" (click)="works.removeAt(indexWork); onCalculateAmount();">
                       <ion-icon slot="icon-only" name="trash"></ion-icon>
                     </ion-button>
                   </ion-item>
@@ -182,7 +182,7 @@
                     <ion-label>
                       <h2>{{ chargeForm.get('name').value }}</h2>
                     </ion-label>
-                    <ion-button color="danger" fill="clear" slot="end" (click)="charges.removeAt(indexCharge)">
+                    <ion-button color="danger" fill="clear" slot="end" (click)="charges.removeAt(indexCharge); onCalculateAmount();">
                       <ion-icon slot="icon-only" name="trash"></ion-icon>
                     </ion-button>
                   </ion-item>

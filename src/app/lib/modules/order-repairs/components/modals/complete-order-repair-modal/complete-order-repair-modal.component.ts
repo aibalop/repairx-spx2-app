@@ -1,8 +1,8 @@
-import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { ModalController } from '@ionic/angular';
-import { ToastService } from 'src/app/lib/core/services/toast.service';
-import { RegexUtil } from 'src/app/lib/core/utils/regex.util';
+import {Component, OnInit, Input} from '@angular/core';
+import {FormControl, FormGroup, Validators} from '@angular/forms';
+import {ModalController} from '@ionic/angular';
+import {ToastService} from 'src/app/lib/core/services/toast.service';
+import {RegexUtil} from 'src/app/lib/core/utils/regex.util';
 
 @Component({
   selector: 'app-complete-order-repair-modal',
@@ -11,9 +11,10 @@ import { RegexUtil } from 'src/app/lib/core/utils/regex.util';
 })
 export class CompleteOrderRepairModalComponent implements OnInit {
 
+  @Input() totalAmount: number;
   today = new Date().toISOString();
   form = new FormGroup({
-    advanceAmount: new FormControl(null, [Validators.required, Validators.pattern(RegexUtil.CURRENCY)]),
+    advanceAmount: new FormControl(null),
     deliveryDate: new FormControl(this.today, Validators.required)
   });
   isSend = false;
@@ -21,9 +22,18 @@ export class CompleteOrderRepairModalComponent implements OnInit {
   constructor(
     private _modalController: ModalController,
     private _toastService: ToastService,
-  ) { }
+  ) {
+  }
 
-  ngOnInit() { }
+  ngOnInit() {
+    const advanceAmountValidators = [
+      Validators.required,
+      Validators.pattern(RegexUtil.CURRENCY),
+      Validators.max(this.totalAmount),
+      Validators.min(0)
+    ];
+    this.form.get('advanceAmount').setValidators(advanceAmountValidators);
+  }
 
   onSubmit(): void {
 

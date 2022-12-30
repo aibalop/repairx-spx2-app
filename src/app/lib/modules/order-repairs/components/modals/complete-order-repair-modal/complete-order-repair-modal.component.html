@@ -34,12 +34,13 @@
           </ion-item>
           <ion-note color="danger" class="ion-padding-start"
                     *ngIf="form.get('advanceAmount').invalid && form.get('advanceAmount').touched">
-            <ng-container *ngIf="form.controls['advanceAmount'].errors.required; else patternError">
+            <ng-container *ngIf="form.controls['advanceAmount'].errors.required">
               Campo requerido
             </ng-container>
-            <ng-template #patternError>
-              Dato incorrecto
-            </ng-template>
+            <ng-container
+              *ngIf="form.controls['advanceAmount'].errors.pattern || form.controls['advanceAmount'].errors.min || form.controls['advanceAmount'].errors.max">
+              Cantidad no valida
+            </ng-container>
           </ion-note>
         </ion-col>
 

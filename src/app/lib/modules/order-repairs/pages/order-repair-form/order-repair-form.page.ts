@@ -49,17 +49,7 @@ export class OrderRepairFormPage implements OnInit {
 
   orderRepairId: string;
 
-  form = new FormGroup({
-    customer: new FormControl(null, Validators.required),
-    works: new FormArray([]),
-    charges: new FormArray([]),
-    devices: new FormControl([]),
-    remainingAmount: new FormControl(0),
-    advanceAmount: new FormControl(0),
-    discountAmount: new FormControl(0),
-    subtotalAmount: new FormControl(0),
-    totalAmount: new FormControl(0),
-  });
+  form: FormGroup;
 
   customerSelected: Customer;
 
@@ -86,6 +76,17 @@ export class OrderRepairFormPage implements OnInit {
 
     this.titleHeader = this.isEdit ? 'Editar Orden Reparación' : this.titleHeader;
 
+    this.form = new FormGroup({
+      customer: new FormControl(null, Validators.required),
+      works: new FormArray([]),
+      charges: new FormArray([]),
+      devices: new FormControl([]),
+      remainingAmount: new FormControl(0),
+      advanceAmount: new FormControl(0),
+      discountAmount: new FormControl(0),
+      subtotalAmount: new FormControl(0),
+      totalAmount: new FormControl(0),
+    });
   }
 
   ngOnInit() {
@@ -255,17 +256,15 @@ export class OrderRepairFormPage implements OnInit {
   }
 
   onCalculateAmount(): void {
-    //if (this.form.get('works').valid && this.form.get('charges').valid) {
-      const workAmounts = this.works.controls.map(control => control.get('amount').value ?? 0);
-      const chargeAmounts = this.charges.controls.map(control => control.get('amount').value ?? 0);
-      const subtotal = CurrencyCalculateUtil.calculateSummation([...workAmounts, ...chargeAmounts]);
-      const total = CurrencyCalculateUtil.calculateSubtraction(subtotal, this.form.get('discountAmount').value);
-      this.form.patchValue({
-        subtotalAmount: subtotal,
-        totalAmount: total,
-        remainingAmount: CurrencyCalculateUtil.calculateSubtraction(total, this.form.get('advanceAmount').value),
-      });
-   // }
+    const workAmounts = this.works.controls.map(control => control.get('amount').value ?? 0);
+    const chargeAmounts = this.charges.controls.map(control => control.get('amount').value ?? 0);
+    const subtotal = CurrencyCalculateUtil.calculateSummation([...workAmounts, ...chargeAmounts]);
+    const total = CurrencyCalculateUtil.calculateSubtraction(subtotal, this.form.get('discountAmount').value);
+    this.form.patchValue({
+      subtotalAmount: subtotal,
+      totalAmount: total,
+      remainingAmount: CurrencyCalculateUtil.calculateSubtraction(total, this.form.get('advanceAmount').value),
+    });
   }
 
   async onSubmit(): Promise<void> {
@@ -288,13 +287,21 @@ export class OrderRepairFormPage implements OnInit {
       breakpoints: Consts.BREAKPOINTS_MODAL_FULL,
       initialBreakpoint: Consts.INITIAL_BREAKPOINT_MODAL_THREE_QUARTER,
       backdropDismiss: false,
-      componentProps: {}
+      componentProps: {
+        totalAmount: this.form.get('totalAmount').value
+      }
     });
 
     await formModal.present();
-    const { data } = await formModal.onDidDismiss();
+    const {data} = await formModal.onDidDismiss();
+    if (!data) {
+      this.isSend = false;
+      return;
+    }
+
     this.form.patchValue(data);
     this.onCalculateAmount();
+
     if (this.isEdit) {
       this._update();
     } else {
@@ -339,7 +346,7 @@ export class OrderRepairFormPage implements OnInit {
 
     try {
       const orderRepair = await this._orderRepairApiService.getById(this.orderRepairId).toPromise();
-      // this.form.patchValue(orderRepair); // TODO uncommented
+      // this.form.patchValue(orderRepair); // TODO mapear datos necesarios para los casos de los form
     } catch (error) {
       this._toastService.danger('No se pudo obtener los datos del cliente', 'Operación Fallida');
       this._alertDialogService.catchError(error);
@@ -356,6 +363,8 @@ export class OrderRepairFormPage implements OnInit {
       this._router.navigate([EOrderRepairsRoutes.ORDER_REPAIRS]);
     } catch (error) {
       this.isSend = false;
+      this.form.get('advanceAmount').setValue(0);
+      this.onCalculateAmount();
       this._toastService.danger('No se pudo completar el registro', 'Operación Fallida');
       this._alertDialogService.catchError(error);
     }

@@ -33,7 +33,7 @@ export class DeviceFormModalComponent implements OnInit {
     model: new FormControl(null),
     accessory: new FormControl(null, Validators.required),
     itsOn: new FormControl(false),
-    cards: new FormControl(null),
+    cards: new FormControl('N/A'),
     password: new FormControl(null),
     details: new FormControl(null, Validators.required),
     customerReport: new FormControl(null, Validators.required),

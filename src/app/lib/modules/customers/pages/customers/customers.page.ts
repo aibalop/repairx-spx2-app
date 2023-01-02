@@ -20,11 +20,7 @@ export class CustomersPage implements OnInit {
 
   list: IPaginationData<Customer>;
 
-  filters: IFilterGeneric = {
-    searchText: '',
-    limit: 20,
-    page: 1
-  };
+  filters: IFilterGeneric;
 
   constructor(
     private _customerApiService: CustomerApiService,
@@ -33,7 +29,14 @@ export class CustomersPage implements OnInit {
     private _router: Router
   ) { }
 
-  ngOnInit() {
+  ngOnInit() { }
+
+  ionViewWillEnter() {
+    this.filters = {
+      searchText: '',
+      limit: 20,
+      page: 1
+    };
     this._loadData();
   }
 

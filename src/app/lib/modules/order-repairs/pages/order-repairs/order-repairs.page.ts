@@ -20,11 +20,7 @@ export class OrderRepairsPage implements OnInit {
 
   list: IPaginationData<IOrderRepair>;
 
-  filters: IFilterGeneric = {
-    searchText: '',
-    limit: 20,
-    page: 1
-  };
+  filters: IFilterGeneric;
 
   constructor(
     private _orderRepairApiService: OrderRepairApiService,
@@ -33,7 +29,14 @@ export class OrderRepairsPage implements OnInit {
     private _router: Router
   ) { }
 
-  ngOnInit() {
+  ngOnInit() { }
+
+  ionViewWillEnter() {
+    this.filters = {
+      searchText: '',
+      limit: 20,
+      page: 1
+    };
     this._loadData();
   }
 

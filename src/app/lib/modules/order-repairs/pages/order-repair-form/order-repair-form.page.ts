@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {FormArray, FormControl, FormGroup, Validators} from '@angular/forms';
 import {ActivatedRoute, Router} from '@angular/router';
 import {ModalController} from '@ionic/angular';
@@ -39,7 +39,7 @@ import {CurrencyCalculateUtil} from '../../../../core/utils/currency-calculate.u
   templateUrl: './order-repair-form.page.html',
   styleUrls: ['./order-repair-form.page.scss'],
 })
-export class OrderRepairFormPage implements OnInit {
+export class OrderRepairFormPage implements OnInit, OnDestroy {
 
   titleHeader: string = 'Nueva Orden Reparación';
 
@@ -58,6 +58,8 @@ export class OrderRepairFormPage implements OnInit {
   subscription: Subscription;
 
   currentDate = new Date();
+
+  orderRepair: IOrderRepair;
 
   constructor(
     private _alertDialogService: AlertDialogService,
@@ -81,6 +83,7 @@ export class OrderRepairFormPage implements OnInit {
       works: new FormArray([]),
       charges: new FormArray([]),
       devices: new FormControl([]),
+      deliveryDate: new FormControl(null),
       remainingAmount: new FormControl(0),
       advanceAmount: new FormControl(0),
       discountAmount: new FormControl(0),
@@ -329,7 +332,7 @@ export class OrderRepairFormPage implements OnInit {
       workId: new FormControl(data._id, Validators.required),
       name: new FormControl(data.name, Validators.required),
       amount: new FormControl(data.amount, [Validators.required, Validators.pattern(RegexUtil.CURRENCY)]),
-      notes: new FormControl(null)
+      notes: new FormControl(data.notes ?? null)
     }));
   }
 
@@ -337,7 +340,7 @@ export class OrderRepairFormPage implements OnInit {
     this.charges.push(new FormGroup({
       chargeId: new FormControl(data._id, Validators.required),
       name: new FormControl(data.name, Validators.required),
-      amount: new FormControl(null, [Validators.required, Validators.pattern(RegexUtil.CURRENCY)]),
+      amount: new FormControl(data.amount ?? null, [Validators.required, Validators.pattern(RegexUtil.CURRENCY)]),
       notes: new FormControl(null)
     }));
   }
@@ -345,8 +348,52 @@ export class OrderRepairFormPage implements OnInit {
   private async _getOrderRepair(): Promise<void> {
 
     try {
-      const orderRepair = await this._orderRepairApiService.getById(this.orderRepairId).toPromise();
-      // this.form.patchValue(orderRepair); // TODO mapear datos necesarios para los casos de los form
+      this.orderRepair = await this._orderRepairApiService.getById(this.orderRepairId).toPromise();
+      console.log(this.orderRepair);
+      this.form.patchValue({
+        customer: this.orderRepair.customer,
+      });
+
+      this.customerSelected = new Customer({
+        _id: this.orderRepair.customer.customerId,
+        name: this.orderRepair.customer.name,
+        lastName: this.orderRepair.customer.lastName,
+        surName: this.orderRepair.customer.surName,
+        phone: this.orderRepair.customer.phone,
+        email: this.orderRepair.customer.email,
+      });
+
+      for (const work of this.orderRepair.works) {
+        this._setWork({
+          _id: work.workId,
+          key: '',
+          name: work.name,
+          amount: work.amount,
+          notes: work.notes,
+        });
+      }
+
+      for (const charge of this.orderRepair.charges) {
+        this._setCharge({
+          _id: charge.chargeId,
+          name: charge.name,
+          amount: charge.amount,
+          notes: charge.notes,
+        });
+      }
+
+      for (const device of this.orderRepair.devices) {
+        this.devices.push(device);
+      }
+
+      this.form.patchValue({
+        deliveryDate: this.orderRepair.deliveryDate,
+        remainingAmount: this.orderRepair.remainingAmount,
+        advanceAmount: this.orderRepair.advanceAmount,
+        discountAmount: this.orderRepair.discountAmount,
+        subtotalAmount: this.orderRepair.subtotalAmount,
+        totalAmount: this.orderRepair.totalAmount,
+      });
     } catch (error) {
       this._toastService.danger('No se pudo obtener los datos del cliente', 'Operación Fallida');
       this._alertDialogService.catchError(error);

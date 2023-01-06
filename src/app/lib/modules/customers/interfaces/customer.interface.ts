@@ -1,5 +1,5 @@
-import { IUser } from "../../users/interfaces/user.interface";
-import { IAddress } from "./address.interface";
+import { IUser } from '../../users/interfaces/user.interface';
+import { IAddress } from './address.interface';
 
 export interface ICustomer {
     _id?: string;
@@ -18,8 +18,8 @@ export interface ICustomer {
     updatedAt?: Date | string;
     deletedAt?: Date | string;
 
-    getFullName: () => string;
+    getFullName?: () => string;
 
-    getPhoneFormat: () => string;
+    getPhoneFormat?: () => string;
 
 }

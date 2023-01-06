@@ -7,6 +7,7 @@ export interface IWork {
     slug?: string;
     description?: string;
     amount: number;
+    notes?: string;
     deleted?: boolean;
     createdBy?: string | IUser;
     updatedBy?: string | IUser;

@@ -5,6 +5,8 @@ export interface ICharge {
     name: string;
     slug?: string;
     description?: string;
+    amount?: number;
+    notes?: string;
     deleted?: boolean;
     createdBy?: string | IUser;
     updatedBy?: string | IUser;

@@ -1,7 +1,4 @@
-import { ICharge } from "../../catalogs/charges/interfaces/charge.interface";
-import { IWork } from "../../catalogs/works/interfaces/work.interface";
-import { ICustomer } from "../../customers/interfaces/customer.interface";
-import { IUser } from "../../users/interfaces/user.interface";
+import {ChargeOrId, CustomerOrId, UserOrId, WorkOrId} from '../../../core/utils/app-types.util';
 
 export interface IOrderRepair {
     _id?: string;
@@ -10,7 +7,7 @@ export interface IOrderRepair {
     works: Array<IWorkOrderRepair>;
     charges: Array<IChargeOrderRepair>;
     devices: Array<IDeviceOrderRepair>;
-    deliveryDate: string | Date;
+    deliveryDate: string;
     status: string;
     isPaid: boolean;
     remainingAmount: number;
@@ -20,16 +17,16 @@ export interface IOrderRepair {
     totalAmount: number;
 
     deleted?: boolean;
-    createdBy?: string | IUser;
-    updatedBy?: string | IUser;
-    deletedBy?: string | IUser;
-    createdAt?: Date | string;
-    updatedAt?: Date | string;
-    deletedAt?: Date | string;
+    createdBy?: UserOrId;
+    updatedBy?: UserOrId;
+    deletedBy?: UserOrId;
+    createdAt?: string;
+    updatedAt?: string;
+    deletedAt?: string;
 }
 
 interface ICustomerOrderRepair {
-    customerId: string | ICustomer;
+    customerId: CustomerOrId;
     name: string;
     lastName: string;
     surName: string;
@@ -38,14 +35,14 @@ interface ICustomerOrderRepair {
 }
 
 interface IWorkOrderRepair {
-    workId: string | IWork;
+    workId: WorkOrId;
     name: string;
     amount: number;
     notes?: string;
 }
 
 interface IChargeOrderRepair {
-    chargeId: string | ICharge;
+    chargeId: ChargeOrId;
     name: string;
     amount: number;
     notes?: string;

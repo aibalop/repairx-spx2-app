@@ -11,8 +11,8 @@ export class Customer implements ICustomer {
     phone: string;
     email?: string;
     address?: IAddress;
-    createdAt: Date | string;
-    updatedAt: Date | string;
+    createdAt: string;
+    updatedAt: string;
 
     constructor(data: ICustomer) {
         Object.assign(this, data);

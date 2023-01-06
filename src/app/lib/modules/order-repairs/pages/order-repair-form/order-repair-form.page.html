@@ -18,11 +18,19 @@
             <ion-item>
               <ion-label>
                 <h2>No. Orden</h2>
-                <p>-</p>
+                <p>{{ orderRepair ? orderRepair.orderId : '-' }}</p>
                 <h2>Fecha</h2>
-                <p>{{ currentDate | date:'short' }}</p>
-                <!--<h2>Creado por</h2>
-                <p>-</p>-->
+                <p>{{ (orderRepair ? orderRepair.createdAt : currentDate) | date:'short' }}</p>
+                <ng-container *ngIf="orderRepair">
+                  <h2>Creado por</h2>
+                  <p>{{ orderRepair.createdBy?.name }} {{ orderRepair.createdBy?.lastName }}</p>
+                  <h2>Fecha estimada entrega</h2>
+                  <p>{{ orderRepair.deliveryDate | date:'short' }}</p>
+                  <h2>Pagado</h2>
+                  <p>{{ orderRepair.isPaid ? 'Si' : 'No' }}</p>
+                  <h2>Estatus</h2>
+                  <p>{{ orderRepair.status }}</p>
+                </ng-container>
               </ion-label>
             </ion-item>
 
@@ -38,7 +46,7 @@
               <h6>Cliente</h6>
             </ion-text>
 
-            <div>
+            <div *ngIf="!isView && !isEdit">
               <ion-button fill="clear" color="primary" (click)="onSearchCustomer()">
                 <ion-icon slot="icon-only" name="search-outline"></ion-icon>
               </ion-button>
@@ -58,6 +66,7 @@
                 <ng-container *ngIf="customerSelected">
                   <h2>{{ customerSelected.getFullName() }}</h2>
                   <p>{{ customerSelected.getPhoneFormat() }}</p>
+                  <p *ngIf="customerSelected.email">{{ customerSelected.email }}</p>
                 </ng-container>
               </ion-label>
             </ion-item>
@@ -81,7 +90,7 @@
               <h6>Servicios</h6>
             </ion-text>
 
-            <div>
+            <div *ngIf="!isView">
               <ion-button fill="clear" color="primary" (click)="onSearchWork()">
                 <ion-icon slot="icon-only" name="search-outline"></ion-icon>
               </ion-button>
@@ -113,7 +122,8 @@
                     <ion-label>
                       <h2>{{ workForm.get('name').value }}</h2>
                     </ion-label>
-                    <ion-button color="danger" fill="clear" slot="end" (click)="works.removeAt(indexWork); onCalculateAmount();">
+                    <ion-button color="danger" fill="clear" slot="end"
+                                (click)="works.removeAt(indexWork); onCalculateAmount();" *ngIf="!isView">
                       <ion-icon slot="icon-only" name="trash"></ion-icon>
                     </ion-button>
                   </ion-item>
@@ -126,7 +136,8 @@
                   </ion-item>
                   <ion-item class="ion-margin-bottom">
                     <ion-label position="stacked">Nota</ion-label>
-                    <ion-textarea rows="1" color="medium" placeholder="Agregar una nota..." formControlName="notes">
+                    <ion-textarea rows="1" color="medium" placeholder="Agregar una nota..." formControlName="notes"
+                                  [readonly]="isView">
                     </ion-textarea>
                   </ion-item>
 
@@ -151,7 +162,7 @@
               <h6>Cargos</h6>
             </ion-text>
 
-            <div>
+            <div *ngIf="!isView">
               <ion-button fill="clear" color="primary" (click)="onSearchCharge()">
                 <ion-icon slot="icon-only" name="search-outline"></ion-icon>
               </ion-button>
@@ -182,7 +193,8 @@
                     <ion-label>
                       <h2>{{ chargeForm.get('name').value }}</h2>
                     </ion-label>
-                    <ion-button color="danger" fill="clear" slot="end" (click)="charges.removeAt(indexCharge); onCalculateAmount();">
+                    <ion-button color="danger" fill="clear" slot="end"
+                                (click)="charges.removeAt(indexCharge); onCalculateAmount();" *ngIf="!isView">
                       <ion-icon slot="icon-only" name="trash"></ion-icon>
                     </ion-button>
                   </ion-item>
@@ -195,7 +207,8 @@
                   </ion-item>
                   <ion-item class="ion-margin-bottom">
                     <ion-label position="stacked">Nota</ion-label>
-                    <ion-textarea rows="1" color="medium" placeholder="Agregar una nota..." formControlName="notes">
+                    <ion-textarea rows="1" color="medium" placeholder="Agregar una nota..." formControlName="notes"
+                                  [readonly]="isView">
                     </ion-textarea>
                   </ion-item>
 
@@ -224,7 +237,7 @@
               <h6>Dispositivos</h6>
             </ion-text>
 
-            <div>
+            <div *ngIf="!isView">
               <ion-button fill="clear" color="primary" (click)="onAddDevice()">
                 <ion-icon slot="icon-only" name="add-outline"></ion-icon>
               </ion-button>
@@ -252,7 +265,8 @@
                     {{ deviceOrderRepair.model ? ' >> ' + deviceOrderRepair.model : ''}}
                   </h3>
                 </ion-label>
-                <ion-button color="danger" fill="clear" slot="end" (click)="devices.splice(indexDevice, 1)">
+                <ion-button color="danger" fill="clear" slot="end" (click)="devices.splice(indexDevice, 1)"
+                            *ngIf="!isView">
                   <ion-icon slot="icon-only" name="trash"></ion-icon>
                 </ion-button>
               </ion-item>
@@ -270,8 +284,6 @@
                       <p class="ion-text-wrap">{{ deviceOrderRepair.accessory }}</p>
                       <h3>Contraseña</h3>
                       <p class="ion-text-wrap">{{ deviceOrderRepair.password ?? '-Sin contraseña-' }}</p>
-                      <!-- <h3>Garantía</h3>
-                      <p>{{ deviceOrderRepair.warrantyDays ? deviceOrderRepair.warrantyDays : '-Sin garantía-' }}</p> -->
                     </ion-label>
                   </ion-item>
                 </ion-col>
@@ -283,8 +295,14 @@
                       <p class="ion-text-wrap">{{ deviceOrderRepair.details }}</p>
                       <h3>Reporto cliente</h3>
                       <p class="ion-text-wrap">{{ deviceOrderRepair.customerReport }}</p>
-                      <!-- <h3>Diagnostico</h3>
-                      <p class="ion-text-wrap">{{ deviceOrderRepair.finalDiagnosis }}</p> -->
+                      <ng-container *ngIf="orderRepair">
+                        <!-- <h3>Diagnostico</h3>
+                        <p class="ion-text-wrap">{{ deviceOrderRepair.finalDiagnosis }}</p> -->
+                        <!-- <h3>Garantía</h3>
+                        <p>{{ deviceOrderRepair.warrantyDays ? deviceOrderRepair.warrantyDays : '-Sin garantía-' }}</p> -->
+                        <h3>Estatus</h3>
+                        <p>{{ deviceOrderRepair.status }}</p>
+                      </ng-container>
                     </ion-label>
                   </ion-item>
                 </ion-col>

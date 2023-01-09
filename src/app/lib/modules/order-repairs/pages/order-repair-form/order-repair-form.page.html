@@ -26,8 +26,9 @@
                   <p>{{ orderRepair.createdBy?.name }} {{ orderRepair.createdBy?.lastName }}</p>
                   <h2>Fecha estimada entrega</h2>
                   <p>{{ orderRepair.deliveryDate | date:'short' }}</p>
-                  <h2>Pagado</h2>
-                  <p>{{ orderRepair.isPaid ? 'Si' : 'No' }}</p>
+                  <app-order-repair-paid-status [isPaid]="orderRepair.isPaid"
+                                                [orderRepairId]="orderRepair._id"
+                                                (paymentCompleted)="onPaymentCompleted($event)"></app-order-repair-paid-status>
                   <h2>Estatus</h2>
                   <p>{{ orderRepair.status }}</p>
                 </ng-container>

@@ -18,7 +18,7 @@ import { CompleteOrderRepairModalComponent } from './components/modals/complete-
         SearchWorkModalComponent,
         SearchChargeModalComponent,
         CompleteOrderRepairModalComponent,
-        DeviceFormModalComponent
+        DeviceFormModalComponent,
     ],
     imports: [
         CommonModule,

@@ -270,6 +270,13 @@ export class OrderRepairFormPage implements OnInit, OnDestroy {
     });
   }
 
+  onPaymentCompleted($event: Date): void {
+    this.orderRepair.paidAt = $event.toISOString();
+    this.orderRepair.isPaid = true;
+    this.orderRepair.remainingAmount = 0;
+    this.form.get('remainingAmount').setValue(0);
+  }
+
   async onSubmit(): Promise<void> {
     if (this.form.invalid) {
       this.form.markAllAsTouched();
@@ -341,7 +348,7 @@ export class OrderRepairFormPage implements OnInit, OnDestroy {
       chargeId: new FormControl(data._id, Validators.required),
       name: new FormControl(data.name, Validators.required),
       amount: new FormControl(data.amount ?? null, [Validators.required, Validators.pattern(RegexUtil.CURRENCY)]),
-      notes: new FormControl(null)
+      notes: new FormControl(data.notes ?? null)
     }));
   }
 

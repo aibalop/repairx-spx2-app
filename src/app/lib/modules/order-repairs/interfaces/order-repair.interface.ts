@@ -10,6 +10,7 @@ export interface IOrderRepair {
     deliveryDate: string;
     status: string;
     isPaid: boolean;
+    paidAt?: string;
     remainingAmount: number;
     discountAmount: number;
     advanceAmount: number;

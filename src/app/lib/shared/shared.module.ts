@@ -16,43 +16,48 @@ import { HeaderGenericFormModalComponent } from './components/header-generic-for
 import { ConfirmCancelButtonsFormModalComponent } from './components/confirm-cancel-buttons-form-modal/confirm-cancel-buttons-form-modal.component';
 import { NotFoundDataComponent } from './components/not-found-data/not-found-data.component';
 import { ConfirmCancelButtonsFormComponent } from './components/confirm-cancel-buttons-form/confirm-cancel-buttons-form.component';
+import {
+    OrderRepairPaidStatusComponent
+} from '../modules/order-repairs/components/order-repair-paid-status/order-repair-paid-status.component';
 
 @NgModule({
-  declarations: [
-    PanelLayoutComponent,
-    MainHeaderLayoutComponent,
-    BreadcrumbComponent,
-    UserMenuPopoverComponent,
-    HeaderPageComponent,
-    AddButtonComponent,
-    SearchbarComponent,
-    CrudActionsButtonComponent,
-    CrudActionsMenuPopoverComponent,
-    HeaderGenericFormModalComponent,
-    ConfirmCancelButtonsFormModalComponent,
-    NotFoundDataComponent,
-    ConfirmCancelButtonsFormComponent
-  ],
+    declarations: [
+        PanelLayoutComponent,
+        MainHeaderLayoutComponent,
+        BreadcrumbComponent,
+        UserMenuPopoverComponent,
+        HeaderPageComponent,
+        AddButtonComponent,
+        SearchbarComponent,
+        CrudActionsButtonComponent,
+        CrudActionsMenuPopoverComponent,
+        HeaderGenericFormModalComponent,
+        ConfirmCancelButtonsFormModalComponent,
+        NotFoundDataComponent,
+        ConfirmCancelButtonsFormComponent,
+        OrderRepairPaidStatusComponent
+    ],
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
     RouterModule
   ],
-  exports: [
-    PanelLayoutComponent,
-    MainHeaderLayoutComponent,
-    BreadcrumbComponent,
-    UserMenuPopoverComponent,
-    HeaderPageComponent,
-    AddButtonComponent,
-    SearchbarComponent,
-    CrudActionsButtonComponent,
-    CrudActionsMenuPopoverComponent,
-    HeaderGenericFormModalComponent,
-    ConfirmCancelButtonsFormModalComponent,
-    NotFoundDataComponent,
-    ConfirmCancelButtonsFormComponent
-  ]
+    exports: [
+        PanelLayoutComponent,
+        MainHeaderLayoutComponent,
+        BreadcrumbComponent,
+        UserMenuPopoverComponent,
+        HeaderPageComponent,
+        AddButtonComponent,
+        SearchbarComponent,
+        CrudActionsButtonComponent,
+        CrudActionsMenuPopoverComponent,
+        HeaderGenericFormModalComponent,
+        ConfirmCancelButtonsFormModalComponent,
+        NotFoundDataComponent,
+        ConfirmCancelButtonsFormComponent,
+        OrderRepairPaidStatusComponent
+    ]
 })
 export class SharedModule { }

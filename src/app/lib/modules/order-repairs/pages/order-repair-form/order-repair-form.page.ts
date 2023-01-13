@@ -41,11 +41,11 @@ import {CurrencyCalculateUtil} from '../../../../core/utils/currency-calculate.u
 })
 export class OrderRepairFormPage implements OnInit, OnDestroy {
 
-  titleHeader: string = 'Nueva Orden Reparación';
+  titleHeader = 'Nueva Orden Reparación';
 
-  isView: boolean = false;
+  isView = false;
 
-  isEdit: boolean = false;
+  isEdit = false;
 
   orderRepairId: string;
 
@@ -277,6 +277,10 @@ export class OrderRepairFormPage implements OnInit, OnDestroy {
     this.form.get('remainingAmount').setValue(0);
   }
 
+  onStatusChanged($event: string): void {
+    this.orderRepair.status = $event;
+  }
+
   async onSubmit(): Promise<void> {
     if (this.form.invalid) {
       this.form.markAllAsTouched();
@@ -356,7 +360,6 @@ export class OrderRepairFormPage implements OnInit, OnDestroy {
 
     try {
       this.orderRepair = await this._orderRepairApiService.getById(this.orderRepairId).toPromise();
-      console.log(this.orderRepair);
       this.form.patchValue({
         customer: this.orderRepair.customer,
       });

@@ -31,8 +31,12 @@ export class OrderRepairApiService {
     return this.httpClientService.put(`${this._resource}/${_id}`, data);
   }
 
-  updateStatusPay(_id: string, paidAt: Date): Observable<IOrderRepair> {
-    return this.httpClientService.put(`${this._resource}/${_id}`, {isPaid: true, remainingAmount: 0, paidAt});
+  updateStatusPayment(_id: string, paidAt: Date): Observable<IOrderRepair> {
+    return this.httpClientService.put(`${this._resource}/payment/${_id}`, {isPaid: true, remainingAmount: 0, paidAt});
+  }
+
+  updateStatus(_id: string, status: string): Observable<IOrderRepair> {
+    return this.httpClientService.put(`${this._resource}/status/${_id}`, {status});
   }
 
   delete(_id: string): Observable<any> {

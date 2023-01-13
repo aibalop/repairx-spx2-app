@@ -10,6 +10,7 @@ import {OrderRepairApiService} from '../../api/order-repair.api.service';
 })
 export class OrderRepairPaidStatusComponent implements OnInit {
 
+  @Input() isView: boolean = false;
   @Input() orderRepairId: string;
   @Input() isPaid: boolean;
   @Output() paymentCompleted = new EventEmitter<Date>();
@@ -26,7 +27,7 @@ export class OrderRepairPaidStatusComponent implements OnInit {
 
   async onPay(): Promise<void> {
 
-    if (this.isPaid) {
+    if (this.isView || this.isPaid) {
       return;
     }
 
@@ -40,7 +41,7 @@ export class OrderRepairPaidStatusComponent implements OnInit {
 
     try {
       const paidAt = new Date();
-      await this._orderRepairApiService.updateStatusPay(this.orderRepairId, paidAt).toPromise();
+      await this._orderRepairApiService.updateStatusPayment(this.orderRepairId, paidAt).toPromise();
       this._toastService.success('Pago actualizado correctamente', 'Operación Completada');
       this.paymentCompleted.emit(paidAt);
     } catch (error) {

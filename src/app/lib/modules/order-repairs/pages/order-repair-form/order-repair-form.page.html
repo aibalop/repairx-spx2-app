@@ -11,6 +11,15 @@
       -->
       <ion-row>
 
+        <ion-col size="12" *ngIf="orderRepair">
+          <app-order-repair-status [orderRepairId]="orderRepair._id" [currentStatus]="orderRepair.status"
+                                   [isView]="isView"
+                                   (statusChanged)="onStatusChanged($event)"></app-order-repair-status>
+          <app-order-repair-paid-status [isPaid]="orderRepair.isPaid"
+                                        [orderRepairId]="orderRepair._id" [isView]="isView"
+                                        (paymentCompleted)="onPaymentCompleted($event)"></app-order-repair-paid-status>
+        </ion-col>
+
         <ion-col size="12" sizeSm="12" sizeMd="4">
 
           <ion-list lines="none">
@@ -26,11 +35,6 @@
                   <p>{{ orderRepair.createdBy?.name }} {{ orderRepair.createdBy?.lastName }}</p>
                   <h2>Fecha estimada entrega</h2>
                   <p>{{ orderRepair.deliveryDate | date:'short' }}</p>
-                  <app-order-repair-paid-status [isPaid]="orderRepair.isPaid"
-                                                [orderRepairId]="orderRepair._id"
-                                                (paymentCompleted)="onPaymentCompleted($event)"></app-order-repair-paid-status>
-                  <h2>Estatus</h2>
-                  <p>{{ orderRepair.status }}</p>
                 </ng-container>
               </ion-label>
             </ion-item>

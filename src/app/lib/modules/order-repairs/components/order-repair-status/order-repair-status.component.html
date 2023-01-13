@@ -1,3 +1,4 @@
-<p>
-  order-repair-status works!
-</p>
+<ion-chip [style]="statusChanged === orderRepairStatus.DELIVERED || isView ? 'cursor: initial;' : ''"
+          [color]="onGetColor()" (click)="onChangeStatus()">
+  {{ currentStatus }}
+</ion-chip>

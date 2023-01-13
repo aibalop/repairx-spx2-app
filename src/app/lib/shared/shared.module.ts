@@ -19,6 +19,9 @@ import { ConfirmCancelButtonsFormComponent } from './components/confirm-cancel-b
 import {
     OrderRepairPaidStatusComponent
 } from '../modules/order-repairs/components/order-repair-paid-status/order-repair-paid-status.component';
+import {
+    OrderRepairStatusComponent
+} from '../modules/order-repairs/components/order-repair-status/order-repair-status.component';
 
 @NgModule({
     declarations: [
@@ -35,7 +38,8 @@ import {
         ConfirmCancelButtonsFormModalComponent,
         NotFoundDataComponent,
         ConfirmCancelButtonsFormComponent,
-        OrderRepairPaidStatusComponent
+        OrderRepairPaidStatusComponent,
+        OrderRepairStatusComponent
     ],
   imports: [
     CommonModule,
@@ -57,7 +61,8 @@ import {
         ConfirmCancelButtonsFormModalComponent,
         NotFoundDataComponent,
         ConfirmCancelButtonsFormComponent,
-        OrderRepairPaidStatusComponent
+        OrderRepairPaidStatusComponent,
+        OrderRepairStatusComponent
     ]
 })
 export class SharedModule { }

@@ -305,11 +305,16 @@
                         <p class="ion-text-wrap">{{ deviceOrderRepair.finalDiagnosis }}</p> -->
                         <!-- <h3>Garantía</h3>
                         <p>{{ deviceOrderRepair.warrantyDays ? deviceOrderRepair.warrantyDays : '-Sin garantía-' }}</p> -->
-                        <h3>Estatus</h3>
-                        <p>{{ deviceOrderRepair.status }}</p>
                       </ng-container>
                     </ion-label>
                   </ion-item>
+                </ion-col>
+
+                <ion-col size="12" *ngIf="orderRepair">
+                  <app-order-repair-device-status
+                    [orderRepairId]="orderRepair._id"
+                    [isView]="isView"
+                    [currentStatus]="deviceOrderRepair.status"></app-order-repair-device-status>
                 </ion-col>
 
               </ion-row>

@@ -12,7 +12,7 @@ import {OrderRepairStatus} from '../../../../core/enums/status.enum';
 })
 export class OrderRepairStatusComponent implements OnInit {
 
-  @Input() isView: boolean = false;
+  @Input() isView = false;
   @Input() orderRepairId: string;
   @Input() currentStatus: string;
   @Output() statusChanged = new EventEmitter<string>();

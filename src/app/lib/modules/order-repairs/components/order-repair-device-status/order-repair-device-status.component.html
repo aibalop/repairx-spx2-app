@@ -1,3 +1,4 @@
-<p>
-  order-repair-device-status works!
-</p>
+<ion-chip [style]="currentStatus === orderRepairDeviceStatus.DONE || currentStatus === orderRepairDeviceStatus.CANCELED || isView ? 'cursor: initial;' : ''"
+          [color]="onGetColor()" (click)="onChangeStatus()">
+  {{ currentStatus }}
+</ion-chip>

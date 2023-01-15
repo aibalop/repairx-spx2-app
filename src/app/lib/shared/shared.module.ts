@@ -22,6 +22,9 @@ import {
 import {
     OrderRepairStatusComponent
 } from '../modules/order-repairs/components/order-repair-status/order-repair-status.component';
+import {
+    OrderRepairDeviceStatusComponent
+} from '../modules/order-repairs/components/order-repair-device-status/order-repair-device-status.component';
 
 @NgModule({
     declarations: [
@@ -39,7 +42,8 @@ import {
         NotFoundDataComponent,
         ConfirmCancelButtonsFormComponent,
         OrderRepairPaidStatusComponent,
-        OrderRepairStatusComponent
+        OrderRepairStatusComponent,
+        OrderRepairDeviceStatusComponent
     ],
   imports: [
     CommonModule,
@@ -62,7 +66,8 @@ import {
         NotFoundDataComponent,
         ConfirmCancelButtonsFormComponent,
         OrderRepairPaidStatusComponent,
-        OrderRepairStatusComponent
+        OrderRepairStatusComponent,
+        OrderRepairDeviceStatusComponent
     ]
 })
 export class SharedModule { }

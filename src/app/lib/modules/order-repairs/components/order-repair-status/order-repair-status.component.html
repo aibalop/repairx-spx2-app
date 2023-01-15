@@ -1,4 +1,4 @@
-<ion-chip [style]="statusChanged === orderRepairStatus.DELIVERED || isView ? 'cursor: initial;' : ''"
+<ion-chip [style]="currentStatus === orderRepairStatus.DELIVERED || isView ? 'cursor: initial;' : ''"
           [color]="onGetColor()" (click)="onChangeStatus()">
   {{ currentStatus }}
 </ion-chip>

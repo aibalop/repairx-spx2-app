@@ -31,16 +31,23 @@ export class OrderRepairApiService {
     return this.httpClientService.put(`${this._resource}/${_id}`, data);
   }
 
-  updateStatusPayment(_id: string, paidAt: Date): Observable<IOrderRepair> {
-    return this.httpClientService.put(`${this._resource}/payment/${_id}`, {isPaid: true, remainingAmount: 0, paidAt});
+  updateStatusPayment(_id: string, paidAt: Date): Observable<void> {
+    return this.httpClientService.put(`${this._resource}/${_id}/payment`, {
+      isPaid: true,
+      remainingAmount: 0,
+      paidAt
+    });
   }
 
-  updateStatus(_id: string, status: string): Observable<IOrderRepair> {
-    return this.httpClientService.put(`${this._resource}/status/${_id}`, {status});
+  updateStatus(_id: string, status: string): Observable<void> {
+    return this.httpClientService.put(`${this._resource}/${_id}/status`, {status});
   }
 
-  updateDeviceStatus(_id: string, status: string): Observable<IOrderRepair> {
-    return this.httpClientService.put(`${this._resource}/status/${_id}`, {status}); // TODO: actualizar endpoint con el nuevo a crear
+  updateDeviceStatus(_id: string, index: number, status: string): Observable<void> {
+    return this.httpClientService.put(`${this._resource}/${_id}/status-device`, {
+      index,
+      status,
+    });
   }
 
   delete(_id: string): Observable<any> {

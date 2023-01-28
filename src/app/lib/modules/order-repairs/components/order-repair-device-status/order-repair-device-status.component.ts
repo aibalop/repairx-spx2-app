@@ -16,7 +16,10 @@ export class OrderRepairDeviceStatusComponent implements OnInit {
   @Input() orderRepairId: string;
   @Input() currentStatus: string;
   @Input() index: number;
-  @Output() statusChanged = new EventEmitter<string>();
+  @Output() statusChanged = new EventEmitter<{
+    newStatus: string;
+    index: number;
+  }>();
   orderRepairDeviceStatus = OrderRepairDeviceStatus;
   isSent = false;
 
@@ -66,7 +69,7 @@ export class OrderRepairDeviceStatusComponent implements OnInit {
     try {
       await this._orderRepairApiService.updateDeviceStatus(this.orderRepairId, this.index, newStatus).toPromise();
       this._toastService.success('Estatus actualizado correctamente', 'Operación Completada');
-      this.statusChanged.emit(newStatus);
+      this.statusChanged.emit({newStatus, index: this.index});
       this.isSent = false;
     } catch (error) {
       this._toastService.danger('No se pudo completar la actualización del pago', 'Operación Fallida');

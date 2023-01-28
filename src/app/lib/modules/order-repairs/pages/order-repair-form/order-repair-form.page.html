@@ -315,6 +315,7 @@
                     [orderRepairId]="orderRepair._id"
                     [isView]="isView"
                     [index]="indexDevice"
+                    (statusChanged)="onStatusDeviceChanged($event)"
                     [currentStatus]="deviceOrderRepair.status"></app-order-repair-device-status>
                 </ion-col>
 

@@ -281,6 +281,10 @@ export class OrderRepairFormPage implements OnInit, OnDestroy {
     this.orderRepair.status = $event;
   }
 
+  onStatusDeviceChanged($event): void {
+    this.devices[$event.index].status = $event.newStatus;
+  }
+
   async onSubmit(): Promise<void> {
     if (this.form.invalid) {
       this.form.markAllAsTouched();

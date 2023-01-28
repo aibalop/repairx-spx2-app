@@ -24,7 +24,7 @@
                         <ion-icon name="journal" slot="start"></ion-icon>
                         <ion-label>
                             <h2>{{ orderRepair.orderId }}</h2>
-                            <!-- <p>{{ orderRepair.getPhone as IPaginationData<Customer>Format() }}</p> -->
+                            <p>{{ orderRepair.customer.name }} {{ orderRepair.customer.lastName }} - {{ orderRepair.customer.phone }}</p>
                         </ion-label>
                         <ion-buttons slot="end">
                             <app-crud-actions-button (update)="onOpenForm(orderRepair._id)"

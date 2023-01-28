@@ -97,6 +97,8 @@ export class OrderRepairsPage implements OnInit {
         }
       }
 
+      console.log('Data: ', this.list.data);
+
     } catch (error) {
       this._alertDialogService.catchError(error);
     }

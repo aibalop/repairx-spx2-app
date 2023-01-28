@@ -26,7 +26,7 @@ export interface IOrderRepair {
     deletedAt?: string;
 }
 
-interface ICustomerOrderRepair {
+export interface ICustomerOrderRepair {
     customerId: CustomerOrId;
     name: string;
     lastName: string;
@@ -35,14 +35,14 @@ interface ICustomerOrderRepair {
     email: string;
 }
 
-interface IWorkOrderRepair {
+export interface IWorkOrderRepair {
     workId: WorkOrId;
     name: string;
     amount: number;
     notes?: string;
 }
 
-interface IChargeOrderRepair {
+export interface IChargeOrderRepair {
     chargeId: ChargeOrId;
     name: string;
     amount: number;

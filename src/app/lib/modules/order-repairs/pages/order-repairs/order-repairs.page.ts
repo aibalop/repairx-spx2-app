@@ -1,13 +1,13 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { Router } from '@angular/router';
-import { IonInfiniteScroll } from '@ionic/angular';
-import { EOrderRepairsRoutes } from 'src/app/lib/core/enums/modules-routes.enum';
-import { IFilterGeneric } from 'src/app/lib/core/interfaces/filter-generic.interface';
-import { IPaginationData } from 'src/app/lib/core/interfaces/pagination-data.interface';
-import { AlertDialogService } from 'src/app/lib/core/services/alert-dialog.service';
-import { ToastService } from 'src/app/lib/core/services/toast.service';
-import { OrderRepairApiService } from '../../api/order-repair.api.service';
-import { IOrderRepair } from '../../interfaces/order-repair.interface';
+import {Component, OnInit, ViewChild} from '@angular/core';
+import {Router} from '@angular/router';
+import {IonInfiniteScroll} from '@ionic/angular';
+import {EOrderRepairsRoutes} from 'src/app/lib/core/enums/modules-routes.enum';
+import {IFilterGeneric} from 'src/app/lib/core/interfaces/filter-generic.interface';
+import {IPaginationData} from 'src/app/lib/core/interfaces/pagination-data.interface';
+import {AlertDialogService} from 'src/app/lib/core/services/alert-dialog.service';
+import {ToastService} from 'src/app/lib/core/services/toast.service';
+import {OrderRepairApiService} from '../../api/order-repair.api.service';
+import {OrderRepair} from '../../models/order-repair.model';
 
 @Component({
   selector: 'app-order-repairs',
@@ -18,7 +18,7 @@ export class OrderRepairsPage implements OnInit {
 
   @ViewChild(IonInfiniteScroll) infiniteScroll: IonInfiniteScroll;
 
-  list: IPaginationData<IOrderRepair>;
+  list: IPaginationData<OrderRepair>;
 
   filters: IFilterGeneric;
 
@@ -27,9 +27,11 @@ export class OrderRepairsPage implements OnInit {
     private _alertDialogService: AlertDialogService,
     private _toastService: ToastService,
     private _router: Router
-  ) { }
+  ) {
+  }
 
-  ngOnInit() { }
+  ngOnInit() {
+  }
 
   ionViewWillEnter() {
     this.filters = {
@@ -80,13 +82,15 @@ export class OrderRepairsPage implements OnInit {
 
       const res = await this._orderRepairApiService.getAll(this.filters).toPromise();
 
+      const data = res.data.map(orderRepair => new OrderRepair(orderRepair)) as Array<OrderRepair>;
+
       if (onLoadMore) {
         this.list = {
           ...res,
-          data: this.list.data.concat(res.data)
+          data: this.list.data.concat(data)
         };
       } else {
-        this.list = res;
+        this.list = {...res, data};
       }
 
       if (onLoadMore) {
@@ -96,9 +100,6 @@ export class OrderRepairsPage implements OnInit {
           event.target.disabled = true;
         }
       }
-
-      console.log('Data: ', this.list.data);
-
     } catch (error) {
       this._alertDialogService.catchError(error);
     }

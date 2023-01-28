@@ -3,46 +3,78 @@
 <app-breadcrumb></app-breadcrumb>
 <ion-content class="ion-padding">
 
-    <ion-grid>
+  <ion-grid>
 
-        <ion-row>
-            <ion-col size="12" class="ion-text-right">
-                <app-add-button (onClick)="onOpenForm()"></app-add-button>
-            </ion-col>
-        </ion-row>
+    <ion-row>
+      <ion-col size="12" class="ion-text-right">
+        <app-add-button (onClick)="onOpenForm()"></app-add-button>
+      </ion-col>
+    </ion-row>
 
-        <ion-row>
-            <ion-col size="12">
-                <app-searchbar (search)="onSearch($event)"></app-searchbar>
-            </ion-col>
-        </ion-row>
+    <ion-row>
+      <ion-col size="12">
+        <app-searchbar (search)="onSearch($event)"></app-searchbar>
+      </ion-col>
+    </ion-row>
 
-        <ion-row>
-            <ion-col size="12">
-                <ion-list lines="full" *ngIf="list">
-                    <ion-item *ngFor="let orderRepair of list.data">
-                        <ion-icon name="journal" slot="start"></ion-icon>
-                        <ion-label>
-                            <h2>{{ orderRepair.orderId }}</h2>
-                            <p>{{ orderRepair.customer.name }} {{ orderRepair.customer.lastName }} - {{ orderRepair.customer.phone }}</p>
-                        </ion-label>
-                        <ion-buttons slot="end">
-                            <app-crud-actions-button (update)="onOpenForm(orderRepair._id)"
-                                (view)="onOpenForm(orderRepair._id, true)" [showDelete]="false">
-                            </app-crud-actions-button>
-                        </ion-buttons>
-                    </ion-item>
-                </ion-list>
+    <ion-row>
+      <ion-col size="12">
+        <ion-list lines="full" *ngIf="list">
+          <ion-item *ngFor="let orderRepair of list.data">
+            <ion-icon name="journal" slot="start"></ion-icon>
+            <ion-label>
+              <h2>
+                {{ orderRepair.getOrderIdFormat() }}
+                <app-order-repair-status [orderRepairId]="orderRepair._id" [currentStatus]="orderRepair.status"
+                                         [isView]="true" class="ion-hide-md-up"
+                ></app-order-repair-status>
+                <app-order-repair-paid-status [isPaid]="orderRepair.isPaid"
+                                              [orderRepairId]="orderRepair._id" [isView]="true" class="ion-hide-md-up"
+                ></app-order-repair-paid-status>
+              </h2>
+              <h3>{{ orderRepair.createdAt | date:'short' }}</h3>
+              <p>{{ orderRepair.getCustomerFullName() }}</p>
+              <p>{{ orderRepair.getCustomerPhone() }}</p>
+              <p class="ion-hide-xl-up">
+                <span class="ion-margin-end" style="font-weight: bold">Total</span>
+                <span>{{ orderRepair.totalAmount | currency:'MXN' }}</span>
+                <ng-container *ngIf="!orderRepair.isPaid">
+                  <span class="ion-margin-horizontal" style="font-weight: bold">Resta</span>
+                  <span>{{ orderRepair.remainingAmount | currency:'MXN' }}</span>
+                </ng-container>
+              </p>
+            </ion-label>
+            <ion-text color="medium" class="ion-margin-end ion-hide-xl-down">
+              <span class="ion-margin-end" style="font-weight: bold">Total</span>
+              <span>{{ orderRepair.totalAmount | currency:'MXN' }}</span>
+              <ng-container *ngIf="!orderRepair.isPaid">
+                <span class="ion-margin-horizontal" style="font-weight: bold">Resta</span>
+                <span>{{ orderRepair.remainingAmount | currency:'MXN' }}</span>
+              </ng-container>
+            </ion-text>
+            <app-order-repair-status [orderRepairId]="orderRepair._id" [currentStatus]="orderRepair.status"
+                                     [isView]="true" class="ion-hide-md-down"
+            ></app-order-repair-status>
+            <app-order-repair-paid-status [isPaid]="orderRepair.isPaid"
+                                          [orderRepairId]="orderRepair._id" [isView]="true" class="ion-hide-md-down"
+            ></app-order-repair-paid-status>
+            <ion-buttons slot="end">
+              <app-crud-actions-button (update)="onOpenForm(orderRepair._id)"
+                                       (view)="onOpenForm(orderRepair._id, true)" [showDelete]="false">
+              </app-crud-actions-button>
+            </ion-buttons>
+          </ion-item>
+        </ion-list>
 
-                <ion-infinite-scroll threshold="100px" (ionInfinite)="doInfinite($event)">
-                    <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="Cargando...">
-                    </ion-infinite-scroll-content>
-                </ion-infinite-scroll>
+        <ion-infinite-scroll threshold="100px" (ionInfinite)="doInfinite($event)">
+          <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="Cargando...">
+          </ion-infinite-scroll-content>
+        </ion-infinite-scroll>
 
-                <app-not-found-data *ngIf="!list || list.data.length === 0"></app-not-found-data>
-            </ion-col>
-        </ion-row>
+        <app-not-found-data *ngIf="!list || list.data.length === 0"></app-not-found-data>
+      </ion-col>
+    </ion-row>
 
-    </ion-grid>
+  </ion-grid>
 
 </ion-content>

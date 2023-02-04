@@ -1,5 +1,6 @@
 export interface IFilterGeneric {
-    searchText?: string;
-    limit?: number;
-    page?: number;
+  searchText?: string;
+  status?: Array<string>;
+  limit?: number;
+  page?: number;
 }

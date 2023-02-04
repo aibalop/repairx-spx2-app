@@ -8,6 +8,7 @@ import {AlertDialogService} from 'src/app/lib/core/services/alert-dialog.service
 import {ToastService} from 'src/app/lib/core/services/toast.service';
 import {OrderRepairApiService} from '../../api/order-repair.api.service';
 import {OrderRepair} from '../../models/order-repair.model';
+import {OrderRepairStatus} from "../../../../core/enums/status.enum";
 
 @Component({
   selector: 'app-order-repairs',
@@ -21,6 +22,8 @@ export class OrderRepairsPage implements OnInit {
   list: IPaginationData<OrderRepair>;
 
   filters: IFilterGeneric;
+
+  orderRepairStatus = OrderRepairStatus;
 
   constructor(
     private _orderRepairApiService: OrderRepairApiService,
@@ -36,6 +39,7 @@ export class OrderRepairsPage implements OnInit {
   ionViewWillEnter() {
     this.filters = {
       searchText: '',
+      status: [this.orderRepairStatus.PENDING],
       limit: 20,
       page: 1
     };
@@ -64,6 +68,10 @@ export class OrderRepairsPage implements OnInit {
 
   onSearch($event: string): void {
     this.filters.searchText = $event;
+    this._loadData();
+  }
+
+  onStatusChanged(): void {
     this._loadData();
   }
 

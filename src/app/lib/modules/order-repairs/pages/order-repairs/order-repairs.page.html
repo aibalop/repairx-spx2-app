@@ -14,20 +14,20 @@
     <ion-row>
       <ion-col size="12" style="display: flex;">
         <app-searchbar style="width: 98%;" (search)="onSearch($event)"></app-searchbar>
-        <app-order-repair-filters></app-order-repair-filters>
+        <app-order-repair-filters [filters]="filters" (refresh)="onFilter($event)"></app-order-repair-filters>
       </ion-col>
       <!-- <ion-col class="ion-text-center" size="1"> -->
-        <!-- <ion-item *ngIf="filters">
-          <ion-select placeholder="Estatus" [multiple]="true" style="width: 100%;" cancelText="Cancelar"
-                      okText="Aceptar" [(ngModel)]="filters.status" (ionChange)="onStatusChanged()">
-            <ion-select-option [value]="orderRepairStatus.PENDING">{{ orderRepairStatus.PENDING }}</ion-select-option>
-            <ion-select-option
-              [value]="orderRepairStatus.COMPLETED">{{ orderRepairStatus.COMPLETED }}</ion-select-option>
-            <ion-select-option
-              [value]="orderRepairStatus.DELIVERED">{{ orderRepairStatus.DELIVERED }}</ion-select-option>
-            <ion-select-option [value]="orderRepairStatus.CANCELED">{{ orderRepairStatus.CANCELED }}</ion-select-option>
-          </ion-select>
-        </ion-item> -->
+      <!-- <ion-item *ngIf="filters">
+        <ion-select placeholder="Estatus" [multiple]="true" style="width: 100%;" cancelText="Cancelar"
+                    okText="Aceptar" [(ngModel)]="filters.status" (ionChange)="onStatusChanged()">
+          <ion-select-option [value]="orderRepairStatus.PENDING">{{ orderRepairStatus.PENDING }}</ion-select-option>
+          <ion-select-option
+            [value]="orderRepairStatus.COMPLETED">{{ orderRepairStatus.COMPLETED }}</ion-select-option>
+          <ion-select-option
+            [value]="orderRepairStatus.DELIVERED">{{ orderRepairStatus.DELIVERED }}</ion-select-option>
+          <ion-select-option [value]="orderRepairStatus.CANCELED">{{ orderRepairStatus.CANCELED }}</ion-select-option>
+        </ion-select>
+      </ion-item> -->
       <!-- </ion-col> -->
     </ion-row>
 
@@ -40,9 +40,9 @@
               <h2>
                 {{ orderRepair.getOrderIdFormat() }}
                 <app-order-repair-status [orderRepairId]="orderRepair._id" [currentStatus]="orderRepair.status"
-                  [isView]="true" class="ion-hide-md-up"></app-order-repair-status>
+                                         [isView]="true" class="ion-hide-md-up"></app-order-repair-status>
                 <app-order-repair-paid-status [isPaid]="orderRepair.isPaid" [orderRepairId]="orderRepair._id"
-                  [isView]="true" class="ion-hide-md-up"></app-order-repair-paid-status>
+                                              [isView]="true" class="ion-hide-md-up"></app-order-repair-paid-status>
               </h2>
               <h3>{{ orderRepair.createdAt | date:'short' }}</h3>
               <p>{{ orderRepair.getCustomerFullName() }}</p>
@@ -65,12 +65,12 @@
               </ng-container>
             </ion-text>
             <app-order-repair-status [orderRepairId]="orderRepair._id" [currentStatus]="orderRepair.status"
-              [isView]="true" class="ion-hide-md-down"></app-order-repair-status>
+                                     [isView]="true" class="ion-hide-md-down"></app-order-repair-status>
             <app-order-repair-paid-status [isPaid]="orderRepair.isPaid" [orderRepairId]="orderRepair._id"
-              [isView]="true" class="ion-hide-md-down"></app-order-repair-paid-status>
+                                          [isView]="true" class="ion-hide-md-down"></app-order-repair-paid-status>
             <ion-buttons slot="end">
               <app-crud-actions-button (update)="onOpenForm(orderRepair._id)" (view)="onOpenForm(orderRepair._id, true)"
-                [showDelete]="false">
+                                       [showDelete]="false">
               </app-crud-actions-button>
             </ion-buttons>
           </ion-item>

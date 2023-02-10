@@ -3,7 +3,7 @@ import {AlertDialogService} from '../../../../core/services/alert-dialog.service
 import {ToastService} from '../../../../core/services/toast.service';
 import {OrderRepairApiService} from '../../api/order-repair.api.service';
 import {ActionSheetController} from '@ionic/angular';
-import {OrderRepairStatus} from '../../../../core/enums/status.enum';
+import {EOrderRepairStatus} from '../../../../core/enums/status.enum';
 
 @Component({
   selector: 'app-order-repair-status',
@@ -16,7 +16,7 @@ export class OrderRepairStatusComponent implements OnInit {
   @Input() orderRepairId: string;
   @Input() currentStatus: string;
   @Output() statusChanged = new EventEmitter<string>();
-  orderRepairStatus = OrderRepairStatus;
+  orderRepairStatus = EOrderRepairStatus;
   isSent = false;
 
   constructor(
@@ -32,13 +32,13 @@ export class OrderRepairStatusComponent implements OnInit {
 
   onGetColor(): string {
     switch (this.currentStatus) {
-      case OrderRepairStatus.PENDING:
+      case EOrderRepairStatus.PENDING:
         return 'medium';
-      case OrderRepairStatus.COMPLETED:
+      case EOrderRepairStatus.COMPLETED:
         return 'primary';
-      case OrderRepairStatus.DELIVERED:
+      case EOrderRepairStatus.DELIVERED:
         return 'success';
-      case OrderRepairStatus.CANCELED:
+      case EOrderRepairStatus.CANCELED:
         return 'danger';
     }
   }
@@ -46,7 +46,7 @@ export class OrderRepairStatusComponent implements OnInit {
   async onChangeStatus(): Promise<void> {
 
     if (this.isView || this.isSent ||
-      this.currentStatus === OrderRepairStatus.DELIVERED || this.currentStatus === OrderRepairStatus.CANCELED) {
+      this.currentStatus === EOrderRepairStatus.DELIVERED || this.currentStatus === EOrderRepairStatus.CANCELED) {
       return;
     }
 
@@ -83,21 +83,21 @@ export class OrderRepairStatusComponent implements OnInit {
       mode: 'ios',
       buttons: [
         {
-          text: OrderRepairStatus.COMPLETED,
+          text: EOrderRepairStatus.COMPLETED,
           data: {
-            action: OrderRepairStatus.COMPLETED,
+            action: EOrderRepairStatus.COMPLETED,
           },
         },
         {
-          text: OrderRepairStatus.DELIVERED,
+          text: EOrderRepairStatus.DELIVERED,
           data: {
-            action: OrderRepairStatus.DELIVERED,
+            action: EOrderRepairStatus.DELIVERED,
           },
         },
         {
-          text: OrderRepairStatus.CANCELED,
+          text: EOrderRepairStatus.CANCELED,
           data: {
-            action: OrderRepairStatus.CANCELED,
+            action: EOrderRepairStatus.CANCELED,
           },
         },
         {

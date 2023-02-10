@@ -1,5 +1,5 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {OrderRepairDeviceStatus} from '../../../../core/enums/status.enum';
+import {EOrderRepairDeviceStatus} from '../../../../core/enums/status.enum';
 import {AlertDialogService} from '../../../../core/services/alert-dialog.service';
 import {ToastService} from '../../../../core/services/toast.service';
 import {OrderRepairApiService} from '../../api/order-repair.api.service';
@@ -20,7 +20,7 @@ export class OrderRepairDeviceStatusComponent implements OnInit {
     newStatus: string;
     index: number;
   }>();
-  orderRepairDeviceStatus = OrderRepairDeviceStatus;
+  orderRepairDeviceStatus = EOrderRepairDeviceStatus;
   isSent = false;
 
   constructor(
@@ -36,11 +36,11 @@ export class OrderRepairDeviceStatusComponent implements OnInit {
 
   onGetColor(): string {
     switch (this.currentStatus) {
-      case OrderRepairDeviceStatus.IN_PROGRESS:
+      case EOrderRepairDeviceStatus.IN_PROGRESS:
         return 'medium';
-      case OrderRepairDeviceStatus.DONE:
+      case EOrderRepairDeviceStatus.DONE:
         return 'success';
-      case OrderRepairDeviceStatus.CANCELED:
+      case EOrderRepairDeviceStatus.CANCELED:
         return 'danger';
     }
   }
@@ -48,7 +48,7 @@ export class OrderRepairDeviceStatusComponent implements OnInit {
   async onChangeStatus(): Promise<void> {
 
     if (this.isView || this.isSent ||
-      this.currentStatus === OrderRepairDeviceStatus.CANCELED || this.currentStatus === OrderRepairDeviceStatus.DONE) {
+      this.currentStatus === EOrderRepairDeviceStatus.CANCELED || this.currentStatus === EOrderRepairDeviceStatus.DONE) {
       return;
     }
 
@@ -85,15 +85,15 @@ export class OrderRepairDeviceStatusComponent implements OnInit {
       mode: 'ios',
       buttons: [
         {
-          text: OrderRepairDeviceStatus.DONE,
+          text: EOrderRepairDeviceStatus.DONE,
           data: {
-            action: OrderRepairDeviceStatus.DONE,
+            action: EOrderRepairDeviceStatus.DONE,
           },
         },
         {
-          text: OrderRepairDeviceStatus.CANCELED,
+          text: EOrderRepairDeviceStatus.CANCELED,
           data: {
-            action: OrderRepairDeviceStatus.CANCELED,
+            action: EOrderRepairDeviceStatus.CANCELED,
           },
         },
         {

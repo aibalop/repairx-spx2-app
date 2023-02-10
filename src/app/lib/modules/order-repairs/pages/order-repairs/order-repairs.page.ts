@@ -8,7 +8,7 @@ import {AlertDialogService} from 'src/app/lib/core/services/alert-dialog.service
 import {ToastService} from 'src/app/lib/core/services/toast.service';
 import {OrderRepairApiService} from '../../api/order-repair.api.service';
 import {OrderRepair} from '../../models/order-repair.model';
-import {OrderRepairStatus} from "../../../../core/enums/status.enum";
+import {EOrderRepairStatus} from '../../../../core/enums/status.enum';
 
 @Component({
   selector: 'app-order-repairs',
@@ -23,7 +23,7 @@ export class OrderRepairsPage implements OnInit {
 
   filters: IFilterGeneric;
 
-  orderRepairStatus = OrderRepairStatus;
+  orderRepairStatus = EOrderRepairStatus;
 
   constructor(
     private _orderRepairApiService: OrderRepairApiService,
@@ -40,6 +40,7 @@ export class OrderRepairsPage implements OnInit {
     this.filters = {
       searchText: '',
       status: [this.orderRepairStatus.PENDING],
+      isPaid: 'both',
       limit: 20,
       page: 1
     };
@@ -68,6 +69,11 @@ export class OrderRepairsPage implements OnInit {
 
   onSearch($event: string): void {
     this.filters.searchText = $event;
+    this._loadData();
+  }
+
+  onFilter($event: IFilterGeneric): void {
+    this.filters = $event;
     this._loadData();
   }
 

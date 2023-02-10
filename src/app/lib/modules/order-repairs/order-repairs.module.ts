@@ -10,7 +10,6 @@ import { SearchWorkModalComponent } from './components/modals/search-work-modal/
 import { SearchChargeModalComponent } from './components/modals/search-charge-modal/search-charge-modal.component';
 import { DeviceFormModalComponent } from './components/modals/device-form-modal/device-form-modal.component';
 import { CompleteOrderRepairModalComponent } from './components/modals/complete-order-repair-modal/complete-order-repair-modal.component';
-import { OrderRepairFiltersComponent } from './components/order-repair-filters/order-repair-filters.component';
 
 @NgModule({
     declarations: [
@@ -20,7 +19,6 @@ import { OrderRepairFiltersComponent } from './components/order-repair-filters/o
         SearchChargeModalComponent,
         CompleteOrderRepairModalComponent,
         DeviceFormModalComponent,
-        OrderRepairFiltersComponent,
     ],
     imports: [
         CommonModule,

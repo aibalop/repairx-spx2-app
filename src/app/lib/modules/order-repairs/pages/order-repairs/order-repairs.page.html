@@ -16,19 +16,6 @@
         <app-searchbar style="width: 98%;" (search)="onSearch($event)"></app-searchbar>
         <app-order-repair-filters [filters]="filters" (refresh)="onFilter($event)"></app-order-repair-filters>
       </ion-col>
-      <!-- <ion-col class="ion-text-center" size="1"> -->
-      <!-- <ion-item *ngIf="filters">
-        <ion-select placeholder="Estatus" [multiple]="true" style="width: 100%;" cancelText="Cancelar"
-                    okText="Aceptar" [(ngModel)]="filters.status" (ionChange)="onStatusChanged()">
-          <ion-select-option [value]="orderRepairStatus.PENDING">{{ orderRepairStatus.PENDING }}</ion-select-option>
-          <ion-select-option
-            [value]="orderRepairStatus.COMPLETED">{{ orderRepairStatus.COMPLETED }}</ion-select-option>
-          <ion-select-option
-            [value]="orderRepairStatus.DELIVERED">{{ orderRepairStatus.DELIVERED }}</ion-select-option>
-          <ion-select-option [value]="orderRepairStatus.CANCELED">{{ orderRepairStatus.CANCELED }}</ion-select-option>
-        </ion-select>
-      </ion-item> -->
-      <!-- </ion-col> -->
     </ion-row>
 
     <ion-row>

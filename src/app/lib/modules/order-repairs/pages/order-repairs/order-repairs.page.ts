@@ -1,14 +1,14 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
-import {Router} from '@angular/router';
-import {IonInfiniteScroll} from '@ionic/angular';
-import {EOrderRepairsRoutes} from 'src/app/lib/core/enums/modules-routes.enum';
-import {IFilterGeneric} from 'src/app/lib/core/interfaces/filter-generic.interface';
-import {IPaginationData} from 'src/app/lib/core/interfaces/pagination-data.interface';
-import {AlertDialogService} from 'src/app/lib/core/services/alert-dialog.service';
-import {ToastService} from 'src/app/lib/core/services/toast.service';
-import {OrderRepairApiService} from '../../api/order-repair.api.service';
-import {OrderRepair} from '../../models/order-repair.model';
-import {EOrderRepairStatus} from '../../../../core/enums/status.enum';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { Router } from '@angular/router';
+import { IonInfiniteScroll } from '@ionic/angular';
+import { EOrderRepairsRoutes } from 'src/app/lib/core/enums/modules-routes.enum';
+import { IFilterGeneric } from 'src/app/lib/core/interfaces/filter-generic.interface';
+import { IPaginationData } from 'src/app/lib/core/interfaces/pagination-data.interface';
+import { AlertDialogService } from 'src/app/lib/core/services/alert-dialog.service';
+import { OrderRepairApiService } from '../../api/order-repair.api.service';
+import { OrderRepair } from '../../models/order-repair.model';
+import { EOrderRepairStatus } from '../../../../core/enums/status.enum';
+import { EDateFilterOption } from 'src/app/lib/core/enums/helpers-emuns.enum';
 
 @Component({
   selector: 'app-order-repairs',
@@ -28,7 +28,6 @@ export class OrderRepairsPage implements OnInit {
   constructor(
     private _orderRepairApiService: OrderRepairApiService,
     private _alertDialogService: AlertDialogService,
-    private _toastService: ToastService,
     private _router: Router
   ) {
   }
@@ -40,6 +39,8 @@ export class OrderRepairsPage implements OnInit {
     this.filters = {
       searchText: '',
       status: [this.orderRepairStatus.PENDING],
+      timeZone: new Date().getTimezoneOffset(),
+      dateFilterOption: EDateFilterOption.DEFAULT,
       isPaid: 'both',
       limit: 20,
       page: 1
@@ -104,7 +105,7 @@ export class OrderRepairsPage implements OnInit {
           data: this.list.data.concat(data)
         };
       } else {
-        this.list = {...res, data};
+        this.list = { ...res, data };
       }
 
       if (onLoadMore) {

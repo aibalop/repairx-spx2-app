@@ -2,29 +2,28 @@
   <ion-list class="ion-no-padding" lines="full">
     <ion-item>
       <ion-label position="stacked">Fecha</ion-label>
-      <ion-select interface="popover" placeholder="Filtrar por fecha" (ionChange)="onFiltersChange()">
-        <ion-select-option value="apples">Hasta hoy</ion-select-option>
-        <ion-select-option value="oranges">Mes actual</ion-select-option>
-        <ion-select-option value="bananas">Hace 2 meses</ion-select-option>
-        <ion-select-option value="bananas">Hace 6 meses</ion-select-option>
+      <ion-select placeholder="Filtrar por fecha" cancelText="Cancelar" okText="Aceptar"
+        [(ngModel)]="filters.dateFilterOption" (ionChange)="onFiltersChange()">
+        <ion-select-option [value]="dateFilterOption.DEFAULT">Hasta hoy</ion-select-option>
+        <ion-select-option [value]="dateFilterOption.CURRENT_MONTH">Mes actual</ion-select-option>
+        <ion-select-option [value]="dateFilterOption.TWO_MONTHS_AGO">Hace 2 meses</ion-select-option>
+        <ion-select-option [value]="dateFilterOption.SIX_MONTHS_AGO">Hace 6 meses</ion-select-option>
       </ion-select>
     </ion-item>
     <ion-item>
       <ion-label position="stacked">Estatus</ion-label>
-      <ion-select placeholder="Estatus" [multiple]="true" style="width: 100%;" cancelText="Cancelar"
-                  okText="Aceptar" [(ngModel)]="filters.status" (ionChange)="onFiltersChange()">
+      <ion-select placeholder="Estatus" [multiple]="true" cancelText="Cancelar" okText="Aceptar"
+        [(ngModel)]="filters.status" (ionChange)="onFiltersChange()">
         <ion-select-option [value]="orderRepairStatus.PENDING">{{ orderRepairStatus.PENDING }}</ion-select-option>
-        <ion-select-option
-          [value]="orderRepairStatus.COMPLETED">{{ orderRepairStatus.COMPLETED }}</ion-select-option>
-        <ion-select-option
-          [value]="orderRepairStatus.DELIVERED">{{ orderRepairStatus.DELIVERED }}</ion-select-option>
+        <ion-select-option [value]="orderRepairStatus.COMPLETED">{{ orderRepairStatus.COMPLETED }}</ion-select-option>
+        <ion-select-option [value]="orderRepairStatus.DELIVERED">{{ orderRepairStatus.DELIVERED }}</ion-select-option>
         <ion-select-option [value]="orderRepairStatus.CANCELED">{{ orderRepairStatus.CANCELED }}</ion-select-option>
       </ion-select>
     </ion-item>
     <ion-item>
       <ion-label position="stacked">Estatus de pago</ion-label>
-      <ion-select interface="popover" placeholder="Estatus de pago" [(ngModel)]="filters.isPaid"
-                  (ionChange)="onFiltersChange()">
+      <ion-select placeholder="Estatus de pago" cancelText="Cancelar" okText="Aceptar" [(ngModel)]="filters.isPaid"
+        (ionChange)="onFiltersChange()">
         <ion-select-option value="both">Pagado y no pagado</ion-select-option>
         <ion-select-option value="true">Pagado</ion-select-option>
         <ion-select-option value="false">No Pagado</ion-select-option>

@@ -5,6 +5,7 @@ export interface IFilterGeneric {
   fromDate?: number;
   toDate?: number;
   timeZone?: number;
+  dateFilterOption?: string;
   limit?: number;
   page?: number;
 }

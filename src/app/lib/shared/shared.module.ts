@@ -25,6 +25,7 @@ import {
 import {
     OrderRepairDeviceStatusComponent
 } from '../modules/order-repairs/components/order-repair-device-status/order-repair-device-status.component';
+import { AvatarComponent } from './components/avatar/avatar.component';
 
 @NgModule({
     declarations: [
@@ -43,14 +44,15 @@ import {
         ConfirmCancelButtonsFormComponent,
         OrderRepairPaidStatusComponent,
         OrderRepairStatusComponent,
-        OrderRepairDeviceStatusComponent
+        OrderRepairDeviceStatusComponent,
+        AvatarComponent,
     ],
-  imports: [
-    CommonModule,
-    FormsModule,
-    IonicModule,
-    RouterModule
-  ],
+    imports: [
+        CommonModule,
+        FormsModule,
+        IonicModule,
+        RouterModule
+    ],
     exports: [
         PanelLayoutComponent,
         MainHeaderLayoutComponent,
@@ -67,7 +69,8 @@ import {
         ConfirmCancelButtonsFormComponent,
         OrderRepairPaidStatusComponent,
         OrderRepairStatusComponent,
-        OrderRepairDeviceStatusComponent
+        OrderRepairDeviceStatusComponent,
+        AvatarComponent,
     ]
 })
 export class SharedModule { }

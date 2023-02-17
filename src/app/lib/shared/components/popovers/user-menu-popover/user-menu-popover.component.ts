@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { ESettingsRoutes } from 'src/app/lib/core/enums/modules-routes.enum';
 import { AlertDialogService } from 'src/app/lib/core/services/alert-dialog.service';
 import { SessionService } from 'src/app/lib/core/services/session.service';
 
@@ -9,16 +10,19 @@ import { SessionService } from 'src/app/lib/core/services/session.service';
 })
 export class UserMenuPopoverComponent {
 
+  settingsRoutes = ESettingsRoutes;
+
   constructor(
-    private readonly sessionService: SessionService,
-    private readonly alertDialogService: AlertDialogService
-  ) { }
+    private readonly _sessionService: SessionService,
+    private readonly _alertDialogService: AlertDialogService,
+  ) {
+  }
 
   async onLogout(): Promise<void> {
-    const confirm = await this.alertDialogService.confirm('Confirmar', '¿Desea cerrar sesión?');
+    const confirm = await this._alertDialogService.confirm('Confirmar', '¿Desea cerrar sesión?');
 
     if (confirm) {
-      this.sessionService.logout();
+      this._sessionService.logout();
     }
   }
 

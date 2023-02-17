@@ -20,7 +20,8 @@
             "tsConfig": "tsconfig.app.json",
             "allowedCommonJsDependencies": [
               "localforage",
-              "currency.js"
+              "currency.js",
+              "generate-avatar"
             ],
             "assets": [
               {

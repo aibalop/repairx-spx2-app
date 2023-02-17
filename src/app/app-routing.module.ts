@@ -49,6 +49,10 @@ const routes: Routes = [
         path: 'ordenes-reparacion',
         loadChildren: () => import('./lib/modules/order-repairs/order-repairs.module').then(m => m.OrderRepairsModule)
       },
+      {
+        path: 'configuraciones',
+        loadChildren: () => import('./lib/modules/settings/settings.module').then(m => m.SettingsModule)
+      },
     ]
   },
   // { path: '**', component: PathNotFoundComponent }

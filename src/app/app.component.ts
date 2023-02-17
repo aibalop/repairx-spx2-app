@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { SessionService } from './lib/core/services/session.service';
 import { SocketioService } from './lib/core/services/socketio.service';
+import { ThemeService } from './lib/core/services/theme.service';
 
 @Component({
   selector: 'app-root',
@@ -11,12 +12,14 @@ export class AppComponent {
 
   constructor(
     private sessionService: SessionService,
-    private socketioService: SocketioService
+    private socketioService: SocketioService,
+    private _themeService: ThemeService,
   ) {
     this.init();
   }
 
   private async init(): Promise<void> {
+    await this._themeService.checkTheme();
     await this.sessionService.checkSession();
 
     if (this.sessionService.isLogged) {

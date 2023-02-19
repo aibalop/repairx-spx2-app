@@ -20,4 +20,8 @@ export class AuthApiService {
     return this.httpClientService.post(`${this._resource}`, { username, password });
   }
 
+  changePassword(username: string, currentPassword: string, newPassword: string): Observable<void> {
+    return this.httpClientService.put(`${this._resource}/password`, { username, currentPassword, newPassword });
+  }
+
 }

@@ -4,6 +4,7 @@ import { BehaviorSubject, Observable } from 'rxjs';
 import { IUser } from '../../modules/users/interfaces/user.interface';
 import { EAuthRoutes } from '../enums/modules-routes.enum';
 import { LocalStoreService } from './local-store.service';
+import { ThemeService } from './theme.service';
 
 @Injectable({
   providedIn: 'root'
@@ -15,8 +16,10 @@ export class SessionService {
   private tokenData = new BehaviorSubject<string | null>(null);
 
   constructor(
-    private store: LocalStoreService,
-    private router: Router) { }
+    private _store: LocalStoreService,
+    private _themeService: ThemeService,
+    private _router: Router,
+  ) { }
 
   get userSessionAsObservable(): Observable<IUser | null> {
     return this.userData.asObservable();
@@ -28,9 +31,9 @@ export class SessionService {
 
   set userSession(user: IUser | null) {
     if (user) {
-      this.store.setItem('userSession', user);
+      this._store.setItem('userSession', user);
     } else {
-      this.store.removeItem('userSession');
+      this._store.removeItem('userSession');
     }
     this.userData.next(user);
   }
@@ -41,9 +44,9 @@ export class SessionService {
 
   set token(token: string | null) {
     if (token) {
-      this.store.setItem('token', token);
+      this._store.setItem('token', token);
     } else {
-      this.store.removeItem('token');
+      this._store.removeItem('token');
     }
     this.tokenData.next(token);
   }
@@ -51,8 +54,9 @@ export class SessionService {
   logout(): void {
     this.userSession = null;
     this.token = null;
-    this.store.clear();
-    this.router.navigate([EAuthRoutes.SIGN_IN]);
+    this._store.clear();
+    this._themeService.isDarkMode = false;
+    this._router.navigate([EAuthRoutes.SIGN_IN]);
   }
 
   clearSession(): void {
@@ -67,12 +71,12 @@ export class SessionService {
   }
 
   private async getToken(): Promise<string> {
-    const token = await this.store.getItem('token');
+    const token = await this._store.getItem('token');
     return token ? token : null;
   }
 
   private async getUserSession(): Promise<IUser> {
-    const user = await this.store.getItem('userSession');
+    const user = await this._store.getItem('userSession');
     return user ? user : null;
   }
 

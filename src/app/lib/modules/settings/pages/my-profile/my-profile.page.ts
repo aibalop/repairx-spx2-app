@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { ModalController } from '@ionic/angular';
 import { SessionService } from 'src/app/lib/core/services/session.service';
 import { ThemeService } from 'src/app/lib/core/services/theme.service';
+import { Consts } from 'src/app/lib/core/utils/consts.util';
+import { ChangePasswordFormModalComponent } from '../../components/modals/change-password-form-modal/change-password-form-modal.component';
 
 @Component({
   selector: 'app-my-profile',
@@ -12,8 +15,9 @@ export class MyProfilePage implements OnInit {
   darkMode: boolean = false;
 
   constructor(
-    private readonly _themeService: ThemeService,
+    private _themeService: ThemeService,
     public sessionService: SessionService,
+    private _modalController: ModalController,
   ) { }
 
   ngOnInit() {
@@ -25,6 +29,22 @@ export class MyProfilePage implements OnInit {
       return;
     }
     this._themeService.isDarkMode = this.darkMode;
+  }
+
+  async onChangePassword(): Promise<void> {
+
+    const formModal = await this._modalController.create({
+      component: ChangePasswordFormModalComponent,
+      breakpoints: Consts.BREAKPOINTS_MODAL_FULL,
+      initialBreakpoint: Consts.INITIAL_BREAKPOINT_MODAL_THREE_QUARTER,
+      backdropDismiss: false,
+      componentProps: {
+        username: this.sessionService.userSession.username,
+      }
+    });
+
+    await formModal.present();
+
   }
 
 }

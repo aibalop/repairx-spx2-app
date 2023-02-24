@@ -1,0 +1,82 @@
+<app-header-generic-form-modal [isSend]="isSend" addText="Editar perfil"></app-header-generic-form-modal>
+<ion-content class="ion-padding">
+
+  <form [formGroup]="form" (submit)="onSubmit()">
+
+    <ion-grid fixed>
+
+      <ion-row class="ion-justify-content-center">
+
+        <ion-col size="12">
+
+          <ion-item>
+            <ion-label position="stacked">Nombre*</ion-label>
+            <ion-input placeholder="Nombre" enterkeyhint="next" inputmode="text" type="text"
+                       formControlName="name" required>
+            </ion-input>
+          </ion-item>
+          <ion-note color="danger" class="ion-padding-start"
+                    *ngIf="form.get('name').invalid && form.get('name').touched">
+            Campo requerido
+          </ion-note>
+
+        </ion-col>
+
+        <ion-col size="12">
+
+          <ion-item>
+            <ion-label position="stacked">Apellido*</ion-label>
+            <ion-input placeholder="Apellido" enterkeyhint="next" inputmode="text" type="text"
+                       formControlName="lastName" required>
+            </ion-input>
+          </ion-item>
+          <ion-note color="danger" class="ion-padding-start"
+                    *ngIf="form.get('lastName').invalid && form.get('lastName').touched">
+            Campo requerido
+          </ion-note>
+
+        </ion-col>
+
+        <ion-col size="12">
+
+          <ion-item>
+            <ion-label position="stacked">Nombre de usuario*</ion-label>
+            <ion-input placeholder="Nombre de usuario" enterkeyhint="next" inputmode="text" type="text"
+                       formControlName="username" required>
+            </ion-input>
+          </ion-item>
+          <ion-note color="danger" class="ion-padding-start"
+                    *ngIf="form.get('username').invalid && form.get('username').touched">
+            Campo requerido
+          </ion-note>
+
+        </ion-col>
+
+        <ion-col size="12">
+
+          <ion-item>
+            <ion-label position="stacked">Email*</ion-label>
+            <ion-input placeholder="Email" enterkeyhint="done" inputmode="email" type="email"
+                       formControlName="email" required>
+            </ion-input>
+          </ion-item>
+          <ion-note color="danger" class="ion-padding-start"
+                    *ngIf="form.get('email').invalid && form.get('email').touched && form.get('email').errors.required">
+            Campo requerido
+          </ion-note>
+          <ion-note color="danger" class="ion-padding-start"
+                    *ngIf="form.get('email').invalid && form.get('email').touched && !form.get('email').errors.required && form.get('email').errors.email">
+            Email no valido
+          </ion-note>
+
+        </ion-col>
+
+      </ion-row>
+
+      <app-confirm-cancel-buttons-form-modal [isSend]="isSend"></app-confirm-cancel-buttons-form-modal>
+
+    </ion-grid>
+
+  </form>
+
+</ion-content>

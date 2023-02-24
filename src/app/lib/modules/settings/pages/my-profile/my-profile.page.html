@@ -18,7 +18,7 @@
               <p> {{ userSession.email }}</p>
             </ion-label>
             <ion-buttons slot="end">
-              <ion-button>
+              <ion-button button detail (click)="onEditProfile()">
                 <ion-icon slot="icon-only" name="pencil-outline"></ion-icon>
               </ion-button>
             </ion-buttons>

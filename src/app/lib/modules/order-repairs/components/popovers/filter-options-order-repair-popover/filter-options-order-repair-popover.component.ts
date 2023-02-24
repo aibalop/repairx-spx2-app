@@ -19,7 +19,7 @@ export class FilterOptionsOrderRepairPopoverComponent implements OnInit {
 
   ngOnInit() { }
 
-  async onFiltersChange(): Promise<void> {
+  async onFiltersChange(): |Promise<void> {
     if (this.filters.status.length === 0) {
       this.filters.status.push(EOrderRepairStatus.PENDING);
     }

@@ -4,7 +4,6 @@ import { BehaviorSubject, Observable } from 'rxjs';
 import { IUser } from '../../modules/users/interfaces/user.interface';
 import { EAuthRoutes } from '../enums/modules-routes.enum';
 import { LocalStoreService } from './local-store.service';
-import { ThemeService } from './theme.service';
 
 @Injectable({
   providedIn: 'root'
@@ -17,7 +16,6 @@ export class SessionService {
 
   constructor(
     private _store: LocalStoreService,
-    private _themeService: ThemeService,
     private _router: Router,
   ) { }
 
@@ -55,7 +53,6 @@ export class SessionService {
     this.userSession = null;
     this.token = null;
     this._store.clear();
-    this._themeService.isDarkMode = false;
     this._router.navigate([EAuthRoutes.SIGN_IN]);
   }
 

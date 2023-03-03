@@ -23,8 +23,6 @@ export class OrderRepairsPage implements OnInit {
 
   filters: IFilterGeneric;
 
-  orderRepairStatus = EOrderRepairStatus;
-
   constructor(
     private _orderRepairApiService: OrderRepairApiService,
     private _alertDialogService: AlertDialogService,
@@ -38,7 +36,7 @@ export class OrderRepairsPage implements OnInit {
   ionViewWillEnter() {
     this.filters = {
       searchText: '',
-      status: [this.orderRepairStatus.PENDING],
+      status: [EOrderRepairStatus.PENDING],
       timeZone: new Date().getTimezoneOffset(),
       dateFilterOption: EDateFilterOption.DEFAULT,
       isPaid: 'both',

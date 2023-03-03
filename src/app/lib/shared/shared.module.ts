@@ -26,6 +26,8 @@ import {
     OrderRepairDeviceStatusComponent
 } from '../modules/order-repairs/components/order-repair-device-status/order-repair-device-status.component';
 import { AvatarComponent } from './components/avatar/avatar.component';
+import { CardSummaryComponent } from './components/card-summary/card-summary.component';
+import { FilterDateSelectComponent } from './components/filter-date-select/filter-date-select.component';
 
 @NgModule({
     declarations: [
@@ -46,6 +48,8 @@ import { AvatarComponent } from './components/avatar/avatar.component';
         OrderRepairStatusComponent,
         OrderRepairDeviceStatusComponent,
         AvatarComponent,
+        CardSummaryComponent,
+        FilterDateSelectComponent,
     ],
     imports: [
         CommonModule,
@@ -71,6 +75,8 @@ import { AvatarComponent } from './components/avatar/avatar.component';
         OrderRepairStatusComponent,
         OrderRepairDeviceStatusComponent,
         AvatarComponent,
+        CardSummaryComponent,
+        FilterDateSelectComponent,
     ]
 })
 export class SharedModule { }

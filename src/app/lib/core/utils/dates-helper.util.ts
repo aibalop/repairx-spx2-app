@@ -1,5 +1,10 @@
+export interface IRangeDates {
+    fromDate: number;
+    toDate: number;
+}
+
 export class DatesHelper {
-    static getTimeRangeForCurrentMonth(): { fromDate: number, toDate: number } {
+    static getTimeRangeForCurrentMonth(): IRangeDates {
         const fromDate = new Date();
         fromDate.setDate(1);
         fromDate.setHours(0, 0, 0, 0);
@@ -8,7 +13,7 @@ export class DatesHelper {
         return { fromDate: fromDate.getTime(), toDate: toDate.getTime() };
     }
 
-    static getTimeRangeForTwoMonthsAgo(): { fromDate: number, toDate: number } {
+    static getTimeRangeForTwoMonthsAgo(): IRangeDates {
         const fromDate = new Date();
         fromDate.setHours(0, 0, 0, 0);
         fromDate.setMonth(fromDate.getMonth() - 2);
@@ -17,7 +22,7 @@ export class DatesHelper {
         return { fromDate: fromDate.getTime(), toDate: toDate.getTime() };
     }
 
-    static getTimeRangeForTwoSixMonthsAgo(): { fromDate: number, toDate: number } {
+    static getTimeRangeForTwoSixMonthsAgo(): IRangeDates {
         const fromDate = new Date();
         fromDate.setHours(0, 0, 0, 0);
         fromDate.setMonth(fromDate.getMonth() - 6);

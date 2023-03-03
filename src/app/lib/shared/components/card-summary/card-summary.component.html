@@ -1,0 +1,9 @@
+<ion-card>
+  <img class="inverted-img-color" *ngIf="icon" [src]="icon" />
+  <ion-card-header class="ion-text-end" sty>
+    <ion-card-subtitle>{{ title }}</ion-card-subtitle>
+    <ion-card-title>
+      {{ isMoneyFormat ? (value ?? 0 | currency:'MXN') : value ?? 0 }}
+    </ion-card-title>
+  </ion-card-header>
+</ion-card>

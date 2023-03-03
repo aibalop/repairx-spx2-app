@@ -1,0 +1,12 @@
+img {
+    width: 60px;
+    align-self: center;
+    padding-left: 15px;
+    filter: invert(30%);
+}
+
+ion-card {
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 3px solid var(--ion-color-primary);
+}

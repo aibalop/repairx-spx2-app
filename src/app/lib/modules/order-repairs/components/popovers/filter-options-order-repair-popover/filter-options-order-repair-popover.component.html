@@ -1,15 +1,6 @@
 <ion-content *ngIf="filters">
   <ion-list class="ion-no-padding" lines="full">
-    <ion-item>
-      <ion-label position="stacked">Fecha</ion-label>
-      <ion-select placeholder="Filtrar por fecha" cancelText="Cancelar" okText="Aceptar"
-        [(ngModel)]="filters.dateFilterOption" (ionChange)="onFiltersChange()">
-        <ion-select-option [value]="dateFilterOption.DEFAULT">Hasta hoy</ion-select-option>
-        <ion-select-option [value]="dateFilterOption.CURRENT_MONTH">Mes actual</ion-select-option>
-        <ion-select-option [value]="dateFilterOption.TWO_MONTHS_AGO">Hace 2 meses</ion-select-option>
-        <ion-select-option [value]="dateFilterOption.SIX_MONTHS_AGO">Hace 6 meses</ion-select-option>
-      </ion-select>
-    </ion-item>
+    <app-filter-date-select [filters]="filters" (dateChange)="onDateChange($event)"></app-filter-date-select>
     <ion-item>
       <ion-label position="stacked">Estatus</ion-label>
       <ion-select placeholder="Estatus" [multiple]="true" cancelText="Cancelar" okText="Aceptar"

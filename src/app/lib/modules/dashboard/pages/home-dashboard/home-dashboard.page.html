@@ -65,6 +65,39 @@
                     </ion-card-header>
                     <ion-card-content>
 
+                        <ion-list lines="full" *ngIf="lastOrders.length > 0">
+                            <ion-item *ngFor="let orderRepair of lastOrders">
+                                <ion-icon name="journal" slot="start"></ion-icon>
+                                <ion-label>
+                                    <h2>{{ orderRepair.getOrderIdFormat() }}</h2>
+                                    <h3>{{ orderRepair.createdAt | date:'short' }}</h3>
+                                    <p>{{ orderRepair.getCustomerFullName() }}</p>
+                                    <p>{{ orderRepair.getCustomerPhone() }}</p>
+                                    <p>
+                                        <span class="ion-margin-end" style="font-weight: bold">Total</span>
+                                        <span>{{ orderRepair.totalAmount | currency:'MXN' }}</span>
+                                        <ng-container *ngIf="!orderRepair.isPaid">
+                                            <span class="ion-margin-horizontal" style="font-weight: bold">Resta</span>
+                                            <span>{{ orderRepair.remainingAmount | currency:'MXN' }}</span>
+                                        </ng-container>
+                                    </p>
+                                </ion-label>
+                                <app-order-repair-status [orderRepairId]="orderRepair._id"
+                                    [currentStatus]="orderRepair.status" [isView]="true"
+                                    class="ion-hide-md-down"></app-order-repair-status>
+                                <app-order-repair-paid-status [isPaid]="orderRepair.isPaid"
+                                    [orderRepairId]="orderRepair._id" [isView]="true"
+                                    class="ion-hide-md-down"></app-order-repair-paid-status>
+                                <ion-buttons slot="end">
+                                    <ion-button (click)="onViewOrder(orderRepair._id)">
+                                        <ion-icon slot="icon-only" name="eye"></ion-icon>
+                                    </ion-button>
+                                </ion-buttons>
+                            </ion-item>
+                        </ion-list>
+
+                        <app-not-found-data *ngIf="lastOrders.length === 0"></app-not-found-data>
+
                     </ion-card-content>
                 </ion-card>
             </ion-col>
@@ -76,6 +109,39 @@
                         <ion-card-title>Pendientes de pagar</ion-card-title>
                     </ion-card-header>
                     <ion-card-content>
+                        
+                        <ion-list lines="full" *ngIf="ordersPendingToPay.length > 0">
+                            <ion-item *ngFor="let orderRepair of ordersPendingToPay">
+                                <ion-icon name="journal" slot="start"></ion-icon>
+                                <ion-label>
+                                    <h2>{{ orderRepair.getOrderIdFormat() }}</h2>
+                                    <h3>{{ orderRepair.createdAt | date:'short' }}</h3>
+                                    <p>{{ orderRepair.getCustomerFullName() }}</p>
+                                    <p>{{ orderRepair.getCustomerPhone() }}</p>
+                                    <p>
+                                        <span class="ion-margin-end" style="font-weight: bold">Total</span>
+                                        <span>{{ orderRepair.totalAmount | currency:'MXN' }}</span>
+                                        <ng-container *ngIf="!orderRepair.isPaid">
+                                            <span class="ion-margin-horizontal" style="font-weight: bold">Resta</span>
+                                            <span>{{ orderRepair.remainingAmount | currency:'MXN' }}</span>
+                                        </ng-container>
+                                    </p>
+                                </ion-label>
+                                <app-order-repair-status [orderRepairId]="orderRepair._id"
+                                    [currentStatus]="orderRepair.status" [isView]="true"
+                                    class="ion-hide-md-down"></app-order-repair-status>
+                                <app-order-repair-paid-status [isPaid]="orderRepair.isPaid"
+                                    [orderRepairId]="orderRepair._id" [isView]="true"
+                                    class="ion-hide-md-down"></app-order-repair-paid-status>
+                                <ion-buttons slot="end">
+                                    <ion-button (click)="onViewOrder(orderRepair._id)">
+                                        <ion-icon slot="icon-only" name="eye"></ion-icon>
+                                    </ion-button>
+                                </ion-buttons>
+                            </ion-item>
+                        </ion-list>
+
+                        <app-not-found-data *ngIf="ordersPendingToPay.length === 0"></app-not-found-data>
 
                     </ion-card-content>
                 </ion-card>

@@ -1,4 +1,8 @@
 <ion-chip [style]="currentStatus === orderRepairStatus.DELIVERED || isView ? 'cursor: initial;' : ''"
-          [color]="onGetColor()" (click)="onChangeStatus()">
-  {{ currentStatus }}
+  [color]="statusColor" (click)="onChangeStatus()" *ngIf="showChip">
+  {{ _currentStatus }}
 </ion-chip>
+
+<ion-badge *ngIf="!showChip" [color]="statusColor" class="ion-margin-end">
+  {{ _currentStatus }}
+</ion-badge>

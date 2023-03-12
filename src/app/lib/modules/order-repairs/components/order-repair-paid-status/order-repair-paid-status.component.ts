@@ -13,6 +13,7 @@ export class OrderRepairPaidStatusComponent implements OnInit {
   @Input() isView: boolean = false;
   @Input() orderRepairId: string;
   @Input() isPaid: boolean;
+  @Input() showChip: boolean = true;
   @Output() paymentCompleted = new EventEmitter<Date>();
 
   constructor(

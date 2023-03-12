@@ -1,3 +1,8 @@
-<ion-chip [style]="isPaid || isView? 'cursor: initial;' : ''" [color]="isPaid ? 'success' : 'warning'" (click)="onPay()">
+<ion-chip [style]="isPaid || isView? 'cursor: initial;' : ''" [color]="isPaid ? 'success' : 'warning'" (click)="onPay()"
+  *ngIf="showChip">
   {{ isPaid ? 'Pagado' : 'No Pagado' }}
 </ion-chip>
+
+<ion-badge [color]="isPaid ? 'success' : 'warning'" class="ion-margin-end" *ngIf="!showChip">
+  {{ isPaid ? 'Pagado' : 'No Pagado' }}
+</ion-badge>

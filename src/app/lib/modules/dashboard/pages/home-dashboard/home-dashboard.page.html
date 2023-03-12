@@ -31,7 +31,7 @@
                     </ion-card-header>
                     <ion-card-content>
                         <app-filter-date-select label="Fitra por un rango de fechas" [filters]="filters"
-                            (dateChange)="onDateChange($event)">
+                            [hideDefault]="true" (dateChange)="onDateChange($event)">
                         </app-filter-date-select>
                     </ion-card-content>
                 </ion-card>
@@ -39,17 +39,19 @@
             </ion-col>
 
             <ion-col size="12" sizeMd="4">
-                <app-card-summary title="Ganancias" icon="assets/imgs/money-icon.svg" [value]="1000"
+                <app-card-summary title="Ganancias" icon="assets/imgs/money-icon.svg" [value]="summary.revenue"
                     [isMoneyFormat]="true"></app-card-summary>
             </ion-col>
 
             <ion-col size="12" sizeMd="4">
-                <app-card-summary title="Nuevas ordenes" icon="assets/imgs/new-order-icon.svg" [value]="50">
+                <app-card-summary title="Nuevas ordenes" icon="assets/imgs/new-order-icon.svg"
+                    [value]="summary.totalOrderRepairs">
                 </app-card-summary>
             </ion-col>
 
             <ion-col size="12" sizeMd="4">
-                <app-card-summary title="Nuevos clientes" icon="assets/imgs/new-customer-icon.svg" [value]="60">
+                <app-card-summary title="Nuevos clientes" icon="assets/imgs/new-customer-icon.svg"
+                    [value]="summary.totalNewCustomers">
                 </app-card-summary>
             </ion-col>
 
@@ -57,7 +59,7 @@
 
         <ion-row>
 
-            <ion-col size="12" sizeMd="6">
+            <ion-col size="12" sizeMd="6" class="col-section">
                 <ion-card>
                     <ion-card-header>
                         <ion-card-subtitle>Ordenes de reparación</ion-card-subtitle>
@@ -69,10 +71,19 @@
                             <ion-item *ngFor="let orderRepair of lastOrders">
                                 <ion-icon name="journal" slot="start"></ion-icon>
                                 <ion-label>
-                                    <h2>{{ orderRepair.getOrderIdFormat() }}</h2>
+                                    <h2 class="header-order-repair">
+                                        <ion-badge color="dark" class="ion-margin-end">
+                                            {{ orderRepair.getOrderIdFormat() }}
+                                        </ion-badge>
+                                        <app-order-repair-status [orderRepairId]="orderRepair._id" [showChip]="false"
+                                            [currentStatus]="orderRepair.status" [isView]="true"
+                                            class="ion-hide-md-down"></app-order-repair-status>
+                                        <app-order-repair-paid-status [isPaid]="orderRepair.isPaid"
+                                            [orderRepairId]="orderRepair._id" [isView]="true" [showChip]="false"
+                                            class="ion-hide-md-down"></app-order-repair-paid-status>
+                                    </h2>
                                     <h3>{{ orderRepair.createdAt | date:'short' }}</h3>
                                     <p>{{ orderRepair.getCustomerFullName() }}</p>
-                                    <p>{{ orderRepair.getCustomerPhone() }}</p>
                                     <p>
                                         <span class="ion-margin-end" style="font-weight: bold">Total</span>
                                         <span>{{ orderRepair.totalAmount | currency:'MXN' }}</span>
@@ -82,12 +93,6 @@
                                         </ng-container>
                                     </p>
                                 </ion-label>
-                                <app-order-repair-status [orderRepairId]="orderRepair._id"
-                                    [currentStatus]="orderRepair.status" [isView]="true"
-                                    class="ion-hide-md-down"></app-order-repair-status>
-                                <app-order-repair-paid-status [isPaid]="orderRepair.isPaid"
-                                    [orderRepairId]="orderRepair._id" [isView]="true"
-                                    class="ion-hide-md-down"></app-order-repair-paid-status>
                                 <ion-buttons slot="end">
                                     <ion-button (click)="onViewOrder(orderRepair._id)">
                                         <ion-icon slot="icon-only" name="eye"></ion-icon>
@@ -102,19 +107,29 @@
                 </ion-card>
             </ion-col>
 
-            <ion-col size="12" sizeMd="6">
+            <ion-col size="12" sizeMd="6" class="col-section">
                 <ion-card>
                     <ion-card-header>
                         <ion-card-subtitle>Ordenes de reparación</ion-card-subtitle>
                         <ion-card-title>Pendientes de pagar</ion-card-title>
                     </ion-card-header>
                     <ion-card-content>
-                        
+
                         <ion-list lines="full" *ngIf="ordersPendingToPay.length > 0">
                             <ion-item *ngFor="let orderRepair of ordersPendingToPay">
                                 <ion-icon name="journal" slot="start"></ion-icon>
                                 <ion-label>
-                                    <h2>{{ orderRepair.getOrderIdFormat() }}</h2>
+                                    <h2 class="header-order-repair">
+                                        <ion-badge color="dark" class="ion-margin-end">
+                                            {{ orderRepair.getOrderIdFormat() }}
+                                        </ion-badge>
+                                        <app-order-repair-status [orderRepairId]="orderRepair._id"
+                                            [currentStatus]="orderRepair.status" [isView]="true" [showChip]="false"
+                                            class="ion-hide-md-down"></app-order-repair-status>
+                                        <app-order-repair-paid-status [isPaid]="orderRepair.isPaid"
+                                            [orderRepairId]="orderRepair._id" [isView]="true" [showChip]="false"
+                                            class="ion-hide-md-down"></app-order-repair-paid-status>
+                                    </h2>
                                     <h3>{{ orderRepair.createdAt | date:'short' }}</h3>
                                     <p>{{ orderRepair.getCustomerFullName() }}</p>
                                     <p>{{ orderRepair.getCustomerPhone() }}</p>
@@ -127,12 +142,6 @@
                                         </ng-container>
                                     </p>
                                 </ion-label>
-                                <app-order-repair-status [orderRepairId]="orderRepair._id"
-                                    [currentStatus]="orderRepair.status" [isView]="true"
-                                    class="ion-hide-md-down"></app-order-repair-status>
-                                <app-order-repair-paid-status [isPaid]="orderRepair.isPaid"
-                                    [orderRepairId]="orderRepair._id" [isView]="true"
-                                    class="ion-hide-md-down"></app-order-repair-paid-status>
                                 <ion-buttons slot="end">
                                     <ion-button (click)="onViewOrder(orderRepair._id)">
                                         <ion-icon slot="icon-only" name="eye"></ion-icon>

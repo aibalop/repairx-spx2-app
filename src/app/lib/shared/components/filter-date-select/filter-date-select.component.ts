@@ -14,6 +14,8 @@ export class FilterDateSelectComponent implements OnInit {
 
   @Input() filters: IFilterGeneric;
 
+  @Input() hideDefault: boolean = false;
+
   @Output() dateChange: EventEmitter<IFilterGeneric> = new EventEmitter();
 
   dateFilterOption = EDateFilterOption;

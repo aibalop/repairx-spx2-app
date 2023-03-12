@@ -6,8 +6,10 @@ import { EOrderRepairStatus } from 'src/app/lib/core/enums/status.enum';
 import { IFilterGeneric } from 'src/app/lib/core/interfaces/filter-generic.interface';
 import { AlertDialogService } from 'src/app/lib/core/services/alert-dialog.service';
 import { SessionService } from 'src/app/lib/core/services/session.service';
+import { DatesHelper } from 'src/app/lib/core/utils/dates-helper.util';
 import { OrderRepairApiService } from '../../../order-repairs/api/order-repair.api.service';
 import { OrderRepair } from '../../../order-repairs/models/order-repair.model';
+import { DashboardApiService, SummaryData } from '../../api/dashboard.api.service';
 
 @Component({
   selector: 'app-home-dashboard',
@@ -20,10 +22,16 @@ export class HomeDashboardPage implements OnInit {
     searchText: '',
     status: [EOrderRepairStatus.PENDING],
     timeZone: new Date().getTimezoneOffset(),
-    dateFilterOption: EDateFilterOption.DEFAULT,
+    dateFilterOption: EDateFilterOption.CURRENT_MONTH,
     isPaid: 'both',
     limit: 5,
     page: 1
+  };
+
+  summary: SummaryData = {
+    revenue: 0,
+    totalNewCustomers: 0,
+    totalOrderRepairs: 0,
   };
 
   settingsRoutes = ESettingsRoutes;
@@ -35,17 +43,24 @@ export class HomeDashboardPage implements OnInit {
   constructor(
     public sessionService: SessionService,
     private _orderRepairApiService: OrderRepairApiService,
+    private _dashboardApiService: DashboardApiService,
     private _alertDialogService: AlertDialogService,
     private _router: Router,
-  ) { }
+  ) {
+    const currentMonth = DatesHelper.getTimeRangeForCurrentMonth();
+    this.filters.fromDate = currentMonth.fromDate;
+    this.filters.toDate = currentMonth.toDate;
+  }
 
   ngOnInit() {
     this._loadData();
+    this._loadSummary();
   }
 
   onDateChange(updatedFilters: IFilterGeneric): void {
     this.filters = updatedFilters;
     this._loadData();
+    this._loadSummary();
   }
 
   onViewOrder(orderRepairId: string): void {
@@ -55,8 +70,6 @@ export class HomeDashboardPage implements OnInit {
   private async _loadData(): Promise<void> {
 
     try {
-
-      console.log('Filters: ', this.filters);
 
       const resLastOrders = await this._orderRepairApiService.getAll(this.filters).toPromise();
 
@@ -70,7 +83,19 @@ export class HomeDashboardPage implements OnInit {
 
       this.ordersPendingToPay = resOrdersPendingToPay.data.map(orderRepair => new OrderRepair(orderRepair)) as Array<OrderRepair>;
 
-      console.log('LastOrders: ', this.lastOrders, 'PendingToPay: ', this.ordersPendingToPay);
+    } catch (error) {
+
+      this._alertDialogService.catchError(error);
+
+    }
+
+  }
+
+  private async _loadSummary(): Promise<void> {
+
+    try {
+
+      this.summary = await this._dashboardApiService.getSummary(this.filters).toPromise();
 
     } catch (error) {
 

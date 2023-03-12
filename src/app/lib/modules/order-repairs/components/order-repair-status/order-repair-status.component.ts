@@ -1,9 +1,9 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {AlertDialogService} from '../../../../core/services/alert-dialog.service';
-import {ToastService} from '../../../../core/services/toast.service';
-import {OrderRepairApiService} from '../../api/order-repair.api.service';
-import {ActionSheetController} from '@ionic/angular';
-import {EOrderRepairStatus} from '../../../../core/enums/status.enum';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { AlertDialogService } from '../../../../core/services/alert-dialog.service';
+import { ToastService } from '../../../../core/services/toast.service';
+import { OrderRepairApiService } from '../../api/order-repair.api.service';
+import { ActionSheetController } from '@ionic/angular';
+import { EOrderRepairStatus } from '../../../../core/enums/status.enum';
 
 @Component({
   selector: 'app-order-repair-status',
@@ -14,8 +14,15 @@ export class OrderRepairStatusComponent implements OnInit {
 
   @Input() isView = false;
   @Input() orderRepairId: string;
-  @Input() currentStatus: string;
+  @Input() set currentStatus(status: string) {
+    this._currentStatus = status;
+    this.statusColor = this.getStatusColor();
+  };
+  @Input() showChip: boolean = true;
   @Output() statusChanged = new EventEmitter<string>();
+
+  _currentStatus: string;
+  statusColor: string;
   orderRepairStatus = EOrderRepairStatus;
   isSent = false;
 
@@ -27,11 +34,10 @@ export class OrderRepairStatusComponent implements OnInit {
   ) {
   }
 
-  ngOnInit() {
-  }
+  ngOnInit() { }
 
-  onGetColor(): string {
-    switch (this.currentStatus) {
+  getStatusColor(): string {
+    switch (this._currentStatus) {
       case EOrderRepairStatus.PENDING:
         return 'medium';
       case EOrderRepairStatus.COMPLETED:
@@ -46,11 +52,11 @@ export class OrderRepairStatusComponent implements OnInit {
   async onChangeStatus(): Promise<void> {
 
     if (this.isView || this.isSent ||
-      this.currentStatus === EOrderRepairStatus.DELIVERED || this.currentStatus === EOrderRepairStatus.CANCELED) {
+      this._currentStatus === EOrderRepairStatus.DELIVERED || this._currentStatus === EOrderRepairStatus.CANCELED) {
       return;
     }
 
-    const {data: {action: newStatus}, role = null} = await this._getNewStatus();
+    const { data: { action: newStatus }, role = null } = await this._getNewStatus();
 
     if (newStatus === 'cancel' || role === 'backdrop') {
       return;
@@ -107,7 +113,7 @@ export class OrderRepairStatusComponent implements OnInit {
             action: 'cancel',
           },
         },
-      ].filter(button => button.text !== this.currentStatus),
+      ].filter(button => button.text !== this._currentStatus),
     });
 
     await actionSheet.present();

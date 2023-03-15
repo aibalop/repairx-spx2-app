@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 
 @Component({
   selector: 'app-searchbar',
@@ -7,16 +7,34 @@ import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 })
 export class SearchbarComponent implements OnInit {
 
+  @ViewChild('inputSearch', { static: false }) inputSearch;
+
+  @Input() placeholder: string = 'Buscar';
+
+  @Input() autofocus: boolean = false;
+
   @Output() search: EventEmitter<string> = new EventEmitter();
 
-  searchText: string = '';
+  @Output() searchOnEnter: EventEmitter<string> = new EventEmitter();
+
+  @Output() cancelSearch: EventEmitter<void> = new EventEmitter();
 
   constructor() { }
 
-  ngOnInit() { }
+  ngOnInit() {
+    if (this.autofocus) {
+      setTimeout(() => {
+        this.inputSearch.setFocus();
+      }, 300);
+    }
+  }
 
-  onChange(): void {
-    this.search.emit(this.searchText);
+  onChange($event): void {
+    this.search.emit($event.target.value);
+  }
+
+  onChangeOnEnter($event): void {
+    this.searchOnEnter.emit($event.target.value);
   }
 
 }

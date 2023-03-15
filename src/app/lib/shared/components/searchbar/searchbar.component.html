@@ -1,2 +1,4 @@
-<ion-searchbar class="custom-searchbar" showCancelButton="focus" cancelButtonText="Cancelar" debounce="1000" animated placeholder="Buscar"
-  enterkeyhint="search" inputmode="text" [(ngModel)]="searchText" (ionChange)="onChange()"></ion-searchbar>
+<ion-searchbar #inputSearch class="custom-searchbar" showCancelButton="focus" cancelButtonText="Cancelar"
+  debounce="1000" animated [placeholder]="placeholder" enterkeyhint="search" inputmode="text"
+  (ionChange)="onChange($event)" (keydown.enter)="onChangeOnEnter($event)" (ionCancel)="cancelSearch.emit()"
+  (ionClear)="cancelSearch.emit()"></ion-searchbar>

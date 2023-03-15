@@ -1,9 +1,9 @@
-import {Injectable} from '@angular/core';
-import {Observable} from 'rxjs';
-import {IFilterGeneric} from 'src/app/lib/core/interfaces/filter-generic.interface';
-import {IPaginationData} from 'src/app/lib/core/interfaces/pagination-data.interface';
-import {HttpClientService} from 'src/app/lib/core/services/http-client.service';
-import {IOrderRepair} from '../interfaces/order-repair.interface';
+import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
+import { IFilterGeneric } from 'src/app/lib/core/interfaces/filter-generic.interface';
+import { IPaginationData } from 'src/app/lib/core/interfaces/pagination-data.interface';
+import { HttpClientService } from 'src/app/lib/core/services/http-client.service';
+import { IOrderRepair } from '../interfaces/order-repair.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -23,6 +23,10 @@ export class OrderRepairApiService {
     return this.httpClientService.get(`${this._resource}/${_id}`);
   }
 
+  getByOrderId(orderId: string): Observable<IOrderRepair> {
+    return this.httpClientService.get(`${this._resource}/order-id/${orderId}`);
+  }
+
   create(data: IOrderRepair): Observable<IOrderRepair> {
     return this.httpClientService.post(`${this._resource}`, data);
   }
@@ -40,7 +44,7 @@ export class OrderRepairApiService {
   }
 
   updateStatus(_id: string, status: string): Observable<void> {
-    return this.httpClientService.put(`${this._resource}/${_id}/status`, {status});
+    return this.httpClientService.put(`${this._resource}/${_id}/status`, { status });
   }
 
   updateDeviceStatus(_id: string, index: number, status: string): Observable<void> {

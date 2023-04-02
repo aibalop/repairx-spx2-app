@@ -9,6 +9,7 @@ import { OrderRepairApiService } from '../../api/order-repair.api.service';
 import { OrderRepair } from '../../models/order-repair.model';
 import { EOrderRepairStatus } from '../../../../core/enums/status.enum';
 import { EDateFilterOption } from 'src/app/lib/core/enums/helpers-emuns.enum';
+import { PdfUtil } from 'src/app/lib/core/utils/pdf.util';
 
 @Component({
   selector: 'app-order-repairs',
@@ -78,6 +79,15 @@ export class OrderRepairsPage implements OnInit {
 
   onStatusChanged(): void {
     this._loadData();
+  }
+
+  async onPrintOrder(orderId: string): Promise<void> {
+    try {
+      const res = await this._orderRepairApiService.getPDFByOrderId(orderId).toPromise();
+      PdfUtil.print(res);
+    } catch (error) {
+      this._alertDialogService.catchError(error);
+    }
   }
 
   private async _loadData(onLoadMore: boolean = false, event: any = null): Promise<void> {

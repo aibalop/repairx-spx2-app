@@ -10,6 +10,8 @@ import {ECrudActions} from 'src/app/lib/core/enums/crud-actions.enum';
 export class CrudActionsMenuPopoverComponent {
 
   @Input() showDelete: boolean = true;
+  
+  @Input() showPrint: boolean = false;
 
   constructor(private _popoverController: PopoverController) {
   }
@@ -24,6 +26,10 @@ export class CrudActionsMenuPopoverComponent {
 
   onDelete(): void {
     this._popoverController.dismiss(ECrudActions.DELETE);
+  }
+
+  onPrint(): void {
+    this._popoverController.dismiss(ECrudActions.PRINT);
   }
 
 }

@@ -57,7 +57,7 @@
                                           [isView]="true" class="ion-hide-md-down"></app-order-repair-paid-status>
             <ion-buttons slot="end">
               <app-crud-actions-button (update)="onOpenForm(orderRepair._id)" (view)="onOpenForm(orderRepair._id, true)"
-                                       [showDelete]="false">
+                                       [showDelete]="false" [showPrint]="true" (print)="onPrintOrder(orderRepair.orderId)">
               </app-crud-actions-button>
             </ion-buttons>
           </ion-item>

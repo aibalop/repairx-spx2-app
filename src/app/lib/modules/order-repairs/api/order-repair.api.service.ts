@@ -23,6 +23,10 @@ export class OrderRepairApiService {
     return this.httpClientService.get(`${this._resource}/${_id}`);
   }
 
+  getPDFByOrderId(orderId: string): Observable<Blob> {
+    return this.httpClientService.getStream(`${this._resource}/order-id/${orderId}/pdf`);
+  }
+
   getByOrderId(orderId: string): Observable<IOrderRepair> {
     return this.httpClientService.get(`${this._resource}/order-id/${orderId}`);
   }

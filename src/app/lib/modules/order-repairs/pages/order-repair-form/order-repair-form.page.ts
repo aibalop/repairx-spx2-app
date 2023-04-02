@@ -33,6 +33,7 @@ import {
 import {SearchWorkModalComponent} from '../../components/modals/search-work-modal/search-work-modal.component';
 import {IDeviceOrderRepair, IOrderRepair} from '../../interfaces/order-repair.interface';
 import {CurrencyCalculateUtil} from '../../../../core/utils/currency-calculate.util';
+import { PdfUtil } from 'src/app/lib/core/utils/pdf.util';
 
 @Component({
   selector: 'app-order-repair-form',
@@ -419,8 +420,13 @@ export class OrderRepairFormPage implements OnInit, OnDestroy {
   private async _create(): Promise<void> {
 
     try {
-      await this._orderRepairApiService.create(this.form.value as IOrderRepair).toPromise();
+      const orderCreated = await this._orderRepairApiService.create(this.form.value as IOrderRepair).toPromise();
       this._toastService.success('Orden creada correctamente', 'Operación Completada');
+      this._orderRepairApiService.getPDFByOrderId(orderCreated.orderId).toPromise()
+        .then(res => PdfUtil.print(res))
+        .catch((error) => {
+          this._toastService.danger('No se pudo imprimir la orden');
+        });
       this._router.navigate([EOrderRepairsRoutes.ORDER_REPAIRS]);
     } catch (error) {
       this.isSend = false;

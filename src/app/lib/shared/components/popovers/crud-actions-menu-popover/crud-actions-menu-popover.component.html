@@ -12,5 +12,10 @@
       <ion-icon name="trash-outline" slot="start"></ion-icon>
       Eliminar
     </ion-item>
+    <ion-item [button]="true" [detail]="false" (click)="onPrint()" *ngIf="showPrint">
+      <ion-icon name="trash-outline" slot="start"></ion-icon>
+      Imprimir
+    </ion-item>
+
   </ion-list>
 </ion-content>

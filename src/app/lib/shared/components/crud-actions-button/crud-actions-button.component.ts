@@ -12,11 +12,15 @@ export class CrudActionsButtonComponent implements OnInit {
 
   @Input() showDelete: boolean = true;
 
+  @Input() showPrint: boolean = false;
+
   @Output() view: EventEmitter<void> = new EventEmitter();
 
   @Output() update: EventEmitter<void> = new EventEmitter();
 
   @Output() delete: EventEmitter<void> = new EventEmitter();
+
+  @Output() print: EventEmitter<void> = new EventEmitter();
 
   constructor(private popoverController: PopoverController) { }
 
@@ -26,7 +30,8 @@ export class CrudActionsButtonComponent implements OnInit {
     const popover = await this.popoverController.create({
       component: CrudActionsMenuPopoverComponent,
       componentProps: {
-        showDelete: this.showDelete
+        showDelete: this.showDelete,
+        showPrint: this.showPrint,
       },
       dismissOnSelect: true,
       showBackdrop: true,
@@ -51,6 +56,10 @@ export class CrudActionsButtonComponent implements OnInit {
       case ECrudActions.DELETE:
         this.delete.emit();
         break;
+      case ECrudActions.PRINT:
+        this.print.emit();
+        break;
+
     }
 
   }

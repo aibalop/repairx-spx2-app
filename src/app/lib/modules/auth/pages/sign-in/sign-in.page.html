@@ -1,69 +1,82 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>Iniciar Sesión</ion-title>
-  </ion-toolbar>
-</ion-header>
+<ion-content>
 
-<ion-content class="ion-padding">
+  <ion-row>
 
-  <form [formGroup]="form" (submit)="onSubmit()">
+    <ion-col size="12" sizeMd="6" sizeLg="8" class="form-background ion-hide-md-down">
+    </ion-col>
 
-    <ion-grid fixed>
+    <ion-col size="12" sizeMd="6" sizeLg="4" class="form-align">
 
-      <ion-row class="ion-justify-content-center">
+      <div class="ion-text-center">
+        <h1>RepairX</h1>
+      </div>
 
-        <ion-col size="12" size-md="4">
+      <div class="ion-text-center">
+        <h5>Iniciar sesión</h5>
+      </div>
 
-          <ion-item>
-            <ion-label position="stacked">Nombre de Usuario</ion-label>
-            <ion-input placeholder="Capture su nombre de usuario" enterkeyhint="next" inputmode="text" type="text"
-              formControlName="username">
-            </ion-input>
-          </ion-item>
+      <form [formGroup]="form" (submit)="onSubmit()">
 
-        </ion-col>
+        <ion-grid>
 
-      </ion-row>
+          <ion-row class="ion-justify-content-center">
 
-      <ion-row class="ion-justify-content-center">
+            <ion-col size="12">
 
-        <ion-col size="12" size-md="4">
+              <ion-item>
+                <ion-label position="stacked">Nombre de Usuario</ion-label>
+                <ion-input placeholder="Capture su nombre de usuario" enterkeyhint="next" inputmode="text" type="text"
+                  formControlName="username">
+                </ion-input>
+              </ion-item>
 
-          <ion-item>
-            <ion-label position="stacked">Contraseña</ion-label>
-            <ion-input placeholder="Capture su contraseña" enterkeyhint="done" type="password"
-              formControlName="password">
-            </ion-input>
-          </ion-item>
+            </ion-col>
 
-        </ion-col>
+          </ion-row>
 
-      </ion-row>
+          <ion-row class="ion-justify-content-center">
 
-      <ion-row class="ion-justify-content-center ion-margin-top" *ngIf="isSend">
+            <ion-col size="12">
 
-        <ion-col size="12" size-md="4" [ngClass]="{ 'ion-text-right': !isSend, 'ion-text-center': isSend }">
+              <ion-item>
+                <ion-label position="stacked">Contraseña</ion-label>
+                <ion-input placeholder="Capture su contraseña" enterkeyhint="done" type="password"
+                  formControlName="password">
+                </ion-input>
+              </ion-item>
 
-          <ion-spinner name="circles"></ion-spinner>
+            </ion-col>
 
-        </ion-col>
+          </ion-row>
 
-      </ion-row>
+          <ion-row class="ion-justify-content-center ion-margin-top" *ngIf="isSend">
 
-      <ion-row class="ion-justify-content-center ion-margin-top" *ngIf="!isSend">
+            <ion-col size="12" [ngClass]="{ 'ion-text-right': !isSend, 'ion-text-center': isSend }">
 
-        <ion-col size="6" size-md="2" class="ion-align-self-end">
+              <ion-spinner name="circles"></ion-spinner>
 
-          <ion-button color="primary" shape="round" type="submit" class="ion-float-right">
-            Ingresar
-          </ion-button>
+            </ion-col>
 
-        </ion-col>
+          </ion-row>
 
-      </ion-row>
+          <ion-row class="ion-justify-content-center ion-margin-top" *ngIf="!isSend">
 
-    </ion-grid>
+            <ion-col size="12" class="ion-text-center">
 
-  </form>
+              <ion-button color="primary" shape="round" type="submit">
+                Ingresar
+              </ion-button>
+
+            </ion-col>
+
+          </ion-row>
+
+        </ion-grid>
+
+      </form>
+
+    </ion-col>
+
+  </ion-row>
 
 </ion-content>

@@ -1,0 +1,12 @@
+.form-align {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.form-background {
+    background: url('../../../../../../assets/imgs/sign-in-background.jpg');
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+}

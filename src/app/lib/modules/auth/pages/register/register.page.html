@@ -1,0 +1,306 @@
+<ion-content>
+
+  <ion-row>
+
+    <ion-col size="12" sizeLg="5" class="form-background ion-hide-lg-down">
+    </ion-col>
+
+    <ion-col size="12" sizeLg="7">
+
+      <div class="ion-text-center">
+        <h1>RepairX</h1>
+      </div>
+
+      <div class="ion-text-center">
+        <h5>Registrarse</h5>
+      </div>
+
+      <form [formGroup]="form" (submit)="onSubmit()">
+
+        <ion-grid>
+
+          <ion-row class="ion-justify-content-center" formGroupName="user">
+
+            <ion-col size="12">
+              <ion-text color="dark">
+                <h6>Datos de usuario</h6>
+              </ion-text>
+            </ion-col>
+
+            <ion-col sizeXs="12" sizeSm="12" sizeMd="4">
+
+              <ion-item>
+                <ion-label position="stacked">Nombre*</ion-label>
+                <ion-input placeholder="Nombre" enterkeyhint="next" inputmode="text" type="text" formControlName="name"
+                  required>
+                </ion-input>
+              </ion-item>
+              <ion-note color="danger" class="ion-padding-start"
+                *ngIf="form.get('user').get('name').invalid && form.get('user').get('name').touched">
+                Campo requerido
+              </ion-note>
+
+            </ion-col>
+
+            <ion-col sizeXs="12" sizeSm="12" sizeMd="4">
+
+              <ion-item>
+                <ion-label position="stacked">Primer apellido*</ion-label>
+                <ion-input placeholder="Primer apellido" enterkeyhint="next" inputmode="text" type="text"
+                  formControlName="lastName" required>
+                </ion-input>
+              </ion-item>
+              <ion-note color="danger" class="ion-padding-start"
+                *ngIf="form.get('user').get('lastName').invalid && form.get('user').get('lastName').touched">
+                Campo requerido
+              </ion-note>
+
+            </ion-col>
+
+            <ion-col sizeXs="12" sizeSm="12" sizeMd="4">
+
+              <ion-item>
+                <ion-label position="stacked">Nombre de usuario*</ion-label>
+                <ion-input placeholder="Nombre de usuario" enterkeyhint="next" inputmode="text" type="text"
+                  formControlName="username" required>
+                </ion-input>
+              </ion-item>
+              <ion-note color="danger" class="ion-padding-start"
+                *ngIf="form.get('user').get('username').invalid && form.get('user').get('username').touched">
+                Campo requerido
+              </ion-note>
+
+            </ion-col>
+
+            <ion-col sizeXs="12" sizeSm="12" sizeMd="6">
+
+              <ion-item>
+                <ion-label position="stacked">Email de usuario</ion-label>
+                <ion-input placeholder="Email de usuario" enterkeyhint="next" inputmode="email" type="email"
+                  formControlName="email" required>
+                </ion-input>
+              </ion-item>
+              <ion-note color="danger" class="ion-padding-start"
+                *ngIf="form.get('user').get('email').invalid && form.get('user').get('email').touched">
+                <ng-container *ngIf="form.controls['user'].controls['email'].errors.required; else emailNoValidUser">
+                  Campo requerido
+                </ng-container>
+                <ng-template #emailNoValidUser>
+                  Email no válido
+                </ng-template>
+              </ion-note>
+
+            </ion-col>
+
+            <ion-col sizeXs="12" sizeSm="12" sizeMd="6">
+
+              <ion-item>
+                <ion-label position="stacked">Contraseña</ion-label>
+                <ion-input placeholder="Capture su contraseña" enterkeyhint="next" type="password" required
+                  formControlName="password" inputmode="text">
+                </ion-input>
+              </ion-item>
+              <ion-note color="danger" class="ion-padding-start"
+                *ngIf="form.get('user').get('password').invalid && form.get('user').get('password').touched">
+                Campo requerido
+              </ion-note>
+
+            </ion-col>
+
+          </ion-row>
+
+          <ion-row class="ion-justify-content-center" formGroupName="company">
+
+            <ion-col size="12">
+              <ion-text color="dark">
+                <h6>Datos de empresa</h6>
+              </ion-text>
+            </ion-col>
+
+            <ion-col sizeXs="12" sizeSm="12" sizeMd="4">
+
+              <ion-item>
+                <ion-label position="stacked">Nombre de la empresa*</ion-label>
+                <ion-input placeholder="Nombre de la empresa" enterkeyhint="next" inputmode="text" type="text"
+                  formControlName="name" required>
+                </ion-input>
+              </ion-item>
+              <ion-note color="danger" class="ion-padding-start"
+                *ngIf="form.get('company').get('name').invalid && form.get('company').get('name').touched">
+                Campo requerido
+              </ion-note>
+
+            </ion-col>
+
+            <ion-col sizeXs="12" sizeSm="12" sizeMd="4">
+
+              <ion-item>
+                <ion-label position="stacked">Email de empresa*</ion-label>
+                <ion-input placeholder="Email de empresa" enterkeyhint="next" inputmode="email" type="email"
+                  formControlName="email">
+                </ion-input>
+              </ion-item>
+              <ion-note color="danger" class="ion-padding-start"
+                *ngIf="form.get('company').get('email').invalid && form.get('company').get('email').touched">
+                <ng-container
+                  *ngIf="form.controls['company'].controls['email'].errors.required; else emailNoValidCompany">
+                  Campo requerido
+                </ng-container>
+                <ng-template #emailNoValidCompany>
+                  Email no válido
+                </ng-template>
+              </ion-note>
+
+            </ion-col>
+
+            <ion-col sizeXs="12" sizeSm="12" sizeMd="4">
+
+              <ion-item>
+                <ion-label position="stacked">Teléfono de empresa*</ion-label>
+                <ion-input placeholder="Teléfono de empresa" enterkeyhint="next" inputmode="tel" type="tel"
+                  maxlength="10" formControlName="phone" required>
+                </ion-input>
+              </ion-item>
+              <ion-note color="danger" class="ion-padding-start"
+                *ngIf="form.get('company').get('phone').invalid && form.get('company').get('phone').touched">
+                <ng-container
+                  *ngIf="form.controls['company'].controls['phone'].errors.required; else minMaxLengthError">
+                  Campo requerido
+                </ng-container>
+                <ng-template #minMaxLengthError>
+                  Debe tener 10 dígitos
+                </ng-template>
+              </ion-note>
+
+            </ion-col>
+
+            <ion-row formGroupName="address">
+
+              <ion-col size="12">
+                <ion-text color="dark">
+                  <h6>Dirección de la empresa (Opcional)</h6>
+                </ion-text>
+              </ion-col>
+
+              <ion-col sizeXs="12" sizeSm="12" sizeMd="6">
+
+                <ion-item>
+                  <ion-label position="stacked">Calle</ion-label>
+                  <ion-input placeholder="Calle" enterkeyhint="next" inputmode="text" type="text"
+                    formControlName="street">
+                  </ion-input>
+                </ion-item>
+
+              </ion-col>
+
+              <ion-col sizeXs="6" sizeSm="6" sizeMd="3">
+
+                <ion-item>
+                  <ion-label position="stacked">#No.</ion-label>
+                  <ion-input placeholder="#No." enterkeyhint="next" inputmode="text" type="text" formControlName="num">
+                  </ion-input>
+                </ion-item>
+
+              </ion-col>
+
+              <ion-col sizeXs="6" sizeSm="6" sizeMd="3">
+
+                <ion-item>
+                  <ion-label position="stacked">#No. Int.</ion-label>
+                  <ion-input placeholder="#No. Int." enterkeyhint="next" inputmode="text" type="text"
+                    formControlName="interiorNum">
+                  </ion-input>
+                </ion-item>
+
+              </ion-col>
+
+              <ion-col sizeXs="12" sizeSm="12" sizeMd="8">
+
+                <ion-item>
+                  <ion-label position="stacked">Colonia</ion-label>
+                  <ion-input placeholder="Colonia" enterkeyhint="next" inputmode="text" type="text"
+                    formControlName="colony">
+                  </ion-input>
+                </ion-item>
+
+              </ion-col>
+
+              <ion-col sizeXs="12" sizeSm="12" sizeMd="4">
+
+                <ion-item>
+                  <ion-label position="stacked">CP</ion-label>
+                  <ion-input placeholder="CP" enterkeyhint="next" inputmode="text" type="text" formControlName="zip">
+                  </ion-input>
+                </ion-item>
+
+              </ion-col>
+
+              <ion-col sizeXs="12" sizeSm="12" sizeMd="6">
+
+                <ion-item>
+                  <ion-label position="stacked">Locación</ion-label>
+                  <ion-input placeholder="Locación" enterkeyhint="next" inputmode="text" type="text"
+                    formControlName="location">
+                  </ion-input>
+                </ion-item>
+
+              </ion-col>
+
+              <ion-col sizeXs="12" sizeSm="12" sizeMd="6">
+
+                <ion-item>
+                  <ion-label position="stacked">Ciudad</ion-label>
+                  <ion-input placeholder="Ciudad" enterkeyhint="next" inputmode="text" type="text"
+                    formControlName="city">
+                  </ion-input>
+                </ion-item>
+
+              </ion-col>
+
+              <ion-col sizeXs="12" sizeSm="12" sizeMd="6">
+
+                <ion-item>
+                  <ion-label position="stacked">Estado</ion-label>
+                  <ion-input placeholder="Estado" enterkeyhint="next" inputmode="text" type="text"
+                    formControlName="state">
+                  </ion-input>
+                </ion-item>
+
+              </ion-col>
+
+              <ion-col sizeXs="12" sizeSm="12" sizeMd="6">
+
+                <ion-item>
+                  <ion-label position="stacked">País</ion-label>
+                  <ion-input placeholder="País" enterkeyhint="next" inputmode="text" type="text"
+                    formControlName="country">
+                  </ion-input>
+                </ion-item>
+
+              </ion-col>
+
+            </ion-row>
+
+          </ion-row>
+
+          <ion-row class="ion-justify-content-center ion-margin-top" *ngIf="!isSend">
+
+            <ion-col size="12" class="ion-text-center">
+
+              <ion-button color="primary" shape="round" type="submit">
+                Registarme
+              </ion-button>
+
+            </ion-col>
+
+          </ion-row>
+
+        </ion-grid>
+
+      </form>
+
+    </ion-col>
+
+  </ion-row>
+
+</ion-content>

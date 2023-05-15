@@ -53,7 +53,7 @@ export class SignInPage implements OnInit {
       this.form.reset();
       this.isSend = false;
       // this.socketioService.connect(); // TODO: uncomment when we need it!
-      this.router.navigateByUrl('/')
+      this.router.navigateByUrl('/');
     } catch (error) {
       this.isSend = false;
       this.alertDialogService.catchError(error);

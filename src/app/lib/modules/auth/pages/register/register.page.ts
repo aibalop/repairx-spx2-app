@@ -1,11 +1,13 @@
-import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
-import { AlertDialogService } from 'src/app/lib/core/services/alert-dialog.service';
-import { SessionService } from 'src/app/lib/core/services/session.service';
-import { SocketioService } from 'src/app/lib/core/services/socketio.service';
-import { ToastService } from 'src/app/lib/core/services/toast.service';
-import { AuthApiService } from '../../api/auth.api.service';
+import {Component, OnInit} from '@angular/core';
+import {FormGroup, FormControl, Validators} from '@angular/forms';
+import {Router} from '@angular/router';
+import {AlertDialogService} from 'src/app/lib/core/services/alert-dialog.service';
+import {SessionService} from 'src/app/lib/core/services/session.service';
+import {SocketioService} from 'src/app/lib/core/services/socketio.service';
+import {ToastService} from 'src/app/lib/core/services/toast.service';
+import {AuthApiService} from '../../api/auth.api.service';
+import {UserApiService} from '../../../users/api/user.api.service';
+import {IUserPayload} from '../../../users/interfaces/user.interface';
 
 @Component({
   selector: 'app-register',
@@ -27,15 +29,15 @@ export class RegisterPage implements OnInit {
       email: new FormControl(null, [Validators.required, Validators.email]),
       phone: new FormControl(null, [Validators.required, Validators.minLength(10), Validators.maxLength(10)]),
       address: new FormGroup({
-        street: new FormControl(null),
-        num: new FormControl(null),
+        street: new FormControl(null, Validators.required),
+        num: new FormControl(null, Validators.required),
         interiorNum: new FormControl(null),
-        colony: new FormControl(null),
-        zip: new FormControl(null),
-        location: new FormControl(null),
-        city: new FormControl(null),
-        state: new FormControl(null),
-        country: new FormControl(null)
+        colony: new FormControl(null, Validators.required),
+        zip: new FormControl(null, Validators.required),
+        location: new FormControl(null, Validators.required),
+        city: new FormControl(null, Validators.required),
+        state: new FormControl(null, Validators.required),
+        country: new FormControl('México', Validators.required)
       }),
     }),
   });
@@ -48,8 +50,10 @@ export class RegisterPage implements OnInit {
     private readonly authApiService: AuthApiService,
     private readonly sessionService: SessionService,
     private readonly socketioService: SocketioService,
+    private readonly userApiService: UserApiService,
     private router: Router
-  ) { }
+  ) {
+  }
 
   ngOnInit() {
   }
@@ -60,21 +64,32 @@ export class RegisterPage implements OnInit {
       return;
     }
 
-    this._signIn();
+    this._createUser();
   }
 
-  private async _signIn(): Promise<void> {
+  private async _createUser(): Promise<void> {
     try {
       this.isSend = true;
-      // const { username, password } = this.form.value;
-      // const signInSuccess = await this.authApiService.signIn(username, password).toPromise();
-      // this.toastService.success(signInSuccess.message);
-      // this.sessionService.token = signInSuccess.token;
-      // this.sessionService.userSession = signInSuccess.user;
-      // this.form.reset();
+      const userPayload: IUserPayload = this.form.value as IUserPayload;
+      await this.userApiService.create(userPayload).toPromise();
+      this._signIn(userPayload);
+    } catch (error) {
+      this.isSend = false;
+      this.alertDialogService.catchError(error);
+    }
+  }
+
+  private async _signIn(userPayload: IUserPayload): Promise<void> {
+    try {
+      const { username, password } = userPayload.user;
+      const signInSuccess = await this.authApiService.signIn(username, password).toPromise();
+      this.toastService.success(signInSuccess.message);
+      this.sessionService.token = signInSuccess.token;
+      this.sessionService.userSession = signInSuccess.user;
+      this.form.reset();
       this.isSend = false;
       // this.socketioService.connect(); // TODO: uncomment when we need it!
-      this.router.navigateByUrl('/')
+      this.router.navigateByUrl('/');
     } catch (error) {
       this.isSend = false;
       this.alertDialogService.catchError(error);

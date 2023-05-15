@@ -1,14 +1,14 @@
 import {Injectable} from '@angular/core';
 import {Observable} from 'rxjs';
 import {HttpClientService} from 'src/app/lib/core/services/http-client.service';
-import {IUser} from '../interfaces/user.interface';
+import {IUser, IUserPayload} from '../interfaces/user.interface';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserApiService {
 
-  private _resource = 'v1/users'
+  private _resource = 'v1/users';
 
   constructor(private httpClientService: HttpClientService) {
   }
@@ -21,7 +21,7 @@ export class UserApiService {
     return this.httpClientService.get(`${this._resource}/${_id}`);
   }
 
-  create(data: IUser): Observable<IUser> {
+  create(data: IUserPayload): Observable<IUser> {
     return this.httpClientService.post(`${this._resource}`, data);
   }
 

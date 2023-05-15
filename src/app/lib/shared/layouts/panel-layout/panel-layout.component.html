@@ -11,8 +11,8 @@
           </ion-thumbnail>
           <ion-label>
             <h3>{{ userSession.name }} {{ userSession.lastName }}</h3>
+            <h4>{{ userSession?.companyId?.name }}</h4>
             <p>Bienvenido</p>
-            <!-- <p>{{ userSession.role.displayName }}</p> -->
           </ion-label>
         </ion-item>
       </ng-container>
@@ -59,7 +59,7 @@
 
         <ion-menu-toggle auto-hide="false" *ngIf="!permissionGroup.childs">
           <ion-item [routerLink]="[permissionGroup.parent.pathname]" routerDirection="root" routerLinkActive="selected"
-            [routerLinkActiveOptions]="{exact:false}">
+                    [routerLinkActiveOptions]="{exact:false}">
             <ion-icon slot="start" [name]="permissionGroup.parent.icon">
             </ion-icon>
             <ion-label>{{ permissionGroup.parent.name }}</ion-label>
@@ -67,8 +67,8 @@
         </ion-menu-toggle>
 
         <ion-item button *ngIf="permissionGroup.childs"
-          (click)="permissionGroup.parent.open = !permissionGroup.parent.open"
-          [class.active-parent]="permissionGroup.parent.open" detail="false">
+                  (click)="permissionGroup.parent.open = !permissionGroup.parent.open"
+                  [class.active-parent]="permissionGroup.parent.open" detail="false">
           <ion-icon slot="start" [name]="permissionGroup.parent.icon"></ion-icon>
           <ion-label>{{ permissionGroup.parent.name }}</ion-label>
           <ion-icon slot="end" [name]="permissionGroup.parent.open ? 'arrow-up' : 'arrow-down'"></ion-icon>
@@ -78,7 +78,7 @@
 
           <ion-menu-toggle auto-hide="false">
             <ion-item class="sub-item" *ngFor="let child of permissionGroup.childs" [routerLink]="[child.pathname]"
-              routerDirection="root" routerLinkActive="selected" [routerLinkActiveOptions]="{exact:false}">
+                      routerDirection="root" routerLinkActive="selected" [routerLinkActiveOptions]="{exact:false}">
               <ion-icon slot="start" [name]="child.icon"></ion-icon>
               <ion-label>{{ child.name }}</ion-label>
             </ion-item>

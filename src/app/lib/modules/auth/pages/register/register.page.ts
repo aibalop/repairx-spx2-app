@@ -64,12 +64,17 @@ export class RegisterPage implements OnInit {
       return;
     }
 
+    if (this.isSend) {
+      return;
+    }
+
+    this.isSend = true;
+
     this._createUser();
   }
 
   private async _createUser(): Promise<void> {
     try {
-      this.isSend = true;
       const userPayload: IUserPayload = this.form.value as IUserPayload;
       await this.userApiService.create(userPayload).toPromise();
       this._signIn(userPayload);

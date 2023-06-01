@@ -68,7 +68,7 @@ export class WorkFormModalComponent implements OnInit {
       const work = await this._workApiService.getById(this.workId).toPromise();
       this.form.patchValue(work);
     } catch (error) {
-      this._toastService.danger('No se pudo obtener los datos del servicio', 'Operación Fallida');
+      this._toastService.danger('No se pudo obtener los datos del servicio');
       this._alertDialogService.catchError(error);
       this._modalController.dismiss(true);
     }
@@ -79,11 +79,11 @@ export class WorkFormModalComponent implements OnInit {
 
     try {
       const workCreated = await this._workApiService.create(this.form.value as IWork).toPromise();
-      this._toastService.success('Servicio creado correctamente', 'Operación Completada');
+      this._toastService.success('Servicio creado correctamente');
       this._modalController.dismiss(workCreated);
     } catch (error) {
       this.isSend = false;
-      this._toastService.danger('No se pudo completar el registro', 'Operación Fallida');
+      this._toastService.danger('No se pudo completar el registro');
       this._alertDialogService.catchError(error);
     }
 
@@ -93,11 +93,11 @@ export class WorkFormModalComponent implements OnInit {
 
     try {
       const workUpdated = await this._workApiService.update(this.workId, this.form.value as IWork).toPromise();
-      this._toastService.success('Servicio actualizado correctamente', 'Operación Completada');
+      this._toastService.success('Servicio actualizado correctamente');
       this._modalController.dismiss(workUpdated);
     } catch (error) {
       this.isSend = false;
-      this._toastService.danger('No se pudo completar la actualización', 'Operación Fallida');
+      this._toastService.danger('No se pudo completar la actualización');
       this._alertDialogService.catchError(error);
     }
 

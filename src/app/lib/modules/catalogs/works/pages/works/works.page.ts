@@ -80,7 +80,7 @@ export class WorksPage implements OnInit {
       }
 
       await this._workApiService.delete(_id).toPromise();
-      this._toastService.success('Servicio eliminado correctamente', 'Operación Completada');
+      this._toastService.success('Servicio eliminado correctamente');
       this._loadData();
     } catch (error) {
       this._alertDialogService.catchError(error);

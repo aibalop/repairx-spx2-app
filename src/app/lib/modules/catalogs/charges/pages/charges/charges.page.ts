@@ -80,7 +80,7 @@ export class ChargesPage implements OnInit {
       }
 
       await this._chargeApiService.delete(_id).toPromise();
-      this._toastService.success('Cargo eliminado correctamente', 'Operación Completada');
+      this._toastService.success('Cargo eliminado correctamente');
       this._loadData();
     } catch (error) {
       this._alertDialogService.catchError(error);

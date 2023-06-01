@@ -23,6 +23,20 @@
               </ion-button>
             </ion-buttons>
           </ion-item>
+          <ion-item lines="none" *ngIf="company">
+            <ion-icon slot="start" name="business"></ion-icon>
+            <ion-label>
+              <h3>{{ company.name }}</h3>
+              <p>{{ company.email }}</p>
+              <p>Tel. {{ companyPhone }}</p>
+              <p>Dir. {{ companyAddress }}</p>
+            </ion-label>
+            <ion-buttons slot="end">
+              <ion-button button detail (click)="onEditCompany()">
+                <ion-icon slot="icon-only" name="pencil-outline"></ion-icon>
+              </ion-button>
+            </ion-buttons>
+          </ion-item>
           <ion-item button detail (click)="onChangePassword()">
             <ion-icon name="key" slot="start"></ion-icon>
             <ion-label>Cambiar contraseña</ion-label>

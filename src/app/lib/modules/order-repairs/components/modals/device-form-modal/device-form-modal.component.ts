@@ -118,7 +118,7 @@ export class DeviceFormModalComponent implements OnInit {
 
     try {
       const deviceCreated = await this._deviceApiService.create({ name: value }).toPromise();
-      this._toastService.success('Dispositivo creado correctamente', 'Operación Completada');
+      this._toastService.success('Dispositivo creado correctamente');
       this.devices.unshift({ deviceId: deviceCreated._id, name: deviceCreated.name } as IDevice);
       this.form.controls['device'].setValue(this.devices[0]);
     } catch (error) {
@@ -139,7 +139,7 @@ export class DeviceFormModalComponent implements OnInit {
 
     try {
       const brandCreated = await this._brandApiService.create({ name: value }).toPromise();
-      this._toastService.success('Marca creada correctamente', 'Operación Completada');
+      this._toastService.success('Marca creada correctamente');
       this.brands.unshift({ brandId: brandCreated._id, name: brandCreated.name } as IBrand);
       this.form.controls['brand'].setValue(this.brands[0]);
     } catch (error) {

@@ -75,7 +75,7 @@ export class CustomersPage implements OnInit {
       }
 
       await this._customerApiService.delete(_id).toPromise();
-      this._toastService.success('Cliente eliminado correctamente', 'Operación Completada');
+      this._toastService.success('Cliente eliminado correctamente');
       this._loadData();
     } catch (error) {
       this._alertDialogService.catchError(error);

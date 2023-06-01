@@ -43,10 +43,10 @@ export class OrderRepairPaidStatusComponent implements OnInit {
     try {
       const paidAt = new Date();
       await this._orderRepairApiService.updateStatusPayment(this.orderRepairId, paidAt).toPromise();
-      this._toastService.success('Pago actualizado correctamente', 'Operación Completada');
+      this._toastService.success('Pago actualizado correctamente');
       this.paymentCompleted.emit(paidAt);
     } catch (error) {
-      this._toastService.danger('No se pudo completar la actualización del pago', 'Operación Fallida');
+      this._toastService.danger('No se pudo completar la actualización del pago');
       this._alertDialogService.catchError(error);
       this.isPaid = false;
     }

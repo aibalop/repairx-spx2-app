@@ -12,7 +12,7 @@ export class ToastService {
 
   async success(
     message: string,
-    header: string = '',
+    header: string = 'Operación Completada',
     duration: number = 2500,
     position: 'bottom' | 'top' | 'middle' = 'top'): Promise<void> {
     const toast = await this.toastController.create({
@@ -57,7 +57,7 @@ export class ToastService {
 
   async danger(
     message: string,
-    header: string = '',
+    header: string = 'Operación Fallida',
     duration: number = 2500,
     position: 'bottom' | 'top' | 'middle' = 'top'): Promise<void> {
     const toast = await this.toastController.create({

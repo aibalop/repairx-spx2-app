@@ -54,11 +54,11 @@ export class ChangePasswordFormModalComponent implements OnInit {
     try {
       const { currentPassword, newPassword } = this.form.value;
       await this._authService.changePassword(this.username, currentPassword, newPassword).toPromise();
-      this._toastService.success('Contraseña actualizada correctamente', 'Operación Completada');
+      this._toastService.success('Contraseña actualizada correctamente');
       this._modalController.dismiss();
     } catch (error) {
       this.isSend = false;
-      this._toastService.danger('No se pudo completar la actualización', 'Operación Fallida');
+      this._toastService.danger('No se pudo completar la actualización');
       this._alertDialogService.catchError(error);
     }
 

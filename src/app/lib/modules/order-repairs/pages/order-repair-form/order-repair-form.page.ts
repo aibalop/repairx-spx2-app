@@ -410,7 +410,7 @@ export class OrderRepairFormPage implements OnInit, OnDestroy {
         totalAmount: this.orderRepair.totalAmount,
       });
     } catch (error) {
-      this._toastService.danger('No se pudo obtener los datos del cliente', 'Operación Fallida');
+      this._toastService.danger('No se pudo obtener los datos del cliente');
       this._alertDialogService.catchError(error);
       this._router.navigate([EOrderRepairsRoutes.ORDER_REPAIRS]);
     }
@@ -421,7 +421,7 @@ export class OrderRepairFormPage implements OnInit, OnDestroy {
 
     try {
       const orderCreated = await this._orderRepairApiService.create(this.form.value as IOrderRepair).toPromise();
-      this._toastService.success('Orden creada correctamente', 'Operación Completada');
+      this._toastService.success('Orden creada correctamente');
       this._orderRepairApiService.getPDFByOrderId(orderCreated.orderId).toPromise()
         .then(res => PdfUtil.print(res))
         .catch((error) => {
@@ -432,7 +432,7 @@ export class OrderRepairFormPage implements OnInit, OnDestroy {
       this.isSend = false;
       this.form.get('advanceAmount').setValue(0);
       this.onCalculateAmount();
-      this._toastService.danger('No se pudo completar el registro', 'Operación Fallida');
+      this._toastService.danger('No se pudo completar el registro');
       this._alertDialogService.catchError(error);
     }
 
@@ -442,11 +442,11 @@ export class OrderRepairFormPage implements OnInit, OnDestroy {
 
     try {
       await this._orderRepairApiService.update(this.orderRepairId, this.form.value as IOrderRepair).toPromise();
-      this._toastService.success('Orden actualizada correctamente', 'Operación Completada');
+      this._toastService.success('Orden actualizada correctamente');
       this._router.navigate([EOrderRepairsRoutes.ORDER_REPAIRS]);
     } catch (error) {
       this.isSend = false;
-      this._toastService.danger('No se pudo completar la actualización', 'Operación Fallida');
+      this._toastService.danger('No se pudo completar la actualización');
       this._alertDialogService.catchError(error);
     }
 

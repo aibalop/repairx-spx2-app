@@ -55,11 +55,11 @@ export class MyProfileFormModalComponent implements OnInit {
     try {
       const data = this.form.value as IUser;
       await this._userApiService.update(this.userId, data).toPromise();
-      this._toastService.success('Perfil actualizado correctamente', 'Operación Completada');
+      this._toastService.success('Perfil actualizado correctamente');
       this._modalController.dismiss({_id: this.userId, ...data});
     } catch (error) {
       this.isSend = false;
-      this._toastService.danger('No se pudo completar la actualización', 'Operación Fallida');
+      this._toastService.danger('No se pudo completar la actualización');
       this._alertDialogService.catchError(error);
     }
 
@@ -71,7 +71,7 @@ export class MyProfileFormModalComponent implements OnInit {
       const data = await this._userApiService.getById(this.userId).toPromise();
       this.form.patchValue(data);
     } catch (error) {
-      this._toastService.danger('No se pudo completar la actualización', 'Operación Fallida');
+      this._toastService.danger('No se pudo completar la actualización');
       this._alertDialogService.catchError(error);
       this._modalController.dismiss();
     }

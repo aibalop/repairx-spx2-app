@@ -116,7 +116,7 @@ export class CustomerFormPage implements OnInit, OnDestroy {
       const customer = await this._customerApiService.getById(this.customerId).toPromise();
       this.form.patchValue(customer);
     } catch (error) {
-      this._toastService.danger('No se pudo obtener los datos del cliente', 'Operación Fallida');
+      this._toastService.danger('No se pudo obtener los datos del cliente');
       this._alertDialogService.catchError(error);
       this._router.navigate([ECustomersRoutes.CUSTOMERS]);
     }
@@ -127,11 +127,11 @@ export class CustomerFormPage implements OnInit, OnDestroy {
 
     try {
       await this._customerApiService.create(this.form.value as ICustomer).toPromise();
-      this._toastService.success('Cliente creado correctamente', 'Operación Completada');
+      this._toastService.success('Cliente creado correctamente');
       this._router.navigate([ECustomersRoutes.CUSTOMERS]);
     } catch (error) {
       this.isSend = false;
-      this._toastService.danger('No se pudo completar el registro', 'Operación Fallida');
+      this._toastService.danger('No se pudo completar el registro');
       this._alertDialogService.catchError(error);
     }
 
@@ -141,11 +141,11 @@ export class CustomerFormPage implements OnInit, OnDestroy {
 
     try {
       await this._customerApiService.update(this.customerId, this.form.value as ICustomer).toPromise();
-      this._toastService.success('Cliente actualizado correctamente', 'Operación Completada');
+      this._toastService.success('Cliente actualizado correctamente');
       this._router.navigate([ECustomersRoutes.CUSTOMERS]);
     } catch (error) {
       this.isSend = false;
-      this._toastService.danger('No se pudo completar la actualización', 'Operación Fallida');
+      this._toastService.danger('No se pudo completar la actualización');
       this._alertDialogService.catchError(error);
     }
 

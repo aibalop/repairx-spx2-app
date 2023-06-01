@@ -72,11 +72,11 @@ export class OrderRepairStatusComponent implements OnInit {
 
     try {
       await this._orderRepairApiService.updateStatus(this.orderRepairId, newStatus).toPromise();
-      this._toastService.success('Estatus actualizado correctamente', 'Operación Completada');
+      this._toastService.success('Estatus actualizado correctamente');
       this.statusChanged.emit(newStatus);
       this.isSent = false;
     } catch (error) {
-      this._toastService.danger('No se pudo completar la actualización del pago', 'Operación Fallida');
+      this._toastService.danger('No se pudo completar la actualización del pago');
       this._alertDialogService.catchError(error);
       this.isSent = false;
     }

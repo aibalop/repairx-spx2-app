@@ -50,11 +50,11 @@ export class CustomerFormShortModalComponent implements OnInit {
 
     try {
       const customerCreated = await this._customerApiService.create(this.form.value as ICustomer).toPromise();
-      this._toastService.success('Cliente creado correctamente', 'Operación Completada');
+      this._toastService.success('Cliente creado correctamente');
       this._modalController.dismiss(customerCreated);
     } catch (error) {
       this.isSend = false;
-      this._toastService.danger('No se pudo completar el registro', 'Operación Fallida');
+      this._toastService.danger('No se pudo completar el registro');
       this._alertDialogService.catchError(error);
     }
 

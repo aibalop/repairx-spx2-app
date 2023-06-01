@@ -14,6 +14,7 @@ import {
 import {
   MyProfileFormModalComponent
 } from '../../components/modals/my-profile-form-modal/my-profile-form-modal.component';
+import { CompanyFormModalComponent } from '../../components/modals/company-form-modal/company-form-modal.component';
 
 @NgModule({
   imports: [
@@ -28,6 +29,7 @@ import {
     MyProfilePage,
     ChangePasswordFormModalComponent,
     MyProfileFormModalComponent,
+    CompanyFormModalComponent,
   ]
 })
 export class MyProfilePageModule {

@@ -65,7 +65,7 @@ export class ChargeFormModalComponent implements OnInit {
       const charge = await this._chargeApiService.getById(this.chargeId).toPromise();
       this.form.patchValue(charge);
     } catch (error) {
-      this._toastService.danger('No se pudo obtener los datos del cargo', 'Operación Fallida');
+      this._toastService.danger('No se pudo obtener los datos del cargo');
       this._alertDialogService.catchError(error);
       this._modalController.dismiss(true);
     }
@@ -76,11 +76,11 @@ export class ChargeFormModalComponent implements OnInit {
 
     try {
       const chargeCreated = await this._chargeApiService.create(this.form.value as ICharge).toPromise();
-      this._toastService.success('Cargo creado correctamente', 'Operación Completada');
+      this._toastService.success('Cargo creado correctamente');
       this._modalController.dismiss(chargeCreated);
     } catch (error) {
       this.isSend = false;
-      this._toastService.danger('No se pudo completar el registro', 'Operación Fallida');
+      this._toastService.danger('No se pudo completar el registro');
       this._alertDialogService.catchError(error);
     }
 
@@ -90,11 +90,11 @@ export class ChargeFormModalComponent implements OnInit {
 
     try {
       const chargeUpdated = await this._chargeApiService.update(this.chargeId, this.form.value as ICharge).toPromise();
-      this._toastService.success('Cargo actualizado correctamente', 'Operación Completada');
+      this._toastService.success('Cargo actualizado correctamente');
       this._modalController.dismiss(chargeUpdated);
     } catch (error) {
       this.isSend = false;
-      this._toastService.danger('No se pudo completar la actualización', 'Operación Fallida');
+      this._toastService.danger('No se pudo completar la actualización');
       this._alertDialogService.catchError(error);
     }
 

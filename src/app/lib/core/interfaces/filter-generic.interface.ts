@@ -1,7 +1,7 @@
 export interface IFilterGeneric {
   searchText?: string;
   status?: Array<string>;
-  isPaid?: string;
+  isPaid?: 'both' | 'true' | 'false';
   fromDate?: number;
   toDate?: number;
   timeZone?: number;

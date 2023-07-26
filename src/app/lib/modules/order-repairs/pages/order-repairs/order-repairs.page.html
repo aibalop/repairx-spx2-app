@@ -20,7 +20,7 @@
 
     <ion-row>
       <ion-col size="12">
-        <ion-list lines="full" *ngIf="list">
+        <ion-list lines="full" *ngIf="list && list.data.length > 0">
           <ion-item *ngFor="let orderRepair of list.data">
             <ion-icon name="journal" slot="start"></ion-icon>
             <ion-label>
@@ -43,12 +43,16 @@
                 </ng-container>
               </p>
             </ion-label>
-            <ion-text color="medium" class="ion-margin-end ion-hide-xl-down ion-text-right">
-              <span class="ion-margin-end" style="font-weight: bold">Total</span>
-              <span>{{ orderRepair.totalAmount | currency:'MXN' }}</span>
+            <ion-text color="medium" class="rx__row__resume ion-margin-end ion-hide-xl-down ion-text-right">
+              <div class="rx__col__resume">
+                <span>{{ orderRepair.totalAmount | currency:'MXN' }}</span>
+                <span>Total</span>
+              </div>
               <ng-container *ngIf="!orderRepair.isPaid">
-                <span class="ion-margin-horizontal" style="font-weight: bold">Resta</span>
-                <span>{{ orderRepair.remainingAmount | currency:'MXN' }}</span>
+                <div class="rx__col__resume">
+                  <span>{{ orderRepair.remainingAmount | currency:'MXN' }}</span>
+                  <span>Resta</span>
+                </div>
               </ng-container>
             </ion-text>
             <app-order-repair-status [orderRepairId]="orderRepair._id" [currentStatus]="orderRepair.status"

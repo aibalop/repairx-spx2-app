@@ -4,7 +4,7 @@
 </ion-toolbar>
 <ion-content>
 
-  <ion-list lines="full" *ngIf="list">
+  <ion-list lines="full" *ngIf="list && list.data.length > 0">
     <ion-item button detail detailIcon="checkbox-outline" *ngFor="let charge of list.data" (click)="onSelect(charge)">
       <ion-icon name="cash" slot="start"></ion-icon>
       <ion-label>

@@ -8,10 +8,9 @@ import { OrderRepairsPageRoutingModule } from './order-repairs-routing.module';
 
 import { OrderRepairsPage } from './order-repairs.page';
 import { SharedModule } from 'src/app/lib/shared/shared.module';
-import {OrderRepairFiltersComponent} from '../../components/order-repair-filters/order-repair-filters.component';
 import {
   FilterOptionsOrderRepairPopoverComponent
-} from '../../components/popovers/filter-options-order-repair-popover/filter-options-order-repair-popover.component';
+} from '../../../../shared/components/popovers/filter-options-order-repair-popover/filter-options-order-repair-popover.component';
 
 @NgModule({
     imports: [
@@ -23,7 +22,6 @@ import {
     ],
   declarations: [
     OrderRepairsPage,
-    OrderRepairFiltersComponent,
     FilterOptionsOrderRepairPopoverComponent,
   ]
 })

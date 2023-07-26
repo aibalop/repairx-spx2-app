@@ -26,6 +26,10 @@ export enum EOrderRepairsRoutes {
     ORDER_REPAIRS_VIEW = '/ordenes-reparacion/ver',
 }
 
+export enum EOrdersReportRoutes {
+    ORDERS_REPORT = '/reportes/ordenes',
+}
+
 export enum ESettingsRoutes {
     SETTINGS_MY_PROFILE = '/configuraciones/mi-perfil',
 }

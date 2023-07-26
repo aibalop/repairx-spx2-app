@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ECatalogsRoutes, ECustomersRoutes, EDashboardRoutes, EOrderRepairsRoutes } from 'src/app/lib/core/enums/modules-routes.enum';
+import { ECatalogsRoutes, ECustomersRoutes, EDashboardRoutes, EOrderRepairsRoutes, EOrdersReportRoutes } from 'src/app/lib/core/enums/modules-routes.enum';
 import { SessionService } from 'src/app/lib/core/services/session.service';
 
 interface Permission {
@@ -65,6 +65,14 @@ export class PanelLayoutComponent implements OnInit {
         pathname: EOrderRepairsRoutes.ORDER_REPAIRS,
         icon: 'journal',
         name: 'Ordenes',
+        open: false
+      }
+    },
+    {
+      parent: {
+        pathname: EOrdersReportRoutes.ORDERS_REPORT,
+        icon: 'bar-chart-outline',
+        name: 'Reporte de ordenes',
         open: false
       }
     },

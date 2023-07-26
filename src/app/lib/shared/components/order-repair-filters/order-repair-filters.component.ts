@@ -3,7 +3,7 @@ import { PopoverController } from '@ionic/angular';
 import {
   FilterOptionsOrderRepairPopoverComponent
 } from '../popovers/filter-options-order-repair-popover/filter-options-order-repair-popover.component';
-import { IFilterGeneric } from '../../../../core/interfaces/filter-generic.interface';
+import { IFilterGeneric } from '../../../core/interfaces/filter-generic.interface';
 
 @Component({
   selector: 'app-order-repair-filters',
@@ -13,6 +13,7 @@ import { IFilterGeneric } from '../../../../core/interfaces/filter-generic.inter
 export class OrderRepairFiltersComponent implements OnInit {
   @Output() refresh = new EventEmitter<IFilterGeneric>();
   @Input() filters: IFilterGeneric;
+  @Input() onlyDateFilter: boolean = false;
 
   constructor(private _popoverController: PopoverController) {
   }
@@ -25,6 +26,7 @@ export class OrderRepairFiltersComponent implements OnInit {
       component: FilterOptionsOrderRepairPopoverComponent,
       componentProps: {
         filters: this.filters,
+        onlyDateFilter: this.onlyDateFilter,
       },
       dismissOnSelect: false,
       showBackdrop: true,

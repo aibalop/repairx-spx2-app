@@ -1,11 +1,12 @@
-.rx__row__resume {
-    font-size: 14px;
+.rx__row__order {
     display: flex;
-    width: 50%;
+    width: 80%;
     justify-content: space-around;
+    align-items: center;
+    font-size: 14px;
 }
 
-.rx__col__resume {
+.rx__col__total {
     display: flex;
     flex-direction: column;
     span:nth-child(2n) {

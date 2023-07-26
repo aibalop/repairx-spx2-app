@@ -50,6 +50,10 @@ const routes: Routes = [
         loadChildren: () => import('./lib/modules/order-repairs/order-repairs.module').then(m => m.OrderRepairsModule)
       },
       {
+        path: 'reportes',
+        loadChildren: () => import('./lib/modules/reports/reports.module').then(m => m.ReportsModule)
+      },
+      {
         path: 'configuraciones',
         loadChildren: () => import('./lib/modules/settings/settings.module').then(m => m.SettingsModule)
       },

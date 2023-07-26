@@ -1,0 +1,62 @@
+<app-main-header-layout></app-main-header-layout>
+<app-header-page title="Reporte de ordenes"></app-header-page>
+<app-breadcrumb></app-breadcrumb>
+<ion-content class="ion-padding">
+
+  <ion-grid>
+
+    <ion-row>
+      <ion-col size="12" style="display: flex;">
+        <app-searchbar style="width: 98%;" (search)="onSearch($event)"></app-searchbar>
+        <app-order-repair-filters [filters]="filters" [onlyDateFilter]="true"
+          (refresh)="onFilter($event)"></app-order-repair-filters>
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col size="12">
+        <ion-list lines="full" *ngIf="list && list.data.length > 0">
+          <ion-item *ngFor="let orderRepair of list.data">
+            <ion-icon name="journal" slot="start"></ion-icon>
+            <ion-label>
+              <h2>
+                {{ orderRepair.getOrderIdFormat() }}
+              </h2>
+              <h3>{{ orderRepair.createdAt | date:'short' }}</h3>
+              <p class="ion-hide-xl-up">{{ orderRepair.getCustomerFullName() }}</p>
+              <p class="ion-hide-xl-up">
+                <span class="ion-margin-end" style="font-weight: bold">Total</span>
+                <span>{{ orderRepair.totalAmount | currency:'MXN' }}</span>
+              </p>
+            </ion-label>
+            <div class="rx__row__order ion-hide-xl-down ion-text-center">
+              <ion-text color="medium" class="rx__col__total">
+                <span>{{ orderRepair.getCustomerFullName() }}</span>
+                <span>Ciente</span>
+              </ion-text>
+              <ion-text color="medium" class="rx__col__total ion-hide-xl-down ion-text-right">
+                <span>{{ orderRepair.totalAmount | currency:'MXN' }}</span>
+                <span>Total</span>
+              </ion-text>
+            </div>
+
+            <ion-buttons slot="end">
+              <ion-button color="medium" (click)="onOpenForm(orderRepair._id, true)">
+                <ion-icon slot="icon-only" name="eye-outline"></ion-icon>
+              </ion-button>
+            </ion-buttons>
+          </ion-item>
+        </ion-list>
+
+        <ion-infinite-scroll threshold="100px" (ionInfinite)="doInfinite($event)">
+          <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="Cargando...">
+          </ion-infinite-scroll-content>
+        </ion-infinite-scroll>
+
+        <app-not-found-data *ngIf="!list || list.data.length === 0"></app-not-found-data>
+      </ion-col>
+    </ion-row>
+
+  </ion-grid>
+
+</ion-content>

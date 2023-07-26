@@ -1,0 +1,26 @@
+<ion-content *ngIf="filters">
+  <ion-list class="ion-no-padding" lines="full">
+    <app-filter-date-select [filters]="filters" (dateChange)="onDateChange($event)"></app-filter-date-select>
+    <ng-container *ngIf="!onlyDateFilter">
+      <ion-item>
+        <ion-label position="stacked">Estatus</ion-label>
+        <ion-select placeholder="Estatus" [multiple]="true" cancelText="Cancelar" okText="Aceptar"
+          [(ngModel)]="filters.status" (ionChange)="onFiltersChange()">
+          <ion-select-option [value]="orderRepairStatus.PENDING">{{ orderRepairStatus.PENDING }}</ion-select-option>
+          <ion-select-option [value]="orderRepairStatus.COMPLETED">{{ orderRepairStatus.COMPLETED }}</ion-select-option>
+          <ion-select-option [value]="orderRepairStatus.DELIVERED">{{ orderRepairStatus.DELIVERED }}</ion-select-option>
+          <ion-select-option [value]="orderRepairStatus.CANCELED">{{ orderRepairStatus.CANCELED }}</ion-select-option>
+        </ion-select>
+      </ion-item>
+      <ion-item>
+        <ion-label position="stacked">Estatus de pago</ion-label>
+        <ion-select placeholder="Estatus de pago" cancelText="Cancelar" okText="Aceptar" [(ngModel)]="filters.isPaid"
+          (ionChange)="onFiltersChange()">
+          <ion-select-option value="both">Pagado y no pagado</ion-select-option>
+          <ion-select-option value="true">Pagado</ion-select-option>
+          <ion-select-option value="false">No Pagado</ion-select-option>
+        </ion-select>
+      </ion-item>
+    </ng-container>
+  </ion-list>
+</ion-content>

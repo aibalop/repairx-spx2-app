@@ -23,6 +23,10 @@ export class OrderRepairApiService {
     return this.httpClientService.get(`${this._resource}/report`, filters);
   }
 
+  downloadReport(filters: IFilterGeneric): Observable<any> {
+    return this.httpClientService.getCsv(`${this._resource}/report/download`, filters);
+  }
+
   getById(_id: string): Observable<IOrderRepair> {
     return this.httpClientService.get(`${this._resource}/${_id}`);
   }

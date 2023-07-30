@@ -23,6 +23,7 @@
     "@ionic/storage": "^3.0.6",
     "@ionic/storage-angular": "^3.0.6",
     "currency.js": "^2.0.4",
+    "file-saver": "^2.0.5",
     "generate-avatar": "^1.4.10",
     "rxjs": "~6.6.0",
     "socket.io-client": "^4.5.1",

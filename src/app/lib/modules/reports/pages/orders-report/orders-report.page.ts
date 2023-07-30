@@ -10,6 +10,7 @@ import { EDateFilterOption } from 'src/app/lib/core/enums/helpers-emuns.enum';
 import { OrderRepair } from '../../../order-repairs/models/order-repair.model';
 import { OrderRepairApiService } from '../../../order-repairs/api/order-repair.api.service';
 import { IOrderRepairReport } from '../../../order-repairs/interfaces/order-repair.interface';
+import { saveAs } from 'file-saver';
 
 @Component({
   selector: 'app-orders-report',
@@ -28,6 +29,8 @@ export class OrdersReportPage implements OnInit {
     totalAmount: 0,
     count: 0,
   };
+
+  isLoading: boolean = false;
 
   constructor(
     private _orderRepairApiService: OrderRepairApiService,
@@ -128,6 +131,24 @@ export class OrdersReportPage implements OnInit {
     try {
       this.report = await this._orderRepairApiService.getReport(this.filters).toPromise();
     } catch (error) {
+      this._alertDialogService.catchError(error);
+    }
+  }
+
+  public async onDownload(): Promise<void> {
+    try {
+      this.isLoading = true;
+      setTimeout(async () => {
+        const data = await this._orderRepairApiService.downloadReport(this.filters).toPromise();
+        const blob = new Blob([data], { type: 'application/octet-stream' });
+        const today = new Date();
+        const month = `${today.getMonth() + 1}`;
+        const fileName = `reporte-ordenes-${today.getDate()}-${month.padStart(2, '0')}-${today.getFullYear()}.csv`;
+        saveAs(blob, fileName);
+        this.isLoading = false;
+      }, 2000);
+    } catch (error) {
+      this.isLoading = false;
       this._alertDialogService.catchError(error);
     }
   }

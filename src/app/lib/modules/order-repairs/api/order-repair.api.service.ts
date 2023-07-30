@@ -3,7 +3,7 @@ import { Observable } from 'rxjs';
 import { IFilterGeneric } from 'src/app/lib/core/interfaces/filter-generic.interface';
 import { IPaginationData } from 'src/app/lib/core/interfaces/pagination-data.interface';
 import { HttpClientService } from 'src/app/lib/core/services/http-client.service';
-import { IOrderRepair } from '../interfaces/order-repair.interface';
+import { IOrderRepair, IOrderRepairReport } from '../interfaces/order-repair.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -17,6 +17,10 @@ export class OrderRepairApiService {
 
   getAll(filters: IFilterGeneric): Observable<IPaginationData<IOrderRepair>> {
     return this.httpClientService.get(`${this._resource}/`, filters);
+  }
+
+  getReport(filters: IFilterGeneric): Observable<IOrderRepairReport> {
+    return this.httpClientService.get(`${this._resource}/report`, filters);
   }
 
   getById(_id: string): Observable<IOrderRepair> {

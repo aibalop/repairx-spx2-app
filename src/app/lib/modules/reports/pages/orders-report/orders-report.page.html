@@ -6,6 +6,19 @@
   <ion-grid>
 
     <ion-row>
+      <ion-col size="12" sizeMd="6">
+        <app-card-summary class="rx--card--no--margin" title="No. Ordenes" icon="assets/imgs/new-order-icon.svg"
+          [value]="report.count"></app-card-summary>
+      </ion-col>
+
+      <ion-col size="12" sizeMd="6">
+        <app-card-summary class="rx--card--no--margin" title="Total" icon="assets/imgs/money-icon.svg"
+          [isMoneyFormat]="true" [value]="report.totalAmount">
+        </app-card-summary>
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
       <ion-col size="12" style="display: flex;">
         <app-searchbar style="width: 98%;" (search)="onSearch($event)"></app-searchbar>
         <app-order-repair-filters [filters]="filters" [onlyDateFilter]="true"

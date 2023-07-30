@@ -7,9 +7,9 @@ import { IPaginationData } from 'src/app/lib/core/interfaces/pagination-data.int
 import { AlertDialogService } from 'src/app/lib/core/services/alert-dialog.service';
 import { EOrderRepairStatus } from '../../../../core/enums/status.enum';
 import { EDateFilterOption } from 'src/app/lib/core/enums/helpers-emuns.enum';
-import { PdfUtil } from 'src/app/lib/core/utils/pdf.util';
 import { OrderRepair } from '../../../order-repairs/models/order-repair.model';
 import { OrderRepairApiService } from '../../../order-repairs/api/order-repair.api.service';
+import { IOrderRepairReport } from '../../../order-repairs/interfaces/order-repair.interface';
 
 @Component({
   selector: 'app-orders-report',
@@ -23,6 +23,11 @@ export class OrdersReportPage implements OnInit {
   list: IPaginationData<OrderRepair>;
 
   filters: IFilterGeneric;
+
+  report: IOrderRepairReport = {
+    totalAmount: 0,
+    count: 0,
+  };
 
   constructor(
     private _orderRepairApiService: OrderRepairApiService,
@@ -45,6 +50,7 @@ export class OrdersReportPage implements OnInit {
       page: 1
     };
     this._loadData();
+    this._getReport();
   }
 
   async onOpenForm(_id: string = '', isView: boolean = false): Promise<void> {
@@ -70,24 +76,13 @@ export class OrdersReportPage implements OnInit {
   onSearch($event: string): void {
     this.filters.searchText = $event;
     this._loadData();
+    this._getReport();
   }
 
   onFilter($event: IFilterGeneric): void {
     this.filters = $event;
     this._loadData();
-  }
-
-  onStatusChanged(): void {
-    this._loadData();
-  }
-
-  async onPrintOrder(orderId: string): Promise<void> {
-    try {
-      const res = await this._orderRepairApiService.getPDFByOrderId(orderId).toPromise();
-      PdfUtil.print(res);
-    } catch (error) {
-      this._alertDialogService.catchError(error);
-    }
+    this._getReport();
   }
 
   private async _loadData(onLoadMore: boolean = false, event: any = null): Promise<void> {
@@ -127,6 +122,14 @@ export class OrdersReportPage implements OnInit {
       this._alertDialogService.catchError(error);
     }
 
+  }
+
+  private async _getReport(): Promise<void> {
+    try {
+      this.report = await this._orderRepairApiService.getReport(this.filters).toPromise();
+    } catch (error) {
+      this._alertDialogService.catchError(error);
+    }
   }
 
 }

@@ -69,3 +69,8 @@ export interface IDeviceOrderRepair {
     warrantyDays: number;
     status: string;
 }
+
+export interface IOrderRepairReport {
+    count: number;
+    totalAmount: number;
+}

@@ -30,4 +30,16 @@ export class DatesHelper {
         toDate.setHours(23, 59, 59, 0);
         return { fromDate: fromDate.getTime(), toDate: toDate.getTime() };
     }
+
+    static getTimeRangeForCurrentYear(): IRangeDates {
+        const fromDate = new Date();
+        fromDate.setDate(1);
+        fromDate.setMonth(0);
+        fromDate.setHours(0, 0, 0, 0);
+        const toDate = new Date();
+        toDate.setDate(1);
+        toDate.setMonth(11);
+        toDate.setHours(23, 59, 59, 0);
+        return { fromDate: fromDate.getTime(), toDate: toDate.getTime() };
+    }
 }

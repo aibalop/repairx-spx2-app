@@ -3,4 +3,5 @@ export enum EDateFilterOption {
     CURRENT_MONTH = 'currentMonth',
     TWO_MONTHS_AGO = 'twoMonthsAgo',
     SIX_MONTHS_AGO = 'sixMonthsAgo',
+    CURRENT_YEAR = 'currentYear',
 };

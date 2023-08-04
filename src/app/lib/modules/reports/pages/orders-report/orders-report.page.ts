@@ -11,6 +11,7 @@ import { OrderRepair } from '../../../order-repairs/models/order-repair.model';
 import { OrderRepairApiService } from '../../../order-repairs/api/order-repair.api.service';
 import { IOrderRepairReport } from '../../../order-repairs/interfaces/order-repair.interface';
 import { saveAs } from 'file-saver';
+import { DatesHelper } from 'src/app/lib/core/utils/dates-helper.util';
 
 @Component({
   selector: 'app-orders-report',
@@ -43,14 +44,17 @@ export class OrdersReportPage implements OnInit {
   }
 
   ionViewWillEnter() {
+    const currentMonth = DatesHelper.getTimeRangeForCurrentMonth();
     this.filters = {
       searchText: '',
       status: [EOrderRepairStatus.COMPLETED],
       timeZone: new Date().getTimezoneOffset(),
-      dateFilterOption: EDateFilterOption.DEFAULT,
+      dateFilterOption: EDateFilterOption.CURRENT_MONTH,
       isPaid: 'true',
       limit: 25,
-      page: 1
+      page: 1,
+      fromDate: currentMonth.fromDate,
+      toDate: currentMonth.toDate,
     };
     this._loadData();
     this._getReport();

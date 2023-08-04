@@ -2,9 +2,10 @@
   <ion-label position="stacked">{{ label }}</ion-label>
   <ion-select placeholder="Filtrar por fecha" cancelText="Cancelar" okText="Aceptar"
     [(ngModel)]="filters.dateFilterOption" (ionChange)="onDateChange()">
-    <ion-select-option [value]="dateFilterOption.DEFAULT" *ngIf="!hideDefault">Hasta hoy</ion-select-option>
+    <!-- <ion-select-option [value]="dateFilterOption.DEFAULT" *ngIf="!hideDefault">Hasta hoy</ion-select-option> -->
     <ion-select-option [value]="dateFilterOption.CURRENT_MONTH">Mes actual</ion-select-option>
     <ion-select-option [value]="dateFilterOption.TWO_MONTHS_AGO">Hace 2 meses</ion-select-option>
     <ion-select-option [value]="dateFilterOption.SIX_MONTHS_AGO">Hace 6 meses</ion-select-option>
+    <ion-select-option [value]="dateFilterOption.CURRENT_YEAR">Año actual</ion-select-option>
   </ion-select>
 </ion-item>

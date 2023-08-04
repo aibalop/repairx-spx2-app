@@ -10,6 +10,7 @@ import { OrderRepair } from '../../models/order-repair.model';
 import { EOrderRepairStatus } from '../../../../core/enums/status.enum';
 import { EDateFilterOption } from 'src/app/lib/core/enums/helpers-emuns.enum';
 import { PdfUtil } from 'src/app/lib/core/utils/pdf.util';
+import { DatesHelper } from 'src/app/lib/core/utils/dates-helper.util';
 
 @Component({
   selector: 'app-order-repairs',
@@ -35,14 +36,17 @@ export class OrderRepairsPage implements OnInit {
   }
 
   ionViewWillEnter() {
+    const currentMonth = DatesHelper.getTimeRangeForCurrentMonth();
     this.filters = {
       searchText: '',
-      status: [EOrderRepairStatus.PENDING],
+      status: [EOrderRepairStatus.PENDING, EOrderRepairStatus.COMPLETED],
       timeZone: new Date().getTimezoneOffset(),
-      dateFilterOption: EDateFilterOption.DEFAULT,
+      dateFilterOption: EDateFilterOption.CURRENT_MONTH,
       isPaid: 'both',
       limit: 20,
-      page: 1
+      page: 1,
+      fromDate: currentMonth.fromDate,
+      toDate: currentMonth.toDate,
     };
     this._loadData();
   }

@@ -46,6 +46,11 @@ export class FilterDateSelectComponent implements OnInit {
         this.filters.fromDate = sixMonthsAgo.fromDate;
         this.filters.toDate = sixMonthsAgo.toDate;
         break;
+      case EDateFilterOption.CURRENT_YEAR:
+        const currentYear = DatesHelper.getTimeRangeForCurrentYear();
+        this.filters.fromDate = currentYear.fromDate;
+        this.filters.toDate = currentYear.toDate;
+        break;
     }
 
     this.dateChange.emit(this.filters);

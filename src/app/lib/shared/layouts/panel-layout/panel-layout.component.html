@@ -5,7 +5,7 @@
     <ion-content>
 
       <ng-container *ngIf="sessionService.userSessionAsObservable | async as userSession">
-        <ion-item class="ion-margin-bottom">
+        <ion-item class="ion-margin-bottom" lines="none">
           <ion-thumbnail slot="start">
             <app-avatar [username]="userSession.username"></app-avatar>
           </ion-thumbnail>
@@ -59,7 +59,7 @@
 
         <ion-menu-toggle auto-hide="false" *ngIf="!permissionGroup.childs">
           <ion-item [routerLink]="[permissionGroup.parent.pathname]" routerDirection="root" routerLinkActive="selected"
-                    [routerLinkActiveOptions]="{exact:false}">
+            [routerLinkActiveOptions]="{exact:false}" lines="none">
             <ion-icon slot="start" [name]="permissionGroup.parent.icon">
             </ion-icon>
             <ion-label>{{ permissionGroup.parent.name }}</ion-label>
@@ -67,18 +67,18 @@
         </ion-menu-toggle>
 
         <ion-item button *ngIf="permissionGroup.childs"
-                  (click)="permissionGroup.parent.open = !permissionGroup.parent.open"
-                  [class.active-parent]="permissionGroup.parent.open" detail="false">
+          (click)="permissionGroup.parent.open = !permissionGroup.parent.open"
+          [class.active-parent]="permissionGroup.parent.open" detail="false" lines="none">
           <ion-icon slot="start" [name]="permissionGroup.parent.icon"></ion-icon>
           <ion-label>{{ permissionGroup.parent.name }}</ion-label>
-          <ion-icon slot="end" [name]="permissionGroup.parent.open ? 'arrow-up' : 'arrow-down'"></ion-icon>
+          <ion-icon slot="end" [name]="permissionGroup.parent.open ? 'caret-up' : 'caret-down'"></ion-icon>
         </ion-item>
 
         <ion-list *ngIf="permissionGroup.parent.open">
 
           <ion-menu-toggle auto-hide="false">
             <ion-item class="sub-item" *ngFor="let child of permissionGroup.childs" [routerLink]="[child.pathname]"
-                      routerDirection="root" routerLinkActive="selected" [routerLinkActiveOptions]="{exact:false}">
+              routerDirection="root" routerLinkActive="selected" [routerLinkActiveOptions]="{exact:false}" lines="none">
               <ion-icon slot="start" [name]="child.icon"></ion-icon>
               <ion-label>{{ child.name }}</ion-label>
             </ion-item>
